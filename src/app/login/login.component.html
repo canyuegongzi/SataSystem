@@ -1,0 +1,29 @@
+<div class="login-box">
+  <form [formGroup] = 'formModel' (ngSubmit) = 'submit()' novalidate class="login">
+    <div class="form-group form-write1 form-write" [class.has-error]="formModel.hasError('phone','phone')">
+      <label for="phone">手机号</label>
+      <input formControlName="phone" type="text" id="phone" placeholder="请输入手机号" class="form-control"/>
+      <span class="form-text" [class.hidden]="!formModel.hasError('phone','phone')">
+      请输入合法的手机号
+    </span>
+    </div>
+    <div class="form-group form-write" [class.has-error]="formModel.hasError('password','password')">
+      <label for="pass">密 码</label>
+      <input formControlName="password" type="password" id="pass" placeholder="请输入密码" class="form-control"/>
+      <span class="form-text" [class.hidden]="!formModel.hasError('password','password')">
+      请输入合法的密码
+    </span>
+    </div>
+    <div class="form-group form-write">
+      <input type="checkbox" formControlName="protocol" id="select" class="form-control"/>
+      <a href="www.baidu.com" class="admin-select">请阅读遵守《互联网安全协议》</a>
+    </div>
+    <div class="form-group form-write2">
+      <button type="submit" class="btn btn-primary btn-block" id="loginButton">登录</button>
+    </div>
+    <div class="form-group caption">
+        <span>非用户登录，请先<a routerLink="/register">注册</a></span>
+    </div>
+  </form>
+</div>
+

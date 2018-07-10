@@ -1,0 +1,21 @@
+.line-number {
+  width: 500px;
+  height:300px;
+  padding-top: 20px;
+}
+.converse {
+  width: 500px;
+  height:300px;
+  padding-top: 20px;
+}
+.success {
+  width: 200px;
+  height:200px;
+}
+.result {
+  width: 200px;
+  height:200px;
+}
+div {
+  float: left;
+}

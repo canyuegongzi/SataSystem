@@ -1,0 +1,25 @@
+<div el-row class="header">
+  <div el-col span="5"><div class="grid-content bg-purple"><i class="fa fa-window-restore" aria-hidden="true"></i></div></div>
+  <div el-col span="16">
+    <div class="grid-content bg-purple-light">
+      <el-menu [model]="0" class="el-menu-demo" mode="horizontal" [el-class] = "'nav'"
+             background-color="#20a0ff"
+             active-text-color="#ffffff"
+             text-color="#ffffff"
+             border-bottom-color="#20a0ff"
+    >
+      <el-menu-item index="1"><a routerLink="./">控制台</a></el-menu-item>
+      <el-menu-item index="2"><a routerLink="./tools">工具集</a></el-menu-item>
+      <el-menu-item index="3"><a routerLink="./message">Message</a></el-menu-item>
+    </el-menu>
+    </div>
+  </div>
+ <div el-col span="3">
+   <div class="loginuser"><img src="https://img2.woyaogexing.com/2018/07/10/907e733831ad4d17!400x400_big.jpg" alt=""/></div>
+   <span class="loginname"><a href="" style="color:#ffffff">admin</a></span>
+   <div id="message">
+     <a href="" style="color:#ffffff;display: block"><i class="fa fa-envelope-o user-message" aria-hidden="true"></i></a>
+     <i class="message-number">1</i>
+   </div>
+ </div>
+</div>

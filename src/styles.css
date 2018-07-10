@@ -1,1 +1,75 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~element-angular/theme/index.css";
+.container {
+  /*max-width: 100%;*/
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+}
+li {
+  list-style: none;
+}
+.fafont {
+  font-size: 1rem;
+  padding-right: 0.4rem;
+}
+.login {
+  width: 30rem;
+  height: 20rem;
+  background: rgba(2,2,2,.4);
+  margin: 2rem;
+  position: fixed;
+  right: 10rem;
+  top:8rem;
+}
+.form-write1 {
+  padding-top: 2rem;
+}
+.form-group {
+  margin-bottom: 2rem;
+}
+.form-write > label {
+  padding: 0.5rem 0 0 1rem;
+}
+.form-write > input {
+  width: 23rem;
+  float: right;
+  margin-right: 1rem;
+}
+.form-write > span {
+  text-align: center;
+  color:red;
+}
+.hidden{
+  display: none;
+}
+#select {
+  width: 0.8rem;
+  height:0.8rem;
+  line-height: 0.8rem;
+  float: left;
+  margin-left: 8rem;
+  margin-top: 0.4rem;
+}
+.caption {
+  text-align: center;
+  margin-top: -1rem;
+}
+.login-box {
+  margin-top: 2.5rem;
+  position: relative;
+  height: 35rem;
+  width: 100%;
+  background-image: url("http://seopic.699pic.com/photo/50053/2947.jpg_wh1200.jpg");
+}
+.form-write2 {
+  position: relative;
+}
+#loginButton {
+  width: 10rem;
+  margin-left: 10rem;
+}

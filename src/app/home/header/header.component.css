@@ -1,0 +1,72 @@
+.header {
+  color:#ffffff;
+  font-weight: 600;
+  height: 20%;
+}
+.nav {
+  background-color: #20a0ff;
+  height: 6rem;
+  padding-top: 1rem;
+}
+.el-menu {
+  background-color: #20a0ff;
+}
+.fa-window-restore {
+  font-size: 3rem;
+  line-height: 6rem;
+  margin-left: 2rem;
+}
+.loginuser {
+  background-color: red;
+  position: absolute;
+  top:1rem;
+  right: 2rem;
+}
+.loginuser >img {
+  background-color: red;
+  position: absolute;
+  top: .5rem;
+  right: 2rem;
+  height: 3rem;
+  margin-right: 8rem;
+  width: 3rem;
+  border-radius: 50%;
+}
+.loginname {
+  border-radius: 50%;
+  display: block;
+  margin-left: -.5rem;
+  margin-top: 2rem;
+}
+.admin {
+  height: 6rem;
+  padding-top: 1rem;
+}
+.admin-slide {
+  position: absolute;
+  top:2rem;
+  right: .5rem;
+}
+.user-message {
+  font-size: 2rem;
+  position: absolute;
+  top: -1.5rem;
+  right: 5rem;
+}
+#message{
+  position: relative;
+}
+.message-number {
+  border-radius: 50%;
+  width: 1rem;
+  height: 1rem;
+  color: red;
+  position: absolute;
+  top: -1.9rem;
+  right: 4.2rem;
+  display: block;
+  background-color: #ffffff;
+  font-size: .8rem;
+  line-height: 1rem;
+  text-align: center;
+}
