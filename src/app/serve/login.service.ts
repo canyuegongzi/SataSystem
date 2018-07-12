@@ -48,7 +48,7 @@ export class LoginService implements CanActivate {
     } else {
       /*否则路由到登录页面再次登录*/
       // noinspection JSIgnoredPromiseFromCall
-      this.router.navigate(['']/*, { queryParams: { name: 1 }} */);
+      this.router.navigate(['home']/*, { queryParams: { name: 1 }} */);
       console.log('登录失败！');
       this.allowLogin = false;
     }

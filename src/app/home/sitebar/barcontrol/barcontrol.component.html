@@ -1,1 +1,40 @@
-<router-outlet></router-outlet>
+<div class="sitebar">
+  <div el-row class="tac sitebar">
+    <div el-col span="24">
+      <el-menu model="2" class="el-menu-vertical-demo">
+        <el-submenu index="1">
+          <ng-template #title>
+            <i class="fa fa-bar-chart barico"></i>实时数据
+          </ng-template>
+          <el-menu-item index="1-1"><i class="fa fa fa-area-chart barico"></i><a routerLink="./data/resdata">反馈数据</a></el-menu-item>
+          <el-menu-item index="1-2"><i class="fa fa-map barico"></i><a routerLink="./data/mapdata">数据分布</a></el-menu-item>
+          <el-menu-item index="1-3"><i class="fa fa-pie-chart barico"></i><a routerLink="./data/assaydata">数据分析</a></el-menu-item>
+        </el-submenu>
+        <el-submenu index="2">
+          <ng-template #title>
+            <i class="barico fa fa-address-card-o"></i>用户管理
+          </ng-template>
+          <el-menu-item index="2-1"><i class="fa fa-users barico"></i><a routerLink="./admin/show">查看用户</a></el-menu-item>
+          <el-menu-item index="2-2"><i class="fa fa-plus barico"></i><a routerLink="./admin/add">添加用户</a></el-menu-item>
+          <el-submenu index="2-3" title="编辑用户">
+            <el-menu-item index="2-3-1"><i class="fa fa-trash-o barico"></i><a routerLink="./admin/del">删除用户</a></el-menu-item>
+            <el-menu-item index="2-3-2"><i class="fa fa-pencil barico"></i><a routerLink="./admin/reg">注册用户</a></el-menu-item>
+          </el-submenu>
+        </el-submenu>
+        <el-submenu index="3">
+          <ng-template #title>
+            <i class="barico fa fa-envelope-open-o"></i>状态信息
+          </ng-template>
+          <el-menu-item index="3-1"><i class="fa fa-deaf barico"></i><a routerLink="./status/fri">分销商户</a></el-menu-item>
+          <el-menu-item index="3-2"><i class="fa fa-list-alt barico"></i><a routerLink="./status/shop">合作伙伴</a></el-menu-item>
+        </el-submenu>
+
+
+        <el-menu-item index="4"><i class="fa fa-user-circle barico"></i><a routerLink="./user">当前用户</a></el-menu-item>
+        <el-menu-item index="5"><i class="fa el-icon-setting barico"></i><a routerLink="./setting">设置</a></el-menu-item>
+        <el-menu-item index="6"><i class="fa fa-cog barico"></i><a routerLink="./about">关于我们</a></el-menu-item>
+
+      </el-menu>
+    </div>
+  </div>
+</div>

@@ -36,6 +36,8 @@ import { SettingComponent } from './setting/setting.component';
 import { OurComponent } from './our/our.component';
 import { BarcontrolComponent } from './home/sitebar/barcontrol/barcontrol.component';
 import {NgxEchartsModule} from 'ngx-echarts';
+import { ToolsitebarComponent } from './home/sitebar/toolsitebar/toolsitebar.component';
+import {GetdataService} from './serve/getdata.service';
 
 
 @NgModule({
@@ -68,6 +70,7 @@ import {NgxEchartsModule} from 'ngx-echarts';
     SettingComponent,
     OurComponent,
     BarcontrolComponent,
+    ToolsitebarComponent,
   ],
   imports: [
     BrowserModule,
@@ -83,7 +86,7 @@ import {NgxEchartsModule} from 'ngx-echarts';
     /*数据可视化库*/
     NgxEchartsModule,
   ],
-  providers: [LoginService],
+  providers: [LoginService, GetdataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
