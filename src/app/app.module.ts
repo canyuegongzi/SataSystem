@@ -10,13 +10,12 @@ import { FooterComponent } from './home/footer/footer.component';
 import { ContentComponent } from './home/content/content.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
-import {routing} from './app.routing';
-import {LoginService} from './serve/login.service';
+import {appRoutes} from './app.routing';
 import { RegisterComponent } from './register/register.component';
 import { ElModule } from 'element-angular';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { ToolsComponent } from './home/content/tools/tools.component';
-import { MessageComponent } from './home/content/message/message.component';
+import { ToolsComponent } from './tools/tools.component';
+import { MessageComponent } from './message/message.component';
 import { DataComponent } from './data/data.component';
 import { ResdataComponent } from './data/resdata/resdata.component';
 import { AssaydataComponent } from './data/assaydata/assaydata.component';
@@ -36,8 +35,11 @@ import { SettingComponent } from './setting/setting.component';
 import { OurComponent } from './our/our.component';
 import { BarcontrolComponent } from './home/sitebar/barcontrol/barcontrol.component';
 import {NgxEchartsModule} from 'ngx-echarts';
-import { ToolsitebarComponent } from './home/sitebar/toolsitebar/toolsitebar.component';
-import {GetdataService} from './serve/getdata.service';
+import {HomeModule} from './module/home/home.module';
+import {RouterModule, Routes} from '@angular/router';
+import {LoginModule} from './module/login/login.module';
+import {ToolsModule} from './module/tools/tools.module';
+import { SlidetoolsComponent } from './tools/slidetools/slidetools.component';
 
 
 @NgModule({
@@ -70,23 +72,30 @@ import {GetdataService} from './serve/getdata.service';
     SettingComponent,
     OurComponent,
     BarcontrolComponent,
-    ToolsitebarComponent,
+    SlidetoolsComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    RouterModule,
     /*响应式的模块*/
     ReactiveFormsModule,
-    routing,
+    // routing,
+    // appRoutes,
     /*第三方的包*/
     ElModule.forRoot(),
     BrowserAnimationsModule,
     BrowserAnimationsModule,
     /*数据可视化库*/
     NgxEchartsModule,
+    /*自己的模块*/
+    HomeModule,
+    LoginModule,
+    ToolsModule,
+    RouterModule.forRoot(<Routes>appRoutes),
   ],
-  providers: [LoginService, GetdataService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

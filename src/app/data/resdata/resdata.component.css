@@ -1,21 +1,24 @@
-.line-number {
-  width: 520px;
-  height:300px;
-  padding-top: 20px;
-}
-.converse {
-  width: 520px;
-  height:300px;
-  padding-top: 20px;
-}
-.success {
-  width: 200px;
-  height:200px;
-}
-.result {
-  width: 200px;
-  height:200px;
+.line-number, .converse, .safe {
+  width: 32.5rem;
+  height:21.8rem;
+  padding-top: 1.25rem;
 }
 div {
   float: left;
+}
+.result {
+  padding-top: 2rem;
+  padding-right: 0.8rem;
+}
+.demo-table-expand {
+  font-size: 0;
+}
+.demo-table-expand label {
+  width: 90px;
+  color: #99a9bf;
+}
+.demo-table-expand .el-form-item {
+  margin-right: 0;
+  margin-bottom: 0;
+  width: 50%;
 }

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ToolsitebarComponent } from './toolsitebar.component';
+import { SlidetoolsComponent } from './slidetools.component';
 
-describe('ToolsitebarComponent', () => {
-  let component: ToolsitebarComponent;
-  let fixture: ComponentFixture<ToolsitebarComponent>;
+describe('SlidetoolsComponent', () => {
+  let component: SlidetoolsComponent;
+  let fixture: ComponentFixture<SlidetoolsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ToolsitebarComponent ]
+      declarations: [ SlidetoolsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ToolsitebarComponent);
+    fixture = TestBed.createComponent(SlidetoolsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

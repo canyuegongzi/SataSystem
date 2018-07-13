@@ -37,15 +37,27 @@
       <file leaf-file-name="server.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server/server.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="30" column="13" lean-forward="true" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+            <state relative-caret-position="21">
+              <caret line="65" column="35" lean-forward="false" selection-start-line="65" selection-start-column="35" selection-end-line="65" selection-end-column="35" />
               <folding>
-                <element signature="e#79#196#0" expanded="false" />
-                <element signature="e#202#288#0" expanded="false" />
-                <element signature="e#294#380#0" expanded="false" />
-                <element signature="e#386#472#0" expanded="false" />
-                <element signature="e#478#565#0" expanded="false" />
+                <element signature="e#0#35#0" expanded="true" />
+                <element signature="e#111#606#0" expanded="false" />
+                <element signature="e#117#234#0" expanded="false" />
+                <element signature="e#240#326#0" expanded="false" />
+                <element signature="e#332#418#0" expanded="false" />
+                <element signature="e#424#510#0" expanded="false" />
+                <element signature="e#516#603#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mock.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/mock.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="10" column="4" lean-forward="false" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -63,6 +75,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/tsconfig.json" />
+        <option value="$PROJECT_DIR$/server/mock.ts" />
         <option value="$PROJECT_DIR$/server/server.ts" />
       </list>
     </option>
@@ -118,14 +131,15 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="settings.typescriptcompiler" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -155,11 +169,13 @@
       <workItem from="1531308075812" duration="1415000" />
       <workItem from="1531351507167" duration="2789000" />
       <workItem from="1531368783848" duration="975000" />
+      <workItem from="1531378153116" duration="5801000" />
+      <workItem from="1531445574781" duration="614000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5179000" />
+    <option name="totallyTimeSpent" value="11594000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -211,16 +227,90 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/server/mock.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="10" column="4" lean-forward="false" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/server.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="798">
+          <caret line="65" column="35" lean-forward="false" selection-start-line="65" selection-start-column="35" selection-end-line="65" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+            <element signature="e#111#606#0" expanded="false" />
+            <element signature="e#117#234#0" expanded="false" />
+            <element signature="e#240#326#0" expanded="false" />
+            <element signature="e#332#418#0" expanded="false" />
+            <element signature="e#424#510#0" expanded="false" />
+            <element signature="e#516#603#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tsconfig.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="12" column="1" lean-forward="false" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/server.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="30" column="13" lean-forward="true" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+            <element signature="e#111#606#0" expanded="false" />
+            <element signature="e#117#234#0" expanded="false" />
+            <element signature="e#240#326#0" expanded="false" />
+            <element signature="e#332#418#0" expanded="false" />
+            <element signature="e#424#510#0" expanded="false" />
+            <element signature="e#516#603#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tsconfig.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="12" column="1" lean-forward="false" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/server/server.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="798">
           <caret line="38" column="2" lean-forward="true" selection-start-line="38" selection-start-column="2" selection-end-line="38" selection-end-column="2" />
           <folding>
-            <element signature="e#79#196#0" expanded="false" />
-            <element signature="e#202#288#0" expanded="false" />
-            <element signature="e#294#380#0" expanded="false" />
-            <element signature="e#386#472#0" expanded="false" />
-            <element signature="e#478#565#0" expanded="false" />
+            <element signature="e#0#35#0" expanded="true" />
+            <element signature="e#111#606#0" expanded="false" />
+            <element signature="e#117#234#0" expanded="false" />
+            <element signature="e#240#326#0" expanded="false" />
+            <element signature="e#332#418#0" expanded="false" />
+            <element signature="e#424#510#0" expanded="false" />
+            <element signature="e#516#603#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -246,20 +336,14 @@
         <state relative-caret-position="147">
           <caret line="7" column="41" lean-forward="false" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
           <folding>
-            <element signature="e#79#196#0" expanded="false" />
-            <element signature="e#202#288#0" expanded="false" />
-            <element signature="e#294#380#0" expanded="false" />
-            <element signature="e#386#472#0" expanded="false" />
-            <element signature="e#478#565#0" expanded="false" />
+            <element signature="e#0#35#0" expanded="true" />
+            <element signature="e#111#606#0" expanded="false" />
+            <element signature="e#117#234#0" expanded="false" />
+            <element signature="e#240#326#0" expanded="false" />
+            <element signature="e#332#418#0" expanded="false" />
+            <element signature="e#424#510#0" expanded="false" />
+            <element signature="e#516#603#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -271,16 +355,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/mock.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="10" column="4" lean-forward="false" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/server/server.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="30" column="13" lean-forward="true" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+        <state relative-caret-position="21">
+          <caret line="65" column="35" lean-forward="false" selection-start-line="65" selection-start-column="35" selection-end-line="65" selection-end-column="35" />
           <folding>
-            <element signature="e#79#196#0" expanded="false" />
-            <element signature="e#202#288#0" expanded="false" />
-            <element signature="e#294#380#0" expanded="false" />
-            <element signature="e#386#472#0" expanded="false" />
-            <element signature="e#478#565#0" expanded="false" />
+            <element signature="e#0#35#0" expanded="true" />
+            <element signature="e#111#606#0" expanded="false" />
+            <element signature="e#117#234#0" expanded="false" />
+            <element signature="e#240#326#0" expanded="false" />
+            <element signature="e#332#418#0" expanded="false" />
+            <element signature="e#424#510#0" expanded="false" />
+            <element signature="e#516#603#0" expanded="false" />
           </folding>
         </state>
       </provider>

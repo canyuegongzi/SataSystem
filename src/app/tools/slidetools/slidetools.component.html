@@ -1,0 +1,20 @@
+<div class="sitebar">
+  <div el-row class="tac sitebar">
+    <div el-col span="24">
+      <el-menu model="2" class="el-menu-vertical-demo">
+        <el-menu-item index="1"><i class="fa fa-user-circle barico"></i><a routerLink="/user">待办事项</a></el-menu-item>
+        <el-menu-item index="2"><i class="fa el-icon-setting barico"></i><a routerLink="/setting">闲情逸致</a></el-menu-item>
+        <el-menu-item index="3"><i class="fa fa-cog barico"></i><a routerLink="/about">通告</a></el-menu-item>
+        <el-menu-item index="4"><i class="fa fa-cog barico"></i><a routerLink="/about">灌水区</a></el-menu-item>
+        <el-submenu index="5">
+          <ng-template #title>
+            <i class="fa fa-bar-chart barico"></i>其他功能
+          </ng-template>
+          <el-menu-item index="5-1"><i class="fa fa fa-area-chart barico"></i><a routerLink="/data/resdata">地图</a></el-menu-item>
+          <el-menu-item index="5-2"><i class="fa fa-map barico"></i><a routerLink="/data/mapdata">流程分析</a></el-menu-item>
+          <el-menu-item index="5-3"><i class="fa fa-pie-chart barico"></i><a routerLink="/data/assaydata">日程表</a></el-menu-item>
+        </el-submenu>
+      </el-menu>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,7 @@
 import * as express from 'express';
+import * as fun from './mock';
 const app = express();
-const datas = [
+const linenumdatas = [
     {
         name: '总数',
         xAyisIndex: 1,
@@ -28,14 +29,52 @@ const datas = [
         data: [258,110,150,280,160,50]
     },
 ]
+const sysstatusdata =  [
+  {
+    name: '在线人数',
+    type: 'line',
+    xAyisIndex: 2,
+    data: (function (){
+       return fun.mockData(500, 0, 9);
+    })()
+  },
+  {
+    name: '系统负载',
+    type: 'line',
+    data: (function (){
+      return fun.mockData(80, 30, 9);
+    })()
+  },
+  {
+    name: '相应率',
+    type: 'line',
+    data: (function (){
+      return fun.mockData(80, 30, 9);
+    })()
+  },
+  {
+    name: '吞吐量',
+    type: 'line',
+    data: (function (){
+      return fun.mockData(80, 30, 9);
+    })()
+  },
+  {
+    name: '资源使用',
+    type: 'line',
+    data: (function (){
+      return fun.mockData(80, 30, 9);
+    })()
+  }
+]
 app.get('/',(req,res) => {
     res.send('ssssss');
 });
 app.get('/api/linenumber',(req,res) => {
-    res.send(datas);
+    res.send(linenumdatas);
 })
 app.get('/api/stausnumber', (req,res) => {
-    res.send(datas);
+    res.send(sysstatusdata);
 })
 const server = app.listen(8000,'localhost',() => {
     // console.log('服务器已启动。地址是localhost:8000')

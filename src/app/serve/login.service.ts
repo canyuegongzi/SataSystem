@@ -40,15 +40,14 @@ export class LoginService implements CanActivate {
       this.user = {user: pargrams.phone, pass: pargrams.password};
       this.allowLogin = true;
       /*如果登录是合法的，路由到具体的页面*/
-      // noinspection JSIgnoredPromiseFromCall
-      this.router.navigate(['home']/*, { queryParams: { name: 1 }} */);
+      this.router.navigate(['data']/*, { queryParams: { name: 1 }} */);
       /*将当前的登录信息存储*/
       localStorage.setItem('user', JSON.stringify(this.user));
       console.log('登录成功！');
     } else {
       /*否则路由到登录页面再次登录*/
       // noinspection JSIgnoredPromiseFromCall
-      this.router.navigate(['home']/*, { queryParams: { name: 1 }} */);
+      this.router.navigate(['/']/*, { queryParams: { name: 1 }} */);
       console.log('登录失败！');
       this.allowLogin = false;
     }

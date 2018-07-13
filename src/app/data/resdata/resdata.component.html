@@ -1,4 +1,28 @@
-<div echarts [options]="linePersonOption" class="line-number"></div>
-<div echarts [(options)]="lineSyastemOption" class="converse" id="converse"></div>
-<!--<div class="success"></div>
-<div class="result"></div>-->
+<div echarts [options]="linePersonOption" class="line-number" id="linenum" [loading]="showloading"></div>
+<div echarts class="converse" id="converse" [loading]="showloading"></div>
+<div class="safe" id="safe" echarts [options] = "syshealthStatus" [loading]="showloading"></div>
+<div class="result">
+  <el-table [model]="tableData" [scroll-x]="true" center="all" [show-header] = "true">
+    <el-table-column label="系统警告">
+    <el-table-column model-key="time" label="时间" width="80">
+    </el-table-column>
+    <el-table-column model-key="degree" label="级别" width="80">
+    </el-table-column>
+    <el-table-column model-key="cure" label="处理" width="80">
+    </el-table-column>
+    <el-table-column model-key="desc" label="错误类别" width="120">
+    </el-table-column>
+    <el-table-column label="标记" width="100">
+      <ng-template #slot let-scope="scope">
+        <el-button type="text" size="small" (click)="handle(scope)">标记</el-button>
+      </ng-template>
+    </el-table-column>
+      <el-table-column label="详情" width="100">
+        <ng-template #slot let-scope="scope">
+          <el-button type="text" size="small" (click)="handle(scope)">详情</el-button>
+        </ng-template>
+      </el-table-column>
+    </el-table-column>
+  </el-table>
+</div>
+
