@@ -1,6 +1,8 @@
 import * as express from 'express';
 import * as fun from './mock';
+import {DetailMessage, SysDetail, trueFalse} from "./mock";
 const app = express();
+/*在线人数信息*/
 const linenumdatas = [
     {
         name: '总数',
@@ -29,53 +31,165 @@ const linenumdatas = [
         data: [258,110,150,280,160,50]
     },
 ]
-const sysstatusdata =  [
+/*系统信息指标*/
+const sysData = fun.Makedata(5);
+/*系统警告*/
+const systemToke = [
+    {
+      id: 5,
+      time: 2017,
+      degree: 5,
+      cure: '是',
+      desc: 'A1！',
+    },
+    {
+      id: 2,
+      time: 2016,
+      degree: 7,
+      cure: '否',
+      desc: 'A1！',
+    } ,
+    {
+      id: 1,
+      time: 2015,
+      degree: 7,
+      cure: '否',
+      desc: 'A1！',
+    }
+  ];
+/*系统的详细信息*/
+const systemdatil: SysDetail[]= [
+  new SysDetail(5,2017,5,'A1',true,'marvin','xxx','我也不知道啥原因', '没查出原因来'),
+  new SysDetail(2,2016,7,'A1',true,'marvin','xxx','你问我我哪儿知道', '没啥意见'),
+  new SysDetail(1,2015,7,'A1',true,'marvin','xxx','不知道', '不知道'),
+];
+/*系统的分布的具体信息的配置文件*/
+const dataSafeMap = [
   {
-    name: '在线人数',
-    type: 'line',
-    xAyisIndex: 2,
-    data: (function (){
-       return fun.mockData(500, 0, 9);
-    })()
+    media: [
+      {name: '北京', value: 11},
+      {name: '天津', value: 11},
+      {name: '上海', value: 11},
+      {name: '重庆', value: 11},
+      {name: '河北', value: 11},
+      {name: '河南', value: 11},
+      {name: '云南', value: 11},
+      {name: '辽宁', value: 11},
+      {name: '黑龙江', value: 44},
+      {name: '湖南', value: 47},
+      {name: '安徽', value: 47},
+      {name: '山东', value: 47},
+      {name: '新疆', value: 47},
+      {name: '江苏', value: 47},
+      {name: '浙江', value: 47},
+      {name: '江西', value: 47},
+      {name: '湖北', value: 47},
+      {name: '广西', value: 47},
+      {name: '甘肃', value: 47},
+      {name: '山西', value: 47},
+      {name: '内蒙古', value: 21},
+      {name: '陕西', value: 32},
+      {name: '吉林', value: 32},
+      {name: '福建', value: 32},
+      {name: '贵州', value: 32},
+      {name: '广东', value: 32},
+      {name: '青海', value: 32},
+      {name: '西藏', value: 32},
+      {name: '四川', value: 32},
+      {name: '宁夏', value: 32},
+      {name: '海南', value: 32},
+      {name: '台湾', value: 32},
+      {name: '香港', value: 32},
+      {name: '澳门', value: 87}
+    ],
+    memory: [
+
+        {name: '北京', value: 78},
+        {name: '天津', value: 78},
+        {name: '上海', value: 78},
+        {name: '广东', value: 78},
+        {name: '台湾', value: 78},
+        {name: '香港', value: 78},
+        {name: '澳门', value: 36}
+    ],
+    service: [
+        {name: '北京', value: 47},
+        {name: '天津', value: 47},
+        {name: '上海', value: 47},
+        {name: '重庆', value: 47},
+        {name: '河北', value: 47},
+        {name: '安徽', value: 47},
+        {name: '新疆', value: 47},
+        {name: '浙江', value: 47},
+        {name: '江西', value: 21},
+        {name: '山西', value: 21},
+        {name: '内蒙古', value: 30},
+        {name: '吉林', value: 41},
+        {name: '福建', value: 41},
+        {name: '广东', value: 41},
+        {name: '西藏', value: 41},
+        {name: '四川', value: 41},
+        {name: '宁夏', value: 41},
+        {name: '香港', value: 39},
+        {name: '澳门', value: 39}
+    ]
   },
   {
-    name: '系统负载',
-    type: 'line',
-    data: (function (){
-      return fun.mockData(80, 30, 9);
-    })()
-  },
+    pie: [
+      {value: 355, name: '负载均衡'},
+      {value: 200, name: '关系型数据库'},
+      {value: 310, name: '对象存储'},
+      {value: 235, name: '云磁盘'},
+      {value: 200, name: '内容分发'},
+      {value: 200, name: '应用引擎'}
+    ]
+  }
+];
+/*系统的开发的参数配置文件*/
+const  sysOption = [
   {
-    name: '相应率',
-    type: 'line',
-    data: (function (){
-      return fun.mockData(80, 30, 9);
-    })()
-  },
-  {
-    name: '吞吐量',
-    type: 'line',
-    data: (function (){
-      return fun.mockData(80, 30, 9);
-    })()
-  },
-  {
-    name: '资源使用',
-    type: 'line',
-    data: (function (){
-      return fun.mockData(80, 30, 9);
-    })()
+    code : '**sdff555',
+    lineTime : '2018-07-02',
+    develodTeam: 'Zero',
+    evenind: 'Marvin',
+    director: 'Marvin',
+    status: '良好',
+    loophole: '暂无',
+    bugTime: '10min'
   }
 ]
-app.get('/',(req,res) => {
-    res.send('ssssss');
+/*用来发送系统夫人具体的参数的函数*/
+app.get('/api/data',(req,res) => {
+    res.json(sysData);
 });
+/*用来发送在线人数*/
 app.get('/api/linenumber',(req,res) => {
-    res.send(linenumdatas);
+    // noinspection JSIgnoredPromiseFromCall
+  res.json(linenumdatas);
 })
-app.get('/api/stausnumber', (req,res) => {
-    res.send(sysstatusdata);
+/*用来发送所有的系统警告的消息*/
+app.get('/api/sysmessage', (req,res) => {
+
+    res.send(systemToke);
+})
+/*根据具体的id来查找对应的系统警告的消息*/
+app.get('/api/sysmessage/:id', (req, res) => {
+  console.log(req.params.id);
+  // res.send('666666');
+  res.json(systemdatil.find((systemdatil) => systemdatil.id == req.params.id));
+});
+/*用来模拟用户是否对消息进行标记成功*/
+app.get('/api/sysmeswrite/:id', (req, res) => {
+  console.log(req.params.id);
+  res.send(trueFalse());
+});
+/*用来发送系统的地图部分的数据*/
+app.get('/api/sysdatamap', (req, res) => {
+  res.json(dataSafeMap)
+});
+/*发送数据分布部分的系统开发信息*/
+app.get('/api/sysdevelope', (req, res) => {
+  res.json(sysOption)
 })
 const server = app.listen(8000,'localhost',() => {
-    // console.log('服务器已启动。地址是localhost:8000')
 })

@@ -9,6 +9,7 @@ div {
 .result {
   padding-top: 2rem;
   padding-right: 0.8rem;
+  width: 34rem;
 }
 .demo-table-expand {
   font-size: 0;
@@ -21,4 +22,34 @@ div {
   margin-right: 0;
   margin-bottom: 0;
   width: 50%;
+}
+.sysmesg {
+  width: 40rem;
+  /*height: 26rem;*/
+  position: fixed;
+  top: 50%;
+  right: 50%;
+  margin-right: -20rem;
+  margin-top: -15rem;
+  background-color: rgba(0,0,0,.3);
+  color: #ffffff;
+}
+.component-sysmes {
+  background-color: rgba(0,0,0,.3);
+}
+.sysmesg >span {
+  float: right;
+  padding-right: .2rem;
+  padding-top: .2rem;
+}
+market_out.page {
+  float: right;
+}
+/*
+.page {
+  float: right;
+}
+*/
+.sysmesg .el-table {
+  background-color: red;
 }

@@ -65,6 +65,7 @@ li {
   height: 35rem;
   width: 100%;
   background-image: url("http://seopic.699pic.com/photo/50053/2947.jpg_wh1200.jpg");
+  background-size: 100%;
 }
 .form-write2 {
   position: relative;
@@ -72,4 +73,20 @@ li {
 #loginButton {
   width: 10rem;
   margin-left: 10rem;
+}
+.sysmesg .el-table  th, .sysmesg .el-table {
+  background-color: rgba(0,0,0,.4);
+  color: #000000;
+  font-size: 1rem;
+}
+.sysmesg .el-table  td {
+  background-color: rgba(0,0,0,.4);
+  color: #000000;
+  font-size: 1rem;
+}
+#dataresult .el-pagination {
+  float: right;
+}
+.sysmesg > .el-tr {
+  background-color: rgba(0,0,0,.4);
 }

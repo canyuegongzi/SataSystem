@@ -1,0 +1,28 @@
+#sysdataMap {
+  width: 43rem;
+  height: 28rem;
+  float: left;
+
+}
+#sysdataPie {
+  width: 22rem;
+  height: 22rem;
+  float: left;
+  margin-left: 2rem;
+}
+#mapData {
+  width: 100%;
+  height: 4.5rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-align: center;
+  padding-top: .8rem;
+}
+.datamap-foot {
+  float: right;
+  width: 30rem;
+  height: 10rem;
+  /* padding-right: 0rem; */
+  margin-right: 1rem;
+  margin-top: -1rem;
+}

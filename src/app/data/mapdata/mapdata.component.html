@@ -1,3 +1,35 @@
-<p>
-  我是数据分布页面
-</p>
+<div id="mapData"><span>系统分布</span></div>
+<div echarts [options]="dataSafeMap" id="sysdataMap"></div>
+<div echarts [options]="dataSpreadPie" id="sysdataPie"></div>
+<div class="datamap-foot">
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th scope="col">代码</th>
+      <th scope="col">上线时间</th>
+      <th scope="col">开发团队</th>
+      <th scope="col">运维团队</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td scope="row">{{sysOption?.code}}</td>
+      <td>{{sysOption?.lineTime}}</td>
+      <td>{{sysOption?.develodTeam}}</td>
+      <td>{{sysOption?.evenind}}</td>
+    </tr>
+    <tr>
+      <th scope="row">负责人</th>
+      <th>运行状况</th>
+      <th>系统漏洞</th>
+      <th>故障时长</th>
+    </tr>
+    <tr>
+      <td scope="row">{{sysOption?.director}}</td>
+      <td>{{sysOption?.status}}</td>
+      <td>{{sysOption?.loophole}}</td>
+      <td>{{sysOption?.bugTime}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

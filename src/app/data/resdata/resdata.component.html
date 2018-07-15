@@ -1,28 +1,66 @@
-<div echarts [options]="linePersonOption" class="line-number" id="linenum" [loading]="showloading"></div>
-<div echarts class="converse" id="converse" [loading]="showloading"></div>
-<div class="safe" id="safe" echarts [options] = "syshealthStatus" [loading]="showloading"></div>
-<div class="result">
-  <el-table [model]="tableData" [scroll-x]="true" center="all" [show-header] = "true">
+<div echarts [options]="lineNumber" class="line-number" id="linenum"></div>
+<div echarts [options]="systemStatus" class="converse"  id="converse"></div>
+<div echarts [options]="syshealthStatus" class="safe" id="safe" ></div>
+<div class="result" id="dataresult">
+  <el-table [model]="systemWaring" center="all" [show-header] = "true">
     <el-table-column label="系统警告">
+     <el-table-column model-key="id" label="id" width="40" >
+     </el-table-column>
     <el-table-column model-key="time" label="时间" width="80">
     </el-table-column>
     <el-table-column model-key="degree" label="级别" width="80">
     </el-table-column>
     <el-table-column model-key="cure" label="处理" width="80">
     </el-table-column>
-    <el-table-column model-key="desc" label="错误类别" width="120">
+    <el-table-column model-key="desc" label="错误类别" width="80">
     </el-table-column>
-    <el-table-column label="标记" width="100">
+    <el-table-column label="标记" width="80">
       <ng-template #slot let-scope="scope">
-        <el-button type="text" size="small" (click)="handle(scope)">标记</el-button>
+        <el-button type="info" (click)="flagMsg('success' ,scope)">标记</el-button>
       </ng-template>
     </el-table-column>
-      <el-table-column label="详情" width="100">
+      <el-table-column label="详情" width="80">
         <ng-template #slot let-scope="scope">
-          <el-button type="text" size="small" (click)="handle(scope)">详情</el-button>
+          <el-button type="info"  (click)="readMsg(scope)">详情</el-button>
         </ng-template>
       </el-table-column>
     </el-table-column>
+
   </el-table>
+  <el-pagination [total]="systemWaring.length"
+                 [small]="true">
+  </el-pagination>
+
+</div>
+<div class="sysmesg" [hidden]="sysMesalert">
+  <span class="icons" (click)="closeAlert()"><i class="el-icon-close"></i></span>
+  <div>
+    <el-table [model]="systeDetailtoke[0]" center="all" [show-header] = "true" [border]="false" [scroll-x]="false">
+      <el-table-column label="详细信息">
+        <el-table-column model-key="id" label="id" width="80">
+        </el-table-column>
+        <el-table-column model-key="time" label="时间" width="100">
+        </el-table-column>
+        <el-table-column model-key="degree" label="级别" width="90">
+        </el-table-column>
+        <el-table-column model-key="cure" label="处理" width="90">
+        </el-table-column>
+        <el-table-column model-key="desc" label="错误类别" width="100">
+        </el-table-column>
+        <el-table-column model-key="who" label="处理人" width="100">
+        </el-table-column>
+        <el-table-column model-key="area" label="影响区域" width="80">
+        </el-table-column>
+      </el-table-column>
+    </el-table>
+    <el-table [model]="systeDetailtoke[1]" center="all">
+      <el-table-column model-key="upperAdvice" width="640" label="主管批示">
+      </el-table-column>
+    </el-table>
+    <el-table [model]="systeDetailtoke[2]" center="all">
+    <el-table-column model-key="solveAdvice" width="640" label="问题说明">
+    </el-table-column>
+  </el-table>
+  </div>
 </div>
 

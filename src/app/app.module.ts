@@ -40,6 +40,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {LoginModule} from './module/login/login.module';
 import {ToolsModule} from './module/tools/tools.module';
 import { SlidetoolsComponent } from './tools/slidetools/slidetools.component';
+import { TlTableComponent } from './data/tl-table/tl-table.component';
 
 
 @NgModule({
@@ -73,6 +74,7 @@ import { SlidetoolsComponent } from './tools/slidetools/slidetools.component';
     OurComponent,
     BarcontrolComponent,
     SlidetoolsComponent,
+    TlTableComponent,
   ],
   imports: [
     BrowserModule,
