@@ -1,3 +1,54 @@
-<p>
-  我是分析数据页面
-</p>
+<div class="data-assay"><span>数据分析</span></div>
+<div id="dataZoom"></div>
+<div class="assay-table">
+  <div><form class="form-inline" [formGroup] = 'formModel' (ngSubmit) = 'submit()' novalidate>
+    <div class="form-group mx-sm-3 mb-2">
+      <label for="input2" class="sr-only">数据解析</label>
+      <input formControlName = 'press' type="text" class="form-control" id="input2" placeholder="请输入负载">
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
+      <label for="input1" class="sr-only">数据解析</label>
+      <input formControlName = 'time' type="text" class="form-control" id="input1" placeholder="请输入时长">
+    </div>
+    <div class="form-group mx-sm-3 mb-2">
+      <select formControlName="area" id="productCategory" placeholder="商品类别" class="form-control">
+        <option [value]="category" *ngFor="let category of categories">{{category}}</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary mb-2" >解析</button>
+  </form></div>
+  <div class="data-assay"><span>数据解析</span></div>
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th scope="col">区域</th>
+      <th scope="col">负载</th>
+      <th scope="col">故障时间</th>
+      <th scope="col">是否优化</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td scope="row">{{assDescriptpon?.area}}</td>
+      <td>{{assDescriptpon?.press}}</td>
+      <td>{{assDescriptpon?.bugtime}}</td>
+      <td>{{assDescriptpon?.needOptimize}}</td>
+    </tr>
+    <tr>
+      <th scope="row">相关度</th>
+      <th>故障几率</th>
+      <th>修复几率</th>
+      <th>可行性措施</th>
+    </tr>
+    <tr>
+      <td scope="row">{{assDescriptpon?.relevance}}</td>
+      <td>{{assDescriptpon?.bugCan}}</td>
+      <td>{{assDescriptpon?.cureCan}}</td>
+      <td>{{assDescriptpon?.hows}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<!--
+<div class="ass-data" id="oneLine"></div>-->
+<div id="assayDataRadar"></div>

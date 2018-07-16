@@ -401,7 +401,7 @@ export class ResdataComponent implements OnInit {
     }
     return res;
   }
-  /*计算啊当前的健康程度，第一个参数为系统承受的能力，第二个参数为现在的指标*/
+  /*计算当前的健康程度，第一个参数为系统承受的能力，第二个参数为现在的指标*/
   private accountStatusnu(able: Array<number>, now: Array<number>): Array<number> {
     const res: Array<number> = [];
     res.push(Math.floor(now[0] / able[0] * 100) / 100);
@@ -430,12 +430,13 @@ export class ResdataComponent implements OnInit {
     this.sysMesalert = false;
     this.getData.getSysmessageByid(ref.rowData.id).subscribe(res => {
       ress.push(res);
-      /*数据不知啥原因，无法同时显然模板，只能采用比较粗暴的办法进行push操作*/
+      /*数据不知啥原因，无法同时渲染模板，只能采用比较粗暴的办法进行push操作*/
       this.systeDetailtoke[0] = ress;
       this.systeDetailtoke[2] = ress;
       this.systeDetailtoke[1] = ress;
     });
   }
+  /*关闭弹出框*/
   private closeAlert() {
     this.sysMesalert = true;
     return true;

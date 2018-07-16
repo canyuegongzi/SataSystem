@@ -8,6 +8,33 @@ export class LineNumber {
 
   }
 }
+/*具体的分析*/
+export class SysWriteData {
+  constructor(
+    public area: string,
+    public press: string,
+    public bugtime: string,
+    public needOptimize: boolean,
+    public relevance: number,
+    public bugCan: number,
+    public cureCan: number,
+    public hows: number,
+  ) {
+    /*area : '',
+    press: '',
+    bugtime: '',
+    /!*是否优化*!/
+    needOptimize: '',
+    /!*相关度*!/
+    relevance: '',
+    /!*故障jilv*!/
+    bugCan: '',
+    /!*解决ijlv*!/
+    cureCan: '',
+    /!*解决方案*!/
+    hows: ''*/
+  }
+}
 export interface Sysmessage {
   id: number;
   time?: any;

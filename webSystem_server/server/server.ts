@@ -1,6 +1,6 @@
 import * as express from 'express';
 import * as fun from './mock';
-import {DetailMessage, SysDetail, trueFalse} from "./mock";
+import {DetailMessage, makeArr, SysDetail, SysWriteData, trueFalse} from "./mock";
 const app = express();
 /*在线人数信息*/
 const linenumdatas = [
@@ -63,6 +63,16 @@ const systemdatil: SysDetail[]= [
   new SysDetail(2,2016,7,'A1',true,'marvin','xxx','你问我我哪儿知道', '没啥意见'),
   new SysDetail(1,2015,7,'A1',true,'marvin','xxx','不知道', '不知道'),
 ];
+/*系统解析文件配*/
+const sysaccount: SysWriteData[] = [
+new SysWriteData('东北', 20, 102, false, 0.2, 0.4, 0.9, 'xxxxxxxxxxxxxxxxxxxxxx'),
+new SysWriteData('华北', 32, 402, true, 0.4, 0.58, 0.8, 'xxxxxxxxxxxxxxxxxxxxxx'),
+new SysWriteData('西北', 46, 982, true, 0.45, 0.47, 0.5, 'xxxxxxxxxxxxxxxxxxxxxx'),
+new SysWriteData('西南', 54, 412, false, 0.89, 0.59, 0.4, 'xxxxxxxxxxxxxxxxxxxxxx'),
+new SysWriteData('华南', 66, 582, true, 0.45, 0.36, 0.2, 'xxxxxxxxxxxxxxxxxxxxxx'),
+new SysWriteData('华中', 10, 252, false, 0.14, 0.7, 0.1, 'xxxxxxxxxxxxxxxxxxxxxx'),
+new SysWriteData('华东', 2780, 402, true, 0.258, 0.99, 0.4, 'xxxxxxxxxxxxxxxxxxxxxx'),
+]
 /*系统的分布的具体信息的配置文件*/
 const dataSafeMap = [
   {
@@ -158,6 +168,7 @@ const  sysOption = [
     bugTime: '10min'
   }
 ]
+const zoomData =  {time: new Date(), data: makeArr()}
 /*用来发送系统夫人具体的参数的函数*/
 app.get('/api/data',(req,res) => {
     res.json(sysData);
@@ -190,6 +201,19 @@ app.get('/api/sysdatamap', (req, res) => {
 /*发送数据分布部分的系统开发信息*/
 app.get('/api/sysdevelope', (req, res) => {
   res.json(sysOption)
+});
+/*发送数据分析页面的数据*/
+app.get('/api/syszoomdata', (req, res) => {
+  res.json(zoomData)
+})
+app.get('/api/accountdata', (req, res) => {
+  if (req.query.area) {
+    console.log(req.query.area);
+    res.json(sysaccount.find((sysaccount) => sysaccount.area == req.query.area ));
+  }
+
+  res.json(zoomData)
 })
 const server = app.listen(8000,'localhost',() => {
+
 })

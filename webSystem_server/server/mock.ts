@@ -96,6 +96,33 @@ export function trueFalse(){
   }
   return res;
 }
+export function random(max: number) {
+  return (Math.random() * max).toFixed(3);
+};
+/*模拟zoomdata组件的数组数据*/
+export function makeArr() {
+  const data1 = [];
+  const data2 = [];
+  const data3 = [];
+  const data4 = [];
+  const data5 = [];
+  const data6 = [];
+  const data7 = [];
+  const random = function (max) {
+    return (Math.random() * max).toFixed(3);
+  };
+  for (let i = 0; i < 100; i++) {
+    data1.push([random(100), random(1000), random(1)]);
+    data2.push([random(100), random(1000), random(1)]);
+    data3.push([random(100), random(1000), random(1)]);
+    data4.push([random(100), random(1000), random(1)]);
+    data5.push([random(100), random(1000), random(1)]);
+    data6.push([random(100), random(1000), random(1)]);
+    data7.push([random(100), random(1000), random(1)]);
+  }
+  return [data1, data2, data3, data4, data5, data6, data7];
+}
+
 /*消息的接口*/
 export interface Sysmessage {
     id: number
@@ -128,5 +155,32 @@ export class SysDetail {
 
   ) {
 
+  }
+}
+/*具体的分析*/
+export class SysWriteData {
+  constructor(
+    public area: string,
+    public press: number,
+    public bugtime: number,
+    public needOptimize: boolean,
+    public relevance: number,
+    public bugCan: number,
+    public cureCan: number,
+    public hows: string,
+  ) {
+    /*area : '',
+    press: '',
+    bugtime: '',
+    /!*是否优化*!/
+    needOptimize: '',
+    /!*相关度*!/
+    relevance: '',
+    /!*故障jilv*!/
+    bugCan: '',
+    /!*解决ijlv*!/
+    cureCan: '',
+    /!*解决方案*!/
+    hows: ''*/
   }
 }

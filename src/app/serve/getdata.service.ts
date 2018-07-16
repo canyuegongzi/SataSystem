@@ -60,6 +60,25 @@ export class GetdataService {
       )
     );
   }
+  /*获取散点图的信息*/
+  getAssayData(): Observable<any> {
+    return this.http.get('api/syszoomdata').pipe(
+      map(res => res.json())
+    );
+  }
+  /*计算相关度*/
+  accountSysNumber(par: any): Observable<any> {
+    if (par.time && par.press) {
+      return this.http.get('api/accountdata', { params: {press: par.time, time: par.press} }).pipe(
+        map(res => res.json())
+      );
+    } else if (par.area) {
+      console.log(par.area);
+      return this.http.get('api/accountdata', { params: {area: par.area }}).pipe(
+        map(res => res.json())
+      );
+    }
+  }
 }
 export interface Line {
   name?: string;

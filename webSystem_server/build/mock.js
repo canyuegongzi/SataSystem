@@ -100,6 +100,35 @@ function trueFalse() {
     return res;
 }
 exports.trueFalse = trueFalse;
+function random(max) {
+    return (Math.random() * max).toFixed(3);
+}
+exports.random = random;
+;
+/*模拟zoomdata组件的数组数据*/
+function makeArr() {
+    var data1 = [];
+    var data2 = [];
+    var data3 = [];
+    var data4 = [];
+    var data5 = [];
+    var data6 = [];
+    var data7 = [];
+    var random = function (max) {
+        return (Math.random() * max).toFixed(3);
+    };
+    for (var i = 0; i < 100; i++) {
+        data1.push([random(100), random(1000), random(1)]);
+        data2.push([random(100), random(1000), random(1)]);
+        data3.push([random(100), random(1000), random(1)]);
+        data4.push([random(100), random(1000), random(1)]);
+        data5.push([random(100), random(1000), random(1)]);
+        data6.push([random(100), random(1000), random(1)]);
+        data7.push([random(100), random(1000), random(1)]);
+    }
+    return [data1, data2, data3, data4, data5, data6, data7];
+}
+exports.makeArr = makeArr;
 var SysDetail = /** @class */ (function () {
     function SysDetail(id, time, degree, desc, cure, who, area, solveAdvice, upperAdvice) {
         this.id = id;
@@ -115,3 +144,31 @@ var SysDetail = /** @class */ (function () {
     return SysDetail;
 }());
 exports.SysDetail = SysDetail;
+/*具体的分析*/
+var SysWriteData = /** @class */ (function () {
+    function SysWriteData(area, press, bugtime, needOptimize, relevance, bugCan, cureCan, hows) {
+        this.area = area;
+        this.press = press;
+        this.bugtime = bugtime;
+        this.needOptimize = needOptimize;
+        this.relevance = relevance;
+        this.bugCan = bugCan;
+        this.cureCan = cureCan;
+        this.hows = hows;
+        /*area : '',
+        press: '',
+        bugtime: '',
+        /!*是否优化*!/
+        needOptimize: '',
+        /!*相关度*!/
+        relevance: '',
+        /!*故障jilv*!/
+        bugCan: '',
+        /!*解决ijlv*!/
+        cureCan: '',
+        /!*解决方案*!/
+        hows: ''*/
+    }
+    return SysWriteData;
+}());
+exports.SysWriteData = SysWriteData;
