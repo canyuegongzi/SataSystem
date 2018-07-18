@@ -361,11 +361,13 @@ export class ResdataComponent implements OnInit {
     this.getData.getSysmessage().subscribe(res => {
       if (res != null && res !== undefined) {
         console.log('数据获取成功！');
-        console.log(res);
+        // console.log(res);
         console.log(this.dataresultLoading);
         this.systemWaring = res;
+        this.changeDetectorRef.markForCheck();
+        this.changeDetectorRef.detectChanges();
         this.dataresultLoading = false;
-        console.log(this.dataresultLoading);
+        // console.log(this.dataresultLoading);
        } else {
           console.log('数据获取失败！');
       }

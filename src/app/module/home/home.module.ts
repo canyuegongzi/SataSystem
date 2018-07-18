@@ -15,6 +15,14 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgxEchartsModule} from 'ngx-echarts';
 import {ElModule} from 'element-angular';
 import {AsydataComponent} from '../../common/asydata/asydata.component';
+import {DeladminComponent} from '../../admin/edit/deladmin/deladmin.component';
+import {EditComponent} from '../../admin/edit/edit.component';
+import {AddadminComponent} from '../../admin/addadmin/addadmin.component';
+import {RegadminComponent} from '../../admin/edit/regadmin/regadmin.component';
+import {AdminComponent} from '../../admin/admin.component';
+import {ShowadminComponent} from '../../admin/showadmin/showadmin.component';
+import {AdminService} from '../../serve/admin.service';
+import {AdminDetailComponent} from '../../admin/admin-detail/admin-detail.component';
 /*这个模块主要是用于显示home的*/
 @NgModule({
   imports: [
@@ -38,8 +46,15 @@ import {AsydataComponent} from '../../common/asydata/asydata.component';
     AssaydataComponent,
     MapdataComponent,
     DataComponent,
-    AsydataComponent
+    AsydataComponent,
+    AdminComponent,
+    ShowadminComponent,
+    AddadminComponent,
+    EditComponent,
+    DeladminComponent,
+    RegadminComponent,
+    AdminDetailComponent,
   ],
-  providers: [LoginService, GetdataService],
+  providers: [LoginService, GetdataService, AdminService],
 })
 export class HomeModule { }

@@ -16,16 +16,6 @@ import { ElModule } from 'element-angular';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ToolsComponent } from './tools/tools.component';
 import { MessageComponent } from './message/message.component';
-import { DataComponent } from './data/data.component';
-import { ResdataComponent } from './data/resdata/resdata.component';
-import { AssaydataComponent } from './data/assaydata/assaydata.component';
-import { MapdataComponent } from './data/mapdata/mapdata.component';
-import { AdminComponent } from './admin/admin.component';
-import { ShowadminComponent } from './admin/showadmin/showadmin.component';
-import { AddadminComponent } from './admin/addadmin/addadmin.component';
-import { EditComponent } from './admin/edit/edit.component';
-import { DeladminComponent } from './admin/edit/deladmin/deladmin.component';
-import { RegadminComponent } from './admin/edit/regadmin/regadmin.component';
 import { NowstatusComponent } from './nowstatus/nowstatus.component';
 import { FriengsComponent } from './nowstatus/friengs/friengs.component';
 import { ShopComponent } from './nowstatus/shop/shop.component';
@@ -41,6 +31,7 @@ import {LoginModule} from './module/login/login.module';
 import {ToolsModule} from './module/tools/tools.module';
 import { SlidetoolsComponent } from './tools/slidetools/slidetools.component';
 import { TlTableComponent } from './data/tl-table/tl-table.component';
+import { AdminDetailComponent } from './admin/admin-detail/admin-detail.component';
 
 
 @NgModule({
@@ -55,12 +46,6 @@ import { TlTableComponent } from './data/tl-table/tl-table.component';
     RegisterComponent,
     ToolsComponent,
     MessageComponent,
-    AdminComponent,
-    ShowadminComponent,
-    AddadminComponent,
-    EditComponent,
-    DeladminComponent,
-    RegadminComponent,
     NowstatusComponent,
     FriengsComponent,
     ShopComponent,
@@ -70,7 +55,7 @@ import { TlTableComponent } from './data/tl-table/tl-table.component';
     OurComponent,
     BarcontrolComponent,
     SlidetoolsComponent,
-    TlTableComponent,
+    TlTableComponent
   ],
   imports: [
     BrowserModule,

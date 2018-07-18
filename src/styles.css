@@ -84,7 +84,7 @@ li {
   color: #000000;
   font-size: 1rem;
 }
-#dataresult .el-pagination {
+#dataresult .el-pagination, .admin-page .admin-pagination {
   float: right;
 }
 .sysmesg > .el-tr {

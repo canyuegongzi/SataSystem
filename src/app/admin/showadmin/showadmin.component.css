@@ -1,0 +1,27 @@
+.admin-header {
+  display: block;
+  width: 100%;
+  height: 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  padding-top: .8rem;
+}
+.admin-header1 {
+  height: 2rem;
+  font-size: 1rem;
+  line-height: 2rem;
+  font-weight: 700;
+}
+.form-group {
+  line-height: 2rem;
+  padding-top: .3rem;
+}
+.btn-primary {
+  margin-top: .3rem;
+}
+#input2{
+  width: 8rem;
+}
+.mes {
+  font-size: 1rem;
+}

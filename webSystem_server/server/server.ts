@@ -1,6 +1,9 @@
 import * as express from 'express';
 import * as fun from './mock';
+const fs = require('fs');
 import {DetailMessage, makeArr, SysDetail, SysWriteData, trueFalse} from "./mock";
+import * as mockData from '../model/localadmin';
+import {lang} from "moment";
 const app = express();
 /*在线人数信息*/
 const linenumdatas = [
@@ -205,15 +208,102 @@ app.get('/api/sysdevelope', (req, res) => {
 /*发送数据分析页面的数据*/
 app.get('/api/syszoomdata', (req, res) => {
   res.json(zoomData)
-})
+});
 app.get('/api/accountdata', (req, res) => {
   if (req.query.area) {
-    console.log(req.query.area);
+    // console.log(req.query.area);
     res.json(sysaccount.find((sysaccount) => sysaccount.area == req.query.area ));
+  }else {
+    console.log('ddd');
   }
+});
+/*根据条件查询具体的admin的信息*/
+app.get('/api/admininfosum', (req, res) => {
+  console.log(req.query.id);
+  let admindata = []
+  let reach = ['策划', '行政', '公关', '研发一', '研发二', '研发三','研发四', '设计一', '设计二', '市场一', '市场二', '销售一',
+    '销售二', '网络', '秘书处'];
+  let age = ['20-25', '26-30' ,'30-35', '35-40', '40-45', '45-50']
+  // console.log(req.query);
+  fs.readFile('mockData/adminuser.json', function (err, data) {
+    if (err) {
+      console.error(err);
+    } else {
+      let admin = data.toString();
+      admin = JSON.parse(admin);
+      let length = admin.data.length;
+      if (req.query.page) {
+        // console.log(req.query.page)
+        // (s*p,(p+1)*s);
+        let pageadmin = admin.data.slice(10 *((req.query.page)-1), (((req.query.page)-1) + 1) * 10);
+        admindata = [
+          {
+            data: pageadmin
+          },
+          {
+            total: length
+          },
+          {
+            reach: reach
+          },
+          {
+            ages: age
+          }
+        ]
+        res.json(admindata);
+      }
+      else if (req.query.id) {
+        console.log(req.query.id)
+        let adminid = (admin.data).filter(function (e) {
+          return e.id == req.query.id
+        })
+        res.json(adminid);
+      }
+      else if (req.query.name) {
+        let adminname = (admin.data).filter(function (e) {
+          return e.name == req.query.name;
+        })
+        res.json(adminname);
+      }
+      else if (req.query.code) {
+        let admincode = (admin.data).filter(function (e) {
+          return e.code == req.query.code;
+        })
+        res.json(admincode);
+      }
+      else if ((req.query.age)!= -1) {
+        let first = req.query.age.substr(0,2);
+        let last = req.query.age.substr(3,2);
+        let adminage = (admin.data).filter(function (e) {
+          return e.age >= first && e.code <= last
+        })
+        res.json(adminage);
+      }
+      else if ((req.query.reach) != -1) {
+        let adminreach = (admin.data).filter(function (e) {
+          return e.reach == req.query.reach
+        })
+        res.json(adminreach);
+      }
+      else if (req.query.data) {
+        let datafirst = req.query.data.substr(0,4);
+        let datalast = req.query.data.substr(7,2);
+        let admindata = (admin.data).filter(function (e) {
+          return (function () {
+          })()})
+        res.json(admindata);
+      }
+      else if ((req.query.age)!= -1 && (req.query.reach) != -1) {
+        let adminagereach = (admin.data).filter(function (e) {
+          return e.age == req.query.age && e.reach == req.query.reach
+        })
+        res.json(adminagereach);
+      }
 
-  res.json(zoomData)
-})
+    }
+  })
+});
+
 const server = app.listen(8000,'localhost',() => {
-
+  // console.log(systemdatil);
 })

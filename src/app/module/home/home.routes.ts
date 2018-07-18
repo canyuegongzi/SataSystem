@@ -12,6 +12,8 @@ import {OurComponent} from '../../our/our.component';
 import {SettingComponent} from '../../setting/setting.component';
 import {MapdataComponent} from '../../data/mapdata/mapdata.component';
 import {HomeComponent} from '../../home/home.component';
+import {AdminDetailComponent} from '../../admin/admin-detail/admin-detail.component';
+import {AdminComponent} from '../../admin/admin.component';
 
 export const HomeRoutes = [
   {
@@ -43,11 +45,21 @@ export const HomeRoutes = [
     children: [
       {
         path: '',
-        component: ShowadminComponent,
+        component: AddadminComponent,
       },
       {
         path: 'show',
-        component : ShowadminComponent
+        component : AdminComponent,
+        children: [
+          {
+            path: '',
+            component: ShowadminComponent
+          },
+          {
+            path: 'detail',
+            component: AdminDetailComponent
+          }
+        ]
       },
       {
         path: 'add',
@@ -60,7 +72,7 @@ export const HomeRoutes = [
       {
         path: 'reg',
         component: RegadminComponent
-      }
+      },
     ]
   },
   {

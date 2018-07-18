@@ -122,7 +122,6 @@ export function makeArr() {
   }
   return [data1, data2, data3, data4, data5, data6, data7];
 }
-
 /*消息的接口*/
 export interface Sysmessage {
     id: number
@@ -169,18 +168,6 @@ export class SysWriteData {
     public cureCan: number,
     public hows: string,
   ) {
-    /*area : '',
-    press: '',
-    bugtime: '',
-    /!*是否优化*!/
-    needOptimize: '',
-    /!*相关度*!/
-    relevance: '',
-    /!*故障jilv*!/
-    bugCan: '',
-    /!*解决ijlv*!/
-    cureCan: '',
-    /!*解决方案*!/
-    hows: ''*/
   }
 }
+/*产生大量的人员数据的*/

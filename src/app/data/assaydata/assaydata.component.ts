@@ -4,7 +4,8 @@ import {from} from 'rxjs';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LoginService} from '../../serve/login.service';
 import {ElMessageService} from 'element-angular/release/message/message.service';
-
+import swal from 'sweetalert';
+declare var SweetAlert: any;
 @Component({
   selector: 'app-assaydata',
   templateUrl: './assaydata.component.html',
@@ -159,7 +160,7 @@ export class AssaydataComponent implements OnInit {
     animation: false,
     label: {
       normal: {
-        formatter: 'y = x',
+        formatter: 'y = k * x',
         textStyle: {
           align: 'right'
         }
@@ -171,15 +172,42 @@ export class AssaydataComponent implements OnInit {
       }
     },
     tooltip: {
-      formatter: 'y = x'
+      formatter: 'y =k * x'
     },
-    data: [{
+    data: [[{
       coord: [0, 0],
       symbol: 'none'
     }, {
       coord: [20, 20],
       symbol: 'none'
-    }]
+    }]]
+  };
+  /*数据分析折线图,用于之后故障相关度*/
+  public markLineOption1 = {
+    animation: false,
+    label: {
+      normal: {
+        formatter: 'y = k * x',
+        textStyle: {
+          align: 'right'
+        }
+      }
+    },
+    lineStyle: {
+      normal: {
+        type: 'solid'
+      }
+    },
+    tooltip: {
+      formatter: 'y =k * x'
+    },
+    data: [[{
+      coord: [0, 0],
+      symbol: 'none'
+    }, {
+      coord: [20, 20],
+      symbol: 'none'
+    }]]
   };
   /*数据分析的图表*/
   public sysLine = {
@@ -216,7 +244,7 @@ export class AssaydataComponent implements OnInit {
         type: 'scatter',
         xAxisIndex: 1,
         yAxisIndex: 1,
-        markLine: this.markLineOption,
+        markLine: this.markLineOption1,
         data: [[10.0, 8.04],
           [8.0, 6.95],
           [13.0, 7.58],
@@ -266,10 +294,14 @@ export class AssaydataComponent implements OnInit {
     /*初始化散点图*/
     this.assay = echarts.init(document.getElementById('dataZoom') as HTMLDivElement);
     this.assay.setOption(this.assayData);
-   /* /!*初始化散点图*!/
+    this.assay.showLoading();
+    /*初始化折线图*/
     this.assline = echarts.init(document.getElementById('oneLine') as HTMLDivElement);
+    this.assline.showLoading();
+    this.sysLine.series[0].markLine = this.markLineOption;
     this.assline.setOption(this.sysLine);
-    this.assline.showLoading();*/
+    this.assline.hideLoading();
+    console.log(this.sysLine);
     /*数据渲染*/
     this.getData.getAssayData().subscribe(
       res => {
@@ -285,7 +317,7 @@ export class AssaydataComponent implements OnInit {
     /*点击事件*/
     /*有时间在捉摸的，在这个回调函数中使用 服务的 方法*/
     this.assay.on('click', function (params, callback) {
-      const relevance: number;
+      // const relevance: number;
       this.assDescriptpon = {
         area: params.seriesName,
         press: params.value[0],
@@ -307,23 +339,34 @@ export class AssaydataComponent implements OnInit {
       });
     } else if (this.formModel.value.area) {
       this.getData.accountSysNumber(this.formModel.value).subscribe(res => {
+        /*实际中这里所有的数据都是从后台来计算的，res的返回值不仅仅是表格中的额内容*/
         /*渲染表格*/
         this.assDescriptpon = res;
-        /*console.log(res.relevance);
-        const relevance = res.relevance;
-        this.markLineOption.label.normal.formatter = 'y = ' + res.relevance  * ' x';
-        this.markLineOption.tooltip.formatter = 'y = ' + res.relevance  * ' x';
-        this.accountLineNum(res.relevance, 5);*/
-        /*/!*重新绘制折线图*!/
-        this.assline.showLoading();
+        this.assline.clear();
+        /*再次初始化折线相关的配置文件*/
+        this.markLineOption.label.normal.formatter = (function() {return 'y = ' + res.relevance + '*x' ; } ) ();
+        this.markLineOption.tooltip.formatter = (function() {return 'y = ' + res.relevance + '*x' ; } ) ();
+        /*再次初始化故障分析配置文件*/
+        this.markLineOption1.label.normal.formatter = (function() {return 'y = ' + res.bugCan + '*x' ; } ) ();
+        this.markLineOption1.tooltip.formatter = (function() {return 'y = ' + res.bugCan + '*x' ; } ) ();
+        /*相关性的折线坐标配置*/
+        this.markLineOption.data[0][0].coord = this.accountLineNum(res.relevance, 18)[0];
+        this.markLineOption.data[0][1].coord = this.accountLineNum(res.relevance, 18)[1];
+        /*漏洞几率分析坐标的配置*/
+        this.markLineOption1.data[0][0].coord = this.accountLineNum(res.bugCan, 18)[0];
+        this.markLineOption1.data[0][1].coord = this.accountLineNum(res.bugCan, 18)[1];
+        // console.log(this.markLineOption);
+        // console.log(this.accountLineNum(res.relevance, 5));
+        /*重新绘制折线图*/
+        /*this.assline.showLoading();*/
         this.assline.setOption(this.sysLine);
-        this.assline.hideLoading();*/
+        this.assline.hideLoading();
     });
     } else {
       console.log('ss');
     }
   }
-  /*重绘*/
+  /*重绘图表，好像不能用 ，不然也不会写这么多的重复的重置图表的代码*/
   public  reDrawData(container: any, option: any, ) {
     if (container && option) {
       this.assay.showLoading();
@@ -340,10 +383,10 @@ export class AssaydataComponent implements OnInit {
     let Y = [];
     if (k && x) {
        X = [0, 0];
-       Y = [x, k * x];
+       Y = [x, Math.round(k * x)];
     } else {
       X = [0, 0];
-      Y = [4, k * 4];
+      Y = [15, Math.round(k * 4)];
     }
     return [X, Y];
   }

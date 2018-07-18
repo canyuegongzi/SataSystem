@@ -12,6 +12,7 @@
   "dependencies": {
     "express": "^4.16.3",
     "mockjs": "^1.0.1-beta3",
+    "moment": "^2.22.2",
     "nodemon": "^1.18.0"
   }
 }

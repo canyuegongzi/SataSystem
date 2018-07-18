@@ -3,7 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express = require("express");
 var fun = require("./mock");
 var mock_1 = require("./mock");
+var mockData = require("./localadmin");
 var app = express();
+/*准备大量的模拟数据*/
 /*在线人数信息*/
 var linenumdatas = [
     {
@@ -208,10 +210,20 @@ app.get('/api/syszoomdata', function (req, res) {
 });
 app.get('/api/accountdata', function (req, res) {
     if (req.query.area) {
-        console.log(req.query.area);
+        // console.log(req.query.area);
         res.json(sysaccount.find(function (sysaccount) { return sysaccount.area == req.query.area; }));
     }
-    res.json(zoomData);
+    else {
+        console.log('ddd');
+    }
 });
+app.get('/api/admininfosum', function(req, res)  {
+  res.json();
+})
+var params = {
+    "id": 5,
+    "name": "白眉鹰王"
+};
 var server = app.listen(8000, 'localhost', function () {
+  console.log(mockData.getAdminSum('./mockData/adminuser.json'));
 });
