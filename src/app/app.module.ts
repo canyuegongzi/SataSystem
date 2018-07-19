@@ -31,7 +31,8 @@ import {LoginModule} from './module/login/login.module';
 import {ToolsModule} from './module/tools/tools.module';
 import { SlidetoolsComponent } from './tools/slidetools/slidetools.component';
 import { TlTableComponent } from './data/tl-table/tl-table.component';
-import { AdminDetailComponent } from './admin/admin-detail/admin-detail.component';
+import { ShowlistComponent } from './admin/showlist/showlist.component';
+
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { AdminDetailComponent } from './admin/admin-detail/admin-detail.componen
     OurComponent,
     BarcontrolComponent,
     SlidetoolsComponent,
-    TlTableComponent
+    TlTableComponent,
+    ShowlistComponent,
   ],
   imports: [
     BrowserModule,

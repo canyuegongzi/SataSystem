@@ -1,3 +1,63 @@
-<p>
-  我是用户添加页面
-</p>
+<ng-container>
+<p class="admin-header">添加员工</p>
+<hr/>
+<div class="admin-page">
+<el-form [formGroup]="validateForm" label-width="200px" size="small"
+         [show-icon]="true" [show-message]="true" el-class="form-demo">
+
+  <el-form-item label="姓名" label-width="200px" [required]="true"
+                [status]="statusCtrl('name')" [error]="messageCtrl('name')" >
+    <el-input formControlName="name" [el-class]="'addadmin-name'" ></el-input>
+  </el-form-item>
+  <el-form-item label="编号" label-width="200px" [required]="true"
+                [status]="statusCtrl('code')" [error]="messageCtrl('code')"  [el-class]="'addadmin-name'" >
+    <el-input formControlName="code"></el-input>
+  </el-form-item>
+  <el-form-item label="身份证号码" label-width="200px" [required]="true"
+                [status]="statusCtrl('identity')" [error]="messageCtrl('identity')"  [el-class]="'addadmin-name'" >
+    <el-input formControlName="identity"></el-input>
+  </el-form-item>
+  <el-form-item label="联系方式" label-width="200px" [required]="true"
+                [status]="statusCtrl('phone')" [error]="messageCtrl('phone')"  [el-class]="'addadmin-name'" >
+    <el-input formControlName="phone"></el-input>
+  </el-form-item>
+
+  <el-form-item label="部门">
+    <el-cascader [options]="options" [required]="true" [change-on-select]="true" formControlName="reach"></el-cascader>
+  </el-form-item>
+
+  <el-form-item label="入职日期" [status]="statusCtrl('date')" [error]="messageCtrl('date')" >
+    <el-date-picker formControlName="date" [format]="'yyyy-MM-dd'"></el-date-picker>
+  </el-form-item>
+
+  <el-form-item label="性别">
+    <el-radio-group formControlName="sex">
+      <el-radio label="1">男</el-radio>
+      <el-radio label="0">女</el-radio>
+    </el-radio-group>
+  </el-form-item>
+
+  <el-form-item label="是否应届">
+    <el-checkbox formControlName="fresh">是</el-checkbox>
+  </el-form-item>
+
+  <el-form-item label="基本待遇">
+    <el-checkbox-group formControlName="deal" (modelChange)="deal">
+      <el-checkbox label="deal1">养老保险</el-checkbox>
+      <el-checkbox label="deal2">养老保险</el-checkbox>
+      <el-checkbox label="deal3">医疗保险</el-checkbox>
+      <el-checkbox label="deal4">失业保险</el-checkbox>
+      <el-checkbox label="deal5">工伤保险</el-checkbox>
+      <el-checkbox label="deal6">生育保险</el-checkbox>
+      <el-checkbox label="禁用" [elDisabled]="true">基本工资</el-checkbox>
+      <el-checkbox label="禁用" [elDisabled]="true">项目提成</el-checkbox>
+    </el-checkbox-group>
+  </el-form-item>
+
+  <el-form-item>
+    <el-button type="primary" (click)="submit()">提交</el-button>
+  </el-form-item>
+
+</el-form>
+</div>
+</ng-container>

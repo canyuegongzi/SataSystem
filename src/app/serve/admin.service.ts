@@ -3,7 +3,7 @@ import {Http} from '@angular/http';
 import {Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/internal/operators';
-import {SearchAdminParams} from '../module/Adminuer';
+import {EditAdminIformation, SearchAdminParams} from '../module/Adminuer';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class AdminService {
     if (par) {
       /*通过id来获取具体的详细信息*/
       if (par.id) {
-        console.log(par.id);
+        // console.log(par.id);
         return this.http.get('api/admininfosum', {params: {id: par.id}}).pipe(
           map(res => res.json())
         );
@@ -38,7 +38,7 @@ export class AdminService {
             ));
         }
       } else if (par.name  == null &&  par.code == null && par.age === '-1' && par.reach === '-1' && par.data == null) {
-        console.log(par.reach);
+        // console.log(par.reach);
         return this.http.get('api/admininfosum', {params: {page: 1}}).pipe(
           map(res => res.json()));
       }
@@ -49,4 +49,37 @@ export class AdminService {
       );
     }
   }
+  /*删除用户*/
+  deleteAdminInformation(par: SearchAdminParams): Observable<any> {
+    // console.log(par);
+    if (par) {
+      console.log(par);
+      return this.http.get('api/admindelete', {params: {id: par}}).pipe(
+        map(res => res.json())
+      );
+    }
+  }
+  getdetailInformation(id): Observable<EditAdminIformation> {
+    if (id) {
+     return this.http.get('api/admindetail', {params: {id: id}}).pipe(
+        map(res => res.json())
+      );
+    }
+  }
+editAdminInformation(par: EditAdminIformation ): Observable<boolean> {
+    if (par) {
+      return  this.http.get('api/adminedit', {params: par}).pipe(
+        map(res => res.json())
+      );
+    }
+}
+addAdminInformation(par: EditAdminIformation): Observable<any> {
+    // console.log(par);
+    if (par) {
+      return this.http.post('api/addadmin', {params: par}).pipe(
+        map(res => res.json()
+        )
+      );
+    }
+}
 }

@@ -18,7 +18,7 @@ const moment = require('moment');
       if(err){
         console.error(err);
       }
-      console.log('----------新增成功-------------');
+      // console.log('----------新增成功-------------');
     })
   })
 }
@@ -89,8 +89,6 @@ export function pagination(p,s, path){
     }
     let person = data.toString();
     person = JSON.parse(person);
-    //把数据读出来
-    //console.log(person.data);
     let length = person.data.length;
     let pagePerson = person.data.slice(s*p,(p+1)*s);
     console.log('------------------------查询成功pagePerson');
@@ -101,15 +99,10 @@ export function pagination(p,s, path){
 export function diffId() {
   const date = new Date();
   const num = date.getTime()
-  return num;
+  const radom = Math.round((Math.random()* 999+ 1));
+  return num + radom;
 }
-/*随机生产编号*/
-/*
-** randomWord 产生任意长度随机字母数字组合
-** randomFlag-是否任意长度 min-任意长度最小位[固定位数] max-任意长度最大位
-** xuanfeng 2014-08-28
-*/
-
+/*随机生产编号 random Flag：是否自动length的标志，min 最小的length max :最大的长度*/
 export function randomWord(randomFlag, min, max){
   let str = "",
     range = min,
@@ -187,7 +180,7 @@ export function getId_no(){
 }
 /*随机分配所属部门*/
 export function get_resach() {
-  let reach = ['策划', '行政', '公关', '研发一', '研发二', '研发三','研发四', '设计一', '设计二', '市场一', '市场二', '销售一', 
+  let reach = ['策划', '行政', '公关', '研发一', '研发二', '研发三','研发四', '设计一', '设计二', '市场一', '市场二', '销售一',
     '销售二', '网络', '秘书处'];
   let i = Math.round(Math.random()* 14 + 1);
   const res = reach[i];

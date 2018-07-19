@@ -2,9 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var express = require("express");
 var fun = require("./mock");
+var bodyParser = require("body-parser");
 var fs = require('fs');
 var mock_1 = require("./mock");
+var mockData = require("../model/localadmin");
 var app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 /*在线人数信息*/
 var linenumdatas = [
     {
@@ -303,6 +307,184 @@ app.get('/api/admininfosum', function (req, res) {
         }
     });
 });
+/*删除操作*/
+app.get('/api/admindelete', function (req, res) {
+    // const result = {status: '',time: ''}
+    var id = req.query.id;
+    fs.readFile('mockData/adminuser.json', function (err, data) {
+        if (err) {
+            console.error(err);
+            res.json({ status: false, time: new Date().toDateString() });
+        }
+        var admin = data.toString();
+        admin = JSON.parse(admin);
+        //把数据读出来删除
+        for (var i = 0; i < admin.data.length; i++) {
+            if (id == admin.data[i].id) {
+                console.log(admin.data[i]);
+                admin.data.splice(i, 1);
+                //res.json(admin.data[i]);
+            }
+        }
+        admin.total = admin.data.length;
+        var str = JSON.stringify(admin);
+        //然后再把数据写进去
+        fs.writeFile('mockData/adminuser.json', str, function (err) {
+            if (err) {
+                console.error(err);
+                res.json({ status: false, time: new Date().toDateString() });
+            }
+            fs.readFile('mockData/adminuerdetail.json', function (err, data) {
+                if (err) {
+                    res.json({ status: false, time: new Date().toDateString() });
+                    console.error(err);
+                }
+                var detail = data.toString();
+                detail = JSON.parse(detail);
+                for (var i = 0; i < detail.data.length; i++) {
+                    if (id == detail.data[i].id) {
+                        // console.log(detail.data[i])
+                        detail.data.splice(i, 1);
+                        //res.json({status: true, time: new Date().toDateString()});
+                    }
+                }
+                detail.total = detail.data.length;
+                var strs = JSON.stringify(detail);
+                //然后再把数据写进去
+                fs.writeFile('mockData/adminuerdetail.json', strs, function (err) {
+                    if (err) {
+                        res.json({ status: false, time: new Date().toDateString() });
+                        console.error(err);
+                    }
+                    res.json({ status: true, time: new Date().toDateString() });
+                });
+            });
+        });
+    });
+});
+/*具体的查询detail*/
+app.get('/api/admindetail', function (req, res) {
+    console.log(req.query.id);
+    var id = req.query.id;
+    if (id) {
+        /*读取大致的仍人员信息*/
+        fs.readFile('mockData/adminuser.json', function (err, data) {
+            if (err) {
+                /*读取失败抛出异常*/
+                console.error(err);
+                res.json({ status: false, time: new Date().toDateString() });
+            }
+            else {
+                /*转化信息为字符串*/
+                var admin = data.toString();
+                admin = JSON.parse(admin);
+                /*具体信息的标题部分*/
+                var adminhead_1 = (admin.data).filter(function (e) {
+                    return e.id == req.query.id;
+                });
+                fs.readFile('mockData/adminuerdetail.json', function (err, data) {
+                    /*读取具体的信息*/
+                    if (err) {
+                        res.json({ status: false, time: new Date().toDateString() });
+                    }
+                    else {
+                        /*查询具体的信息*/
+                        var admindetail = data.toString();
+                        admindetail = JSON.parse(admindetail);
+                        /*过滤信息*/
+                        var adminde = (admindetail.data).filter(function (e) {
+                            return e.id == req.query.id;
+                        });
+                        // console.log( adminhead[0])
+                        // console.log( adminde[0])
+                        /*申明一个对象发送数据*/
+                        var ress = [adminhead_1[0], adminde[0]];
+                        res.json(ress);
+                    }
+                });
+            }
+        });
+    }
+});
+/*添加操作*/
+app.post('/api/addadmin', function (req, res) {
+    //console.log(JSON.stringify(req.body))
+    /*post转化返回的数据*/
+    var params = JSON.parse(JSON.stringify(req.body)).params;
+    fs.readFile('mockData/adminuser.json', function (err, data) {
+        if (err) {
+            res.json({ status: false, date: new Date() });
+        }
+        else {
+            /*转化信息为字符串*/
+            var admin = data.toString();
+            admin = JSON.parse(admin);
+            var id = mockData.diffId();
+            /*声明对象为添加文本做准备*/
+            var adminmessage = {
+                job: params.job,
+                reach: params.reach,
+                phone: params.phone,
+                star: params.star | 0,
+                demerits: params.demerits | 0,
+                id: id,
+                name: params.name,
+                age: params.age | 0,
+                sex: params.sex | 0,
+                headphoto: params.headphoto,
+                Id_no: params.identity,
+                date: params.date,
+                code: mockData.randomWord(false, 4, 8),
+            };
+            var admindetail_1 = {
+                id: id,
+                identity: params.identity,
+                address: params.address,
+                express: [{ time: '', company: '', item: '', job: '' }],
+                demerits: [{ time: '', reason: '', way: '' }],
+                deal: params.deal,
+                fresh: params.fresh,
+            };
+            /*push数据*/
+            admin.data.push(adminmessage);
+            admin.total = admin.total + 1;
+            var str = JSON.stringify(admin);
+            /*把二进制的数据重新写进文本*/
+            fs.writeFile('mockData/adminuser.json', str, function (err) {
+                if (err) {
+                    res.json({ status: false, date: new Date() });
+                }
+                else {
+                    /*读取具体的信息*/
+                    fs.readFile('mockData/adminuerdetail.json', function (err, data) {
+                        if (err) {
+                            res.json({ status: false, date: new Date() });
+                        }
+                        else {
+                            /*转化为二进制信息*/
+                            var detail = data.toString();
+                            detail = JSON.parse(detail);
+                            detail.data.push(admindetail_1);
+                            detail.total = detail.total + 1;
+                            var strda = JSON.stringify(detail);
+                            /*重新写进数据*/
+                            fs.writeFile('mockData/adminuerdetail.json', strda, function (err) {
+                                if (err) {
+                                    console.error(err);
+                                    res.json({ status: false, date: new Date() });
+                                }
+                                else {
+                                    console.log('sssss');
+                                    res.json({ status: true, date: new Date() });
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }
+    });
+});
 var server = app.listen(8000, 'localhost', function () {
-    // console.log(systemdatil);
+    //console.log(systemdatil);
 });

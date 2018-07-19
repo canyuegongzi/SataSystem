@@ -38,3 +38,16 @@ var AdminUser = /** @class */ (function () {
     return AdminUser;
 }());
 exports.AdminUser = AdminUser;
+var DetailAdmin = /** @class */ (function () {
+    function DetailAdmin(id, identity, address, experience, demerits, deal, fresh) {
+        this.id = id;
+        this.identity = identity;
+        this.address = address;
+        this.experience = experience;
+        this.demerits = demerits;
+        this.deal = deal;
+        this.fresh = fresh;
+    }
+    return DetailAdmin;
+}());
+exports.DetailAdmin = DetailAdmin;

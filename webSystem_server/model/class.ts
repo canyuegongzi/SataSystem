@@ -47,5 +47,33 @@ export interface SearchAdminParams {
   age ?: number;
 }
 
+export interface EditAdminIformation extends SearchAdminParams {
+  identity ?: any | null;
+  address ?: string | null;
+  experience ?: Experiences[] | null;
+  demerits ?: Demerits[] | null;
+}
+export interface Experiences {
+  time ?: string | null;
+  company ?: string |null;
+  item ?: string | string;
+  job ?: string |string;
+}
+export interface Demerits {
+  time ?: string | null;
+  reason ?: string | null;
+  way ?: string | null;
+}
+export class DetailAdmin {
+  constructor(
+    public id: any,
+    public identity: any,
+    public address: string,
+    public experience: Experiences[],
+    public demerits: Demerits[],
+    public deal: Array<string>,
+    public fresh: number
 
-
+  ) {
+  }
+}

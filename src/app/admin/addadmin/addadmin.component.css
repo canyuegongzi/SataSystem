@@ -1,0 +1,16 @@
+.admin-header {
+  display: block;
+  width: 80%;
+  height: 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  padding-top: .8rem;
+}
+.admin-page {
+  width: 70%;
+  /*margin: 0 auto;*/
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+}

@@ -44,6 +44,25 @@ export interface SearchAdminParams {
   age ?: any  | null;
   page ?: number | 1;
 }
+export interface EditAdminIformation extends SearchAdminParams {
+  deal ?: any | null;
+  fresh ?: any | null;
+  identity ?: string | null;
+  address ?: string | null;
+  experience ?: Experiences[] | null;
+  demerits ?: Demerits[] | null;
+}
+export interface Experiences {
+  time ?: string | null;
+  company ?: string |null;
+  item ?: string | string;
+  job ?: string |string;
+}
+export interface Demerits {
+  time ?: string | null;
+  reason ?: string | null;
+  way ?: string | null;
+}
 
 
 

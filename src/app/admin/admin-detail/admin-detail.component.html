@@ -1,35 +1,78 @@
 <div class="admin-page">
   <p class="admin-header">职员详情</p>
   <hr/>
-  <div>
-    <table class="table table-bordered">
-      <thead>
+  <button type="submit" class="btn btn-primary mb-2 edit-button" icon="search" (click)="editadmin()">
+    <el-icon name="edit"></el-icon>
+    编辑
+  </button>
+  <button type="submit"  class="btn btn-danger mb-2 edit-button" icon="search" (click)="deleteadmin()">
+    <el-icon name="delete"></el-icon>
+    删除
+  </button>
+  <hr class="edit-hr"/>
+  <div class="detail-table">
+    <table class="table table-bordered " style="text-align: center">
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
+        <th>姓名</th>
+        <td>{{detailInformation[0]?.name}}</td>
+        <th>性别</th>
+        <td>{{sex}}</td>
+        <th>民族</th>
+        <td>{{detailInformation[0]?.nation}}</td>
+        <td rowspan="3">
+          <img class="headphoto" src="./../../../assets/907e733831ad4d17!400x400_big.jpg"  alt=""/></td>
       </tr>
       <tr>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
+        <th>编号</th>
+        <td>{{detailInformation[0]?.code}}</td>
+        <th>部门</th>
+        <td>{{detailInformation[0]?.reach}}</td>
+        <th>职位</th>
+        <td>{{detailInformation[0]?.reach}}</td>
       </tr>
-      </tbody>
+      <tr>
+        <th>通报</th>
+        <td>{{detailInformation[0]?.demerits}}</td>
+        <th>星级</th>
+        <th>{{detailInformation[0]?.star}}</th>
+        <th>入职月份</th>
+        <td>{{detailInformation[0]?.date}}</td>
+      </tr>
+      <tr>
+        <th>身份证号</th>
+        <th colspan="2">{{detailInformation[0]?.Id_no}}</th>
+        <th >手机</th>
+        <td colspan="3">{{detailInformation[0]?.phone}}</td>
+      </tr>
+      <tr>
+        <th>家庭住址</th>
+        <th colspan="6">{{detailInformation[1]?.address}}</th>
+      </tr>
+      <tr>
+        <th colspan="7">个人经历</th>
+      </tr><tr>
+        <th colspan="7">
+          <div *ngFor="let experience of detailInformation[1]?.experience">
+            <p>{{experience?.time}}</p>
+            <p>{{experience?.company}}</p>
+            <p>{{experience?.item}}</p>
+            <p>{{experience?.job}}</p>
+          </div>
+        </th>
+      </tr>
+      <tr>
+        <th colspan="7">个人奖惩</th>
+      </tr>
+      <tr>
+      <th colspan="7">
+        <div *ngFor="let demerits of detailInformation[1]?.demerits">
+          <p>{{demerits?.time}}</p>
+          <p>{{demerits?.reason}}</p>
+          <p>{{demerits?.way}}</p>
+        </div>
+      </th>
+      </tr>
     </table>
   </div>
 </div>
+

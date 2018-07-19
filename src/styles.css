@@ -90,3 +90,6 @@ li {
 .sysmesg > .el-tr {
   background-color: rgba(0,0,0,.4);
 }
+.addadmin-name input {
+  width: 300px;
+}

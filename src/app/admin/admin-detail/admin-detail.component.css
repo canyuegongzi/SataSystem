@@ -1,0 +1,30 @@
+.admin-header {
+  display: block;
+  width: 80%;
+  height: 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  padding-top: .8rem;
+}
+.detail-table {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+ /* width: fit-content;
+  width: -moz-fit-content;
+  margin: auto;*/
+  width: 80%;
+
+}
+.headphoto {
+  width: 7rem;
+  height: 10rem;
+}
+.edit-button {
+  margin-top: -1rem;
+  margin-right: 2rem;
+}
+.edit-hr {
+  margin-top: 0;
+}
