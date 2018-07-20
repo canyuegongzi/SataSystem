@@ -191,7 +191,7 @@ app.get('/api/sysmessage', (req, res) => {
 })
 /*根据具体的id来查找对应的系统警告的消息*/
 app.get('/api/sysmessage/:id', (req, res) => {
-  console.log(req.params.id);
+  // console.log(req.params.id);
   // res.send('666666');
   res.json(systemdatil.find((systemdatil) => systemdatil.id == req.params.id));
 });
@@ -488,6 +488,27 @@ app.post('/api/addadmin', (req, res) => {
 
 
 
+})
+/*修改操作*/
+app.post('/api/adminedit', (req, res) =>{
+  const params = JSON.parse(JSON.stringify(req.body)).params;
+  console.log(params);
+  fs.readFile('mockData/adminuser.json', function (err, data) {
+    if(err) {
+      res.json({status: false, date: new Date()})
+    } else {
+      /*转化信息为字符串*/
+      let admin = data.toString();
+      admin = JSON.parse(admin);
+
+
+
+
+
+
+    }
+
+  })
 })
 const server = app.listen(8000, 'localhost', () => {
   //console.log(systemdatil);

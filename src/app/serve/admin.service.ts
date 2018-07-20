@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Http} from '@angular/http';
 import {Router} from '@angular/router';
-import {Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {map} from 'rxjs/internal/operators';
 import {EditAdminIformation, SearchAdminParams} from '../module/Adminuer';
 
@@ -9,6 +9,8 @@ import {EditAdminIformation, SearchAdminParams} from '../module/Adminuer';
   providedIn: 'root'
 })
 export class AdminService {
+  public subject = new Subject<any>();
+  public formDetail: any;
   constructor(private http: Http, private router: Router) { }
   /*获取所有的员工的信息或者根据id查询具体的信息*/
   getAdminInformation(par?: SearchAdminParams): Observable<any> {
@@ -54,7 +56,7 @@ export class AdminService {
     // console.log(par);
     if (par) {
       console.log(par);
-      return this.http.get('api/admindelete', {params: {id: par}}).pipe(
+      return this.http.get('api/admindelete', {params: {id: par.id}}).pipe(
         map(res => res.json())
       );
     }
@@ -66,14 +68,16 @@ export class AdminService {
       );
     }
   }
-editAdminInformation(par: EditAdminIformation ): Observable<boolean> {
+  /*修改*/
+  editAdminInformation(par: EditAdminIformation ): Observable<boolean> {
     if (par) {
-      return  this.http.get('api/adminedit', {params: par}).pipe(
+      return  this.http.post('api/adminedit', {params: par}).pipe(
         map(res => res.json())
       );
     }
 }
-addAdminInformation(par: EditAdminIformation): Observable<any> {
+  /*添加*/
+  addAdminInformation(par: EditAdminIformation): Observable<any> {
     // console.log(par);
     if (par) {
       return this.http.post('api/addadmin', {params: par}).pipe(
@@ -81,5 +85,16 @@ addAdminInformation(par: EditAdminIformation): Observable<any> {
         )
       );
     }
-}
+  }
+  setFormDetail(par: any) {
+    console.log(par);
+    this.formDetail = par;
+    this.subject.next(par);
+  }
+  clearFormDetail() {
+    this.subject.next();
+  }
+  getFormDetail(): Observable<any> {
+    return this.subject.asObservable();
+  }
 }

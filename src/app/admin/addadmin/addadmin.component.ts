@@ -117,7 +117,7 @@ export class AddadminComponent implements OnInit {
     return { status: 'success' };
   }
 
-  private dateValidator = (control: FormControl) => {
+  private dateValidator = (control: FormControl) =>  {
     if (!control.value) {
       return { status: 'error', message: '必须选择配送日期' };
     }

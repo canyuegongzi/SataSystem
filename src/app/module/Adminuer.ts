@@ -40,7 +40,7 @@ export interface SearchAdminParams {
   job ?: string  | null;
   reach ?: any  | null;
   data ?: string  | null;
-  id ?: number  | null;
+  id ?: any  | null;
   age ?: any  | null;
   page ?: number | 1;
 }

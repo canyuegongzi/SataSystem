@@ -37,6 +37,12 @@ export class AdminDetailComponent implements OnInit, AfterContentInit {
   ngAfterContentInit() {
   }
 private editadmin() {
+    Swal ('确定离开详情页面前往修改页面').then(value => {
+      this.router.navigate(['/admin/show/edit'], { queryParams: { id: this.id}} );
+      /*向服务发送具体的信息*/
+      this.admin.setFormDetail(this.detailInformation);
+    });
+
 }
 private deleteadmin() {
   Swal ({
@@ -45,7 +51,7 @@ private deleteadmin() {
   })
     .then((value) => {
       // console.log(ref.rowData.id);
-      this.admin.deleteAdminInformation(this.id)
+      this.admin.deleteAdminInformation({id: this.id})
         .subscribe(res => {
           if (res.status) {
             Swal ('删除成功！');

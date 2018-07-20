@@ -44,7 +44,7 @@ export class ShowadminComponent implements OnInit, OnChanges {
   private submit() {
     this.changeDetectorRef.markForCheck();
     this.changeDetectorRef.detectChanges();
-    /*变更检测机制*/
+    /*变更*/
     if (this.formModel.value) {
       this.admin.getAdminInformation(this.formModel.value).subscribe(res => {
         if (res[0].data && res[1].total && res[2].reach && res[3].ages) {

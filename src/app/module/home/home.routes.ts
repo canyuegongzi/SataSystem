@@ -14,6 +14,8 @@ import {MapdataComponent} from '../../data/mapdata/mapdata.component';
 import {HomeComponent} from '../../home/home.component';
 import {AdminDetailComponent} from '../../admin/admin-detail/admin-detail.component';
 import {AdminComponent} from '../../admin/admin.component';
+import {EditComponent} from '../../admin/edit/edit.component';
+import {EditunsaveService} from '../../serve/editunsave.service';
 
 export const HomeRoutes = [
   {
@@ -58,6 +60,11 @@ export const HomeRoutes = [
           {
             path: 'detail',
             component: AdminDetailComponent
+          },
+          {
+            path: 'edit',
+            component: EditComponent,
+            canDeativate: EditunsaveService
           }
         ]
       },

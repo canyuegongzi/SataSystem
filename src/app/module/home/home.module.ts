@@ -23,6 +23,8 @@ import {AdminComponent} from '../../admin/admin.component';
 import {ShowadminComponent} from '../../admin/showadmin/showadmin.component';
 import {AdminService} from '../../serve/admin.service';
 import {AdminDetailComponent} from '../../admin/admin-detail/admin-detail.component';
+import {UnsavedGuard} from '../../serve/editsave-guard';
+import {EditunsaveService} from '../../serve/editunsave.service';
 /*这个模块主要是用于显示home的*/
 @NgModule({
   imports: [
@@ -55,6 +57,6 @@ import {AdminDetailComponent} from '../../admin/admin-detail/admin-detail.compon
     RegadminComponent,
     AdminDetailComponent,
   ],
-  providers: [LoginService, GetdataService, AdminService],
+  providers: [LoginService, GetdataService, AdminService, EditunsaveService],
 })
 export class HomeModule { }

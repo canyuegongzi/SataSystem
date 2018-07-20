@@ -93,3 +93,14 @@ li {
 .addadmin-name input {
   width: 300px;
 }
+.admin-header {
+  display: block;
+  width: 80%;
+  height: 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  padding-top: .8rem;
+}
+.edit-admin >div {
+  height: 80px;
+}
