@@ -497,6 +497,118 @@ app.post('/api/adminedit', function (req, res) {
             /*转化信息为字符串*/
             var admin = data.toString();
             admin = JSON.parse(admin);
+            for (var i = 0; i < admin.data.length; i++) {
+                if (params.id == admin.data[i].id) {
+                    console.log('id一样的');
+                    for (var key in params) {
+                        if (admin.data[i][key]) {
+                            admin.data[i][key] = params[key];
+                        }
+                    }
+                }
+            }
+            admin.total = admin.data.length;
+            var str = JSON.stringify(admin);
+            //console.log(str);
+            fs.writeFile('mockData/adminuser.json', str, function (err) {
+                if (err) {
+                    res.json({ status: false, date: new Date() });
+                    console.error(err);
+                }
+                // console.log('--------------------修改成功');
+                // console.log(admin.data);
+                fs.readFile('mockData/adminuerdetail.json', function (err, data) {
+                    if (err) {
+                        res.json({ status: false, date: new Date() });
+                    }
+                    else {
+                        var admindetail = data.toString();
+                        admindetail = JSON.parse(admindetail);
+                        for (var j = 0; j < admindetail.data.length; j++) {
+                            if (params.id == admindetail.data[j].id) {
+                                // console.log('id一样的');
+                                for (var key in params) {
+                                    if (admindetail.data[j][key]) {
+                                        admindetail.data[j][key] = params[key];
+                                    }
+                                }
+                            }
+                        }
+                        admindetail.total = admindetail.data.length;
+                        var str1 = JSON.stringify(admindetail);
+                        //console.log(str);
+                        fs.writeFile('mockData/adminuerdetail.json', str1, function (err) {
+                            if (err) {
+                                res.json({ status: false, date: new Date() });
+                                console.error(err);
+                            }
+                            else {
+                                res.json({ status: true, date: new Date() });
+                                console.log('ssss');
+                            }
+                        });
+                    }
+                });
+            });
+        }
+    });
+});
+app.post('/api/adminroot', function (req, res) {
+    var params = JSON.parse(JSON.stringify(req.body)).params;
+    console.log(params);
+    fs.readFile('mockData/adminuser.json', function (err, data) {
+        if (err) {
+            res.json({ status: false, date: new Date() });
+        }
+        else {
+            var admin = data.toString();
+            admin = JSON.parse(admin);
+            var adminroot = (admin.data).filter(function (e) {
+                return e.id == params.id;
+            });
+            if (adminroot[0].root == params.root) {
+                res.json({ status: false, date: new Date() });
+            }
+            else {
+                adminroot[0].root = params.root;
+            }
+            // console.log(adminroot[0].root);
+            var str = JSON.stringify(admin);
+            fs.writeFile('mockData/adminuser.json', str, function (err) {
+                if (err) {
+                    res.json({ status: false, date: new Date() });
+                    console.error(err);
+                }
+                else {
+                    res.json({ status: true, date: new Date() });
+                    console.log('权限修改成功');
+                }
+            });
+        }
+    });
+});
+/*获取或有的公司简介*/
+app.get('/api/company', function (req, res) {
+    fs.readFile('mockData/company.json', function (err, data) {
+        if (err) {
+            console.error(err);
+        }
+        else {
+            // console.log('1111')
+            var company = data.toString();
+            company = JSON.parse(company);
+            var length = company.data.length;
+            // console.log(company);
+            if (req.query.name) {
+                var onecompany = (company.data).filter(function (e) {
+                    return e.name == req.query.name;
+                });
+                console.log(req);
+                res.send(onecompany.data);
+            }
+            else {
+                res.send(company);
+            }
         }
     });
 });

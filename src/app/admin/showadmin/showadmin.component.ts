@@ -27,7 +27,6 @@ export class ShowadminComponent implements OnInit, OnChanges {
       reach: ['-1'],
     });
   }
-
   ngOnInit() {
     /*所有的用户的信息的初始化*/
     this.admin.getAdminInformation().subscribe(res => {

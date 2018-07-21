@@ -64,7 +64,7 @@ export const HomeRoutes = [
           {
             path: 'edit',
             component: EditComponent,
-            canDeativate: EditunsaveService
+           /* canDeactivate: [EditunsaveService]*/
           }
         ]
       },
@@ -88,7 +88,7 @@ export const HomeRoutes = [
     children: [
       {
         path: '',
-        component: NowstatusComponent
+        component: FriengsComponent
       },
       {
         path: 'fri',

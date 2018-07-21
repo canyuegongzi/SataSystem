@@ -168,6 +168,7 @@ function get_resach() {
         '销售二', '网络', '秘书处'];
     var i = Math.round(Math.random() * 14 + 1);
     var res = reach[i];
+    console.log(res);
     return res;
 }
 exports.get_resach = get_resach;

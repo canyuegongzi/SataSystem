@@ -1,0 +1,24 @@
+#regCode, #regName {
+  width: 16rem;
+}
+#regSearch {
+  width: 33rem;
+  padding-left: 7rem;
+  float: left;
+}
+.show-admin-root {
+  float: right;
+  width: 33rem;
+  padding-left: 7rem;
+  float: left;
+  text-align: center;
+}
+.show-admin-root td {
+  height: 3rem;
+}
+#submitRegSearch{
+  margin-left: 5rem;
+}
+#submitRegRegadmin {
+  margin-left: 8rem;
+}

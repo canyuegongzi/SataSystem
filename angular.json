@@ -27,6 +27,7 @@
               "./node_modules/font-awesome/css/font-awesome.min.css",
               "./node_modules/element-angular/theme/index.css",
               "src/assets/sweetalert2.css",
+              "./node_modules/angular-ui-tree/dist/angular-ui-tree.css",
               "src/styles.css"
             ],
             "scripts": [
@@ -36,6 +37,7 @@
               "./node_modules/echarts/dist/echarts.js",
               "./node_modules/echarts/map/js/china.js",
               "./node_modules/echarts/dist/extension/bmap.js",
+              "./node_modules/angular-ui-tree/dist/angular-ui-tree.js",
               "src/assets/sweetalert2.js"
             ]
           },

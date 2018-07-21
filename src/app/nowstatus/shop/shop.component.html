@@ -1,3 +1,43 @@
-<p>
-  shop works!
-</p>
+<ng-container>
+  <div class="admin-page">
+    <p class="admin-header">合作伙伴</p>
+    <hr/>
+    <div>
+
+      <el-form [formGroup]="formModel" [inline]="true" size="small" label-width="200px">
+        <el-form-item label="">
+          <el-input [el-class]="'searchinput'"  formControlName="name" placeholder="请输入公司名称"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" [el-class]="'searchbutton'" (click)="submit()">搜索</el-button>
+        </el-form-item>
+
+      </el-form>
+    </div>
+
+    <el-collapse >
+      <!--<el-collapse-item label="一致性 Consistency" value="1">
+
+        <ng-template #label>
+          一致性 Consistency<i class="header-icon el-icon-information"></i>
+        </ng-template>
+
+        <div>与现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；</div>
+        <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
+      </el-collapse-item>-->
+
+      <div *ngFor="let item of companydesc; let i = index">
+        <el-collapse-item [label]= 'item.name' [value]="i">
+          <div>{{item.desc}}</div>
+        </el-collapse-item>
+
+      </div>
+    </el-collapse>
+  </div>
+  <div>
+    <el-pagination [total]="companydesc?.length"
+                   [small]="true">
+    </el-pagination>
+  </div>
+</ng-container>
+

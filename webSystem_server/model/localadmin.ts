@@ -184,6 +184,7 @@ export function get_resach() {
     '销售二', '网络', '秘书处'];
   let i = Math.round(Math.random()* 14 + 1);
   const res = reach[i];
+  console.log(res);
   return res;
 }
 /*随机产生日期*/

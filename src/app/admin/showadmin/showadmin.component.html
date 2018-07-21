@@ -37,7 +37,7 @@
   </div>
   <hr/>
 
-  <ng-template [ngIf]="adminNumber">
+  <div *ngIf="adminNumber">
     <el-table [model]="adminNumber" center="all" scroll-x="false">
       <el-table-column model-key="code" label="编号" width="120">
       </el-table-column>
@@ -45,13 +45,13 @@
       </el-table-column>
       <el-table-column model-key="date" label="入职日期" width="120">
       </el-table-column>
-      <el-table-column model-key="reach" label="所属部门" width="120">
+      <el-table-column model-key="job" label="工作岗位" width="120">
       </el-table-column>
       <el-table-column model-key="phone" label="联系方式">
       </el-table-column>
       <el-table-column model-key="star" label="表现状况">
       </el-table-column>
-      <el-table-column model-key="demerits" label="通报次数">
+      <el-table-column model-key="demerit" label="通报次数">
       </el-table-column>
       <el-table-column label="删除" width="120">
         <ng-template #slot let-scope="scope">
@@ -73,7 +73,7 @@
                     (modelChange)="pagination($event)"
     >
     </el-pagination>
-  </ng-template>
+  </div>
   <ng-template>
 
   </ng-template>

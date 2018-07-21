@@ -20,12 +20,12 @@ var User = /** @class */ (function () {
 exports.User = User;
 /*半成品*/
 var AdminUser = /** @class */ (function () {
-    function AdminUser(job, reach, phone, star, demerits, id, name, age, sex, headphoto, Id_no, date, code) {
+    function AdminUser(job, reach, phone, star, demerit, id, name, age, sex, headphoto, Id_no, date, code, root, fresh) {
         this.job = job;
         this.reach = reach;
         this.phone = phone;
         this.star = star;
-        this.demerits = demerits;
+        this.demerit = demerit;
         this.id = id;
         this.name = name;
         this.age = age;
@@ -34,6 +34,8 @@ var AdminUser = /** @class */ (function () {
         this.Id_no = Id_no;
         this.date = date;
         this.code = code;
+        this.root = root;
+        this.fresh = fresh;
     }
     return AdminUser;
 }());

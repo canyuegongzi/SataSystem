@@ -20,10 +20,10 @@ export class User {
 /*半成品*/
 export class AdminUser {
   constructor(public job: string,
-              public reach: string,
+              public reach: any,
               public phone: string,
               public star: number,
-              public demerits: number,
+              public demerit: number,
               public id: number,
               public name: string,
               public age: number,
@@ -31,7 +31,9 @@ export class AdminUser {
               public headphoto: string,
               public Id_no: string,
               public date: any,
-              public code: any,) {
+              public code: any,
+              public root: any,
+              public fresh: any) {
 
   }
 }

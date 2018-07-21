@@ -1,146 +1,6 @@
 <ng-container>
   <p class="admin-header">修改信息</p>
   <hr/>
-  <!--<form class="edit-admin">
-    <div class="form-row">
-      <div class="form-group col-md-3">
-        <label for="inputEmail4">姓名</label>
-        <input type="text" class="form-control" id="inputEmail4" placeholder="">
-      </div>
-      <div class="form-group col-md-3">
-        <label for="inputPassword4">编号</label>
-        <input type="text" class="form-control" id="inputPassword4" placeholder="编号">
-      </div>
-      <div class="form-group col-md-3">
-        <label for="inputPassword6">名族</label>
-        <div class="form-group">
-          <select class="form-control" id="inputPassword6">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-group col-md-3">
-        <label for="inputPassword5">性别</label>
-        <div class="form-group">
-          <select class="form-control" id="inputPassword5">
-            <option>男</option>
-            <option>女</option>
-          </select>
-        </div>
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="inputAddress">家庭住址</label>
-        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-      </div>
-      <div class="form-group col-md-6">
-        <label for="inputAddress1">省份证号</label>
-        <input type="text" class="form-control" id="inputAddress1" placeholder="1234 Main St">
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-4">
-        <label for="inputAddress2">联系方式</label>
-        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-      </div>
-      <div class="form-group col-md-4">
-        <label for="inputAddress4">部门</label>
-        <input type="text" class="form-control" id="inputAddress4" placeholder="Apartment, studio, or floor">
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="inputCity">City</label>
-        <input type="text" class="form-control" id="inputCity">
-      </div>
-      <div class="form-group col-md-4">
-        <label for="inputState">State</label>
-        <select id="inputState" class="form-control">
-          <option selected>Choose...</option>
-          <option>...</option>
-        </select>
-      </div>
-      <div class="form-group col-md-2">
-        <label for="inputZip">Zip</label>
-        <input type="text" class="form-control" id="inputZip">
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="gridCheck">
-        <label class="form-check-label" for="gridCheck">
-          Check me out
-        </label>
-      </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Sign in</button>
-  </form>-->
-
-
-
- <!-- {job: "研发三", reach: "设计二", phone: "18733235542", star: 4, demerits: Array(1), …}
-  Id_no
-  :
-  "420101198101019533"
-  address
-  :
-  "暂时没有模拟的家庭住址的数据"
-  age
-  :
-  26
-  code
-  :
-  "jOE4"
-  date
-  :
-  "2018-07-19"
-  deal
-  :
-  []
-  demerits
-  :
-  [{…}]
-  experience
-  :
-  [{…}]
-  fresh
-  :
-  1
-  headphoto
-  :
-  ""
-  id
-  :
-  1532002353824
-  identity
-  :
-  "420101198101019533"
-  job
-  :
-  "研发三"
-  name
-  :
-  "费夫子"
-  phone
-  :
-  "18733235542"
-  reach
-  :
-  "设计二"
-  sex
-  :
-  1
-  star
-  :
-  4
-  __proto__
-  :
-  Ob-->
 
   <el-form [formGroup]="validateForm" label-width="100px" size="small"
            [show-icon]="true" [show-message]="true" el-class="form-demo">
@@ -149,7 +9,7 @@
       <div el-col [span]="6">
         <el-form-item label="姓名" [required]="true"
                       [status]="statusCtrl('name')" [error]="messageCtrl('name')">
-          <el-input formControlName="name" [value]="forminit ?.name"></el-input>
+          <el-input formControlName="name" [model] = 'forminit ?.name' [value]="forminit ?.name"></el-input>
         </el-form-item>
       </div>
       <div el-col [span]="6">
@@ -176,9 +36,10 @@
       <div el-col [span]="6">
         <el-form-item label="权限" [required]="true"
                       [status]="statusCtrl('root')" [error]="messageCtrl('root')">
-          <el-select [model]="forminit ?.root" formControlName="root" [elDisabled]="true">
-            <el-option *ngFor="let item of [{value: 1,label: '普通员工' },
-                                            { value: 2, label: '系统管理员' }]"
+          <el-select [model]="'1'" formControlName="root" [elDisabled]="true">
+
+            <el-option *ngFor="let item of [{value: '1',label: '普通员工' },
+                                            { value: '2' , label: '系统管理员' }]"
                        [label]="item.label"
                        [value]="item.value">
             </el-option>
@@ -222,7 +83,7 @@
     { value: 5, label: '市场二' }, { value: 6, label: '设计二' },
     { value: 7, label: '市场一' }, { value: 8, label: '研发三' }]; "
                        [label]="item.label"
-                       [value]="item.value">
+                       [value]="item.label">
             </el-option>
           </el-select>
         </el-form-item>
@@ -247,7 +108,7 @@
                       [status]="statusCtrl('date')" [error]="messageCtrl('date')">
           <el-date-picker (modelChange)="handle($event)"
                           [format]="'yyyy年MM月-dd日'" formControlName="date"
-                          [model]='forminit?.fresh'>
+                          [model]='forminit?.date'>
           </el-date-picker>
         </el-form-item>
       </div>
@@ -257,12 +118,12 @@
       <div el-col [span]="24">
       <el-form-item label="基本待遇">
         <el-checkbox-group formControlName="deal" (modelChange)="deal">
-          <el-checkbox label="deal1">养老保险</el-checkbox>
-          <el-checkbox label="deal2">养老保险</el-checkbox>
-          <el-checkbox label="deal3">医疗保险</el-checkbox>
-          <el-checkbox label="deal4">失业保险</el-checkbox>
-          <el-checkbox label="deal5">工伤保险</el-checkbox>
-          <el-checkbox label="deal6">生育保险</el-checkbox>
+          <el-checkbox label="养老保险">养老保险</el-checkbox>
+          <el-checkbox label="养老保险">养老保险</el-checkbox>
+          <el-checkbox label="医疗保险">医疗保险</el-checkbox>
+          <el-checkbox label="失业保险">失业保险</el-checkbox>
+          <el-checkbox label="工伤保险">工伤保险</el-checkbox>
+          <el-checkbox label="生育保险">生育保险</el-checkbox>
           <el-checkbox label="禁用" [elDisabled]="true">基本工资</el-checkbox>
           <el-checkbox label="禁用" [elDisabled]="true">项目提成</el-checkbox>
         </el-checkbox-group>
@@ -277,7 +138,7 @@
       </div>
       <div el-col [span]="12">
         <el-form-item label="通报次数">
-          <el-input-number formControlName="demerits" [model]="demer" (modelChange)="changeDemerits($event)" [min]="1" [max]="10"></el-input-number>
+          <el-input-number formControlName="demerits"  (modelChange)="changeDemerits($event)" [min]="1" [max]="10"></el-input-number>
         </el-form-item>
       </div>
     </div>

@@ -2,7 +2,7 @@ import {AfterViewInit, ChangeDetectorRef, Component, forwardRef, Inject, OnDestr
 import {AdminService} from '../../serve/admin.service';
 import {Observable, Subscription} from 'rxjs';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -14,7 +14,7 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
   id: any;
   labelPosition = 'left';
   /*数据回填1*/
-  public forminit: any;
+  private forminit: any;
   /*用来从服务中接受具体的信息的，在组件销毁时可以用来取消订阅的流*/
   private subscription: Subscription;
   validateForm: FormGroup;
@@ -23,25 +23,27 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
     { value: 5, label: '市场二' }, { value: 6, label: '设计二' },
     { value: 7, label: '市场一' }, { value: 8, label: '研发三' }];
 
-  public name = new FormControl('', Validators.required);
-  public code = new FormControl('', Validators.required);
-  public sex = new FormControl('');
-  public reach = new FormControl('', Validators.required);
-  public date = new FormControl('', Validators.required);
-  public deal = new FormControl([], Validators.required);
-  public fresh = new FormControl('', Validators.required);
-  public identity = new FormControl('', Validators.required);
-  public phone = new FormControl('', Validators.required);
-  public root = new FormControl('', Validators.required);
-  public address = new FormControl('', Validators.required);
-  public demerits = new FormControl('', Validators.required);
-  public star = new FormControl('', Validators.required);
-  public age = new FormControl('', Validators.required);
+  private name = new FormControl('');
+  private code = new FormControl('', Validators.required);
+  private sex = new FormControl('');
+  private reach = new FormControl([{}] , Validators.required);
+  private date = new FormControl('', Validators.required);
+  private deal = new FormControl([], Validators.required);
+  private fresh = new FormControl('', Validators.required);
+  private identity = new FormControl('', Validators.required);
+  private phone = new FormControl('', Validators.required);
+  private root = new FormControl('', Validators.required);
+  private address = new FormControl('', Validators.required);
+  private demerits = new FormControl('', Validators.required);
+  private star = new FormControl('', Validators.required);
+  private age = new FormControl('', Validators.required);
   /*通报次数*/
- public demer: number;
+  private demer: any;
  /*综合登记*/
- public  stars: number;
-  constructor(private admin: AdminService, private changeDetectorRef: ChangeDetectorRef,
+ private  stars: number;
+ /*是否修改成功的标志位*/
+ private editflag: boolean;
+  constructor(private admin: AdminService, private changeDetectorRef: ChangeDetectorRef, private router: Router,
                private routerInfo: ActivatedRoute,
               @Inject(forwardRef(() => FormBuilder)) private formBuilder: FormBuilder, private fb: FormBuilder) {
     this.validateForm = this.fb.group({
@@ -133,6 +135,7 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
     "420101198101017802"*/
   ngOnInit() {
   this.formInit();
+  console.log(this.name.value);
   }
   ngAfterViewInit() {
     this.changeDetectorRef.markForCheck();
@@ -151,10 +154,7 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
       this.forminit = Object.assign(res[0], res[1]);
       this.demer  = Number(this.forminit.demerits);
       this.stars  = Number(this.forminit.star);
-      console.log(this.forminit);
-      this.changeDetectorRef.markForCheck();
-      this.changeDetectorRef.detectChanges();
-      // console.log(this.validateForm.value);
+      console.log(this.validateForm.value);
     });
 
   }
@@ -164,15 +164,21 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   submit(): void {
-    if (this.validateForm.value) {
-      this.admin.editAdminInformation(this.validateForm.value).subscribe(res => {
-        console.log(res);
-
+      for (const key in this.validateForm.value) {
+        if (this.validateForm.value[key] === '') {
+            this.validateForm.value[key] = this.forminit[key];
+        }
+      }
+     console.log(this.validateForm.value);
+     if (this.validateForm.value) {
+      this.admin.editAdminInformation(this.validateForm.value, this.id).subscribe(res => {
+          if (res.status) {
+            Swal('修改成功成功', '请进行其他操作', 'success').then(value => {
+              this.router.navigate(['/admin/show']);
+            });
+          }
       });
-    } else {
-      Swal('修改失败', 'error');
     }
-    console.log(this.validateForm.value);
   }
 
   reset(): void {
@@ -231,9 +237,26 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
   private changeDemerits(event) {
     console.log(event);
   }
-}
-export interface CanDeactivateComponent {
-  canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean;
+  /*canDeactivate(): Observable<boolean> | boolean {
+    // Allow synchronous navigation (`true`) if no crisis or the crisis is unchanged
+    if (2 > 1) {
+      Swal('确定要离开');
+      return false;
+    }
+  }*/private isObjectValueEqual(a, b) {
+
+    const aProps = Object.getOwnPropertyNames(a);
+    const bProps = Object.getOwnPropertyNames(b);
+    for (let i = 0; i < aProps.length; i++) {
+      const propName = aProps[i];
+
+      if (a[propName] !== b[propName]) {
+        return false;
+      }
+    }
+
+    return true;
+  }
 }
 
 

@@ -23,8 +23,10 @@ import {AdminComponent} from '../../admin/admin.component';
 import {ShowadminComponent} from '../../admin/showadmin/showadmin.component';
 import {AdminService} from '../../serve/admin.service';
 import {AdminDetailComponent} from '../../admin/admin-detail/admin-detail.component';
-import {UnsavedGuard} from '../../serve/editsave-guard';
 import {EditunsaveService} from '../../serve/editunsave.service';
+import {ShopComponent} from '../../nowstatus/shop/shop.component';
+import {FriengsComponent} from '../../nowstatus/friengs/friengs.component';
+import {NowstatusComponent} from '../../nowstatus/nowstatus.component';
 /*这个模块主要是用于显示home的*/
 @NgModule({
   imports: [
@@ -56,6 +58,9 @@ import {EditunsaveService} from '../../serve/editunsave.service';
     DeladminComponent,
     RegadminComponent,
     AdminDetailComponent,
+    NowstatusComponent,
+    FriengsComponent,
+    ShopComponent,
   ],
   providers: [LoginService, GetdataService, AdminService, EditunsaveService],
 })

@@ -1,0 +1,11 @@
+.fir-tree {
+  width: 40%;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  background: pink;
+}
+.tree {
+  margin: 0 auto;
+}

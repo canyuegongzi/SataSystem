@@ -16,9 +16,6 @@ import { ElModule } from 'element-angular';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ToolsComponent } from './tools/tools.component';
 import { MessageComponent } from './message/message.component';
-import { NowstatusComponent } from './nowstatus/nowstatus.component';
-import { FriengsComponent } from './nowstatus/friengs/friengs.component';
-import { ShopComponent } from './nowstatus/shop/shop.component';
 import { ControlComponent } from './home/content/control/control.component';
 import { UserComponent } from './user/user.component';
 import { SettingComponent } from './setting/setting.component';
@@ -47,9 +44,6 @@ import { ShowlistComponent } from './admin/showlist/showlist.component';
     RegisterComponent,
     ToolsComponent,
     MessageComponent,
-    NowstatusComponent,
-    FriengsComponent,
-    ShopComponent,
     ControlComponent,
     UserComponent,
     SettingComponent,

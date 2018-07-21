@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {Observable, Subject} from 'rxjs';
 import {map} from 'rxjs/internal/operators';
 import {EditAdminIformation, SearchAdminParams} from '../module/Adminuer';
+import {post} from 'selenium-webdriver/http';
 
 @Injectable({
   providedIn: 'root'
@@ -69,8 +70,9 @@ export class AdminService {
     }
   }
   /*修改*/
-  editAdminInformation(par: EditAdminIformation ): Observable<boolean> {
+  editAdminInformation(par: EditAdminIformation, id: number): Observable<any> {
     if (par) {
+      par.id = id;
       return  this.http.post('api/adminedit', {params: par}).pipe(
         map(res => res.json())
       );
@@ -84,6 +86,17 @@ export class AdminService {
         map(res => res.json()
         )
       );
+    }
+  }
+  /*注册权限*/
+  regAdminRoot(id: number, root: number): Observable<any> {
+    if (id && root) {
+     return this.http.post('api/adminroot', {params: {id: id, root: root}}).pipe(
+        map(res => res.json()
+        )
+      );
+    } else {
+      return;
     }
   }
   setFormDetail(par: any) {
