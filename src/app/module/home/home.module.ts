@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {HomeRoutes} from './home.routes';
@@ -27,6 +27,13 @@ import {EditunsaveService} from '../../serve/editunsave.service';
 import {ShopComponent} from '../../nowstatus/shop/shop.component';
 import {FriengsComponent} from '../../nowstatus/friengs/friengs.component';
 import {NowstatusComponent} from '../../nowstatus/nowstatus.component';
+import {CompanyPipe} from '../../pipe/company.pipe';
+import {ReeorduserComponent} from '../../user/reeorduser/reeorduser.component';
+import {UserindexComponent} from '../../user/userindex/userindex.component';
+import {UserService} from '../../serve/user.service';
+import {RepassComponent} from '../../user/repass/repass.component';
+import {EdituserComponent} from '../../user/edituser/edituser.component';
+import {UsermessageComponent} from '../../user/usermessage/usermessage.component';
 /*这个模块主要是用于显示home的*/
 @NgModule({
   imports: [
@@ -40,7 +47,6 @@ import {NowstatusComponent} from '../../nowstatus/nowstatus.component';
     RouterModule.forChild(<any>HomeRoutes),
     /*第三方的包*/
     ElModule.forRoot(),
-    BrowserAnimationsModule,
     BrowserAnimationsModule,
     /*数据可视化库*/
     NgxEchartsModule,
@@ -61,7 +67,16 @@ import {NowstatusComponent} from '../../nowstatus/nowstatus.component';
     NowstatusComponent,
     FriengsComponent,
     ShopComponent,
+    CompanyPipe,
+    ReeorduserComponent,
+    UserindexComponent,
+    RepassComponent,
+    EdituserComponent,
+    UsermessageComponent,
   ],
-  providers: [LoginService, GetdataService, AdminService, EditunsaveService],
+  providers: [LoginService, GetdataService, AdminService, EditunsaveService, UserService],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ],
 })
 export class HomeModule { }

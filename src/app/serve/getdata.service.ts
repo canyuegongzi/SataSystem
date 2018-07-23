@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {NgxEchartsModule} from 'ngx-echarts';
-import {Http, RequestOptionsArgs} from '@angular/http';
+import {Http} from '@angular/http';
 import {map} from 'rxjs/internal/operators';
-import {DetailMessage, Sysmessage} from '../module/lineNumber';
 
 @Injectable({
   providedIn: 'root'

@@ -1,13 +1,19 @@
 import * as express from 'express';
 import * as fun from './mock';
 import bodyParser = require('body-parser');
-const fs = require('fs');
 import {DetailMessage, makeArr, SysDetail, SysWriteData, trueFalse} from "./mock";
 import * as mockData from '../model/localadmin';
-
+import {SearchCity} from '../model/searchCity';
+import * as moment from "moment";
+import _quarter = moment.unitOfTime._quarter;
 const app = express();
+const fs = require('fs');
+const request = require('request');
+
+const http = require('http');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+
 /*在线人数信息*/
 const linenumdatas = [
   {
@@ -303,11 +309,9 @@ app.get('/api/admininfosum', (req, res) => {
         })
         res.json(adminagereach);
       }
-
     }
   })
 });
-
 /*删除操作*/
 app.get('/api/admindelete', (req, res) => {
   // const result = {status: '',time: ''}
@@ -366,7 +370,7 @@ app.get('/api/admindelete', (req, res) => {
 });
 /*具体的查询detail*/
 app.get('/api/admindetail', (req,res) => {
-  console.log(req.query.id);
+  // console.log(req.query.id);
   let id = req.query.id;
   if (id) {
     /*读取大致的仍人员信息*/
@@ -520,7 +524,6 @@ app.post('/api/adminedit', (req, res) =>{
         }
         // console.log('--------------------修改成功');
         // console.log(admin.data);
-
         fs.readFile('mockData/adminuerdetail.json', function (err, data) {
           if (err) {
             res.json({status: false, date: new Date()})
@@ -535,7 +538,6 @@ app.post('/api/adminedit', (req, res) =>{
                     admindetail.data[j][key] = params[key];
                   }
                 }
-
               }
             }
             admindetail.total = admindetail.data.length;
@@ -550,18 +552,11 @@ app.post('/api/adminedit', (req, res) =>{
                 res.json({status: true, date: new Date()});
                 console.log('ssss');
               }
-
             })
-
-
           }
-
         })
-
       })
-
     }
-
   })
 })
 app.post('/api/adminroot', (req, res) => {
@@ -608,17 +603,208 @@ app.get('/api/company', (req,res) => {
       company = JSON.parse(company);
       let length = company.data.length;
       // console.log(company);
+
       if (req.query.name) {
+        console.log(req.query.name);
         let onecompany = (company.data).filter(function (e) {
           return e.name == req.query.name;
         })
-        console.log(req)
-        res.send(onecompany.data);
+        // console.log(req)
+        res.send({data:onecompany,total: length});
+      } else if (req.query.page) {
+        let companys = company.data.slice(10 * ((req.query.page) - 1), (((req.query.page) - 1) + 1) * 10);
+        res.send({data: companys, total: length});
       } else {
-        res.send(company)
+        res.send({data:company, total: length})
       }
     }
   })
+})
+/*查询当前登录用户*/
+app.get('/api/user', (req,res) =>{
+
+  let id = req.query.id;
+  let name= req.query.name;
+
+  if (!id && !name) {
+    res.send({status: false, date: new Date()})
+  } else {
+    fs.readFile('mockData/user.json', function (err, data) {
+      if (err) {
+        console.error(err);
+        res.send({status: false, date: new Date()})
+      } else {
+        let user = data.toString();
+        user = JSON.parse(user);
+        let userdetail = (user.data).filter(function (e) {
+          return e.name == name && e.id == id;
+        })
+        res.json(userdetail);
+      }
+    })
+  }
+
+})
+/*修改的 登录的用户的信息*/
+app.post('/api/edituser', (req,res) => {
+  const params = JSON.parse(JSON.stringify(req.body)).params;
+  //console.log(params);
+
+  fs.readFile('mockData/user.json', function (err, data) {
+    if(err) {
+      res.json({status: false, date: new Date()})
+    } else {
+      let userdetail = data.toString();
+      userdetail = JSON.parse(userdetail);
+      for(let i = 0; i < userdetail.data.length;i++){
+        if(params.id == userdetail.data[i].id){
+          // console.log('id一样的');
+          for(var key in params){
+            if(userdetail.data[i][key]){
+              userdetail.data[i][key] = params[key];
+            }
+          }
+        }
+      }
+      userdetail.total = userdetail.data.length;
+      var str = JSON.stringify(userdetail);
+      //console.log(str);
+      fs.writeFile('mockData/user.json', str,function(err){
+        if(err){
+          res.json({status: false, date: new Date()});
+          console.error(err);
+          } else {
+          res.json({status: true, date: new Date()})
+        }
+      });
+    }
+  })
+  })
+/*修改密码*/
+app.post('/api/editpass', (req, res) =>{
+  const params = JSON.parse(JSON.stringify(req.body)).params;
+  console.log(params);
+  if (params.oldpass == params.newpass) {
+    res.send({status: 'same', date: new Date()})
+  } else {
+    fs.readFile('mockData/userpassword.json', function (err, data) {
+    if(err) {
+      res.send({status: false, date: new Date()})
+    } else {
+      let userpass = data.toString();
+      userpass = JSON.parse(userpass);
+
+      for(let i = 0; i < userpass.data.length;i++){
+        if(params.id == userpass.data[i].id){
+
+          if (userpass.data[i].password != params.oldpass) {
+           return res.send({status: 'different', date: new Date()})
+          } else {
+            userpass.data[i].password =  params.newpass;
+            userpass.data[i].name =  params.name;
+          }
+        }
+      }
+      userpass.total = userpass.data.length;
+      var str = JSON.stringify(userpass);
+      fs.writeFile('mockData/userpassword.json', str,function(err){
+        if(err){
+          res.send({status: false, date: new Date()});
+          console.error(err);
+        } else {
+          res.send({status: true, date: new Date()})
+        }
+      });
+
+    }})
+  }
+});
+/*查询天气*/
+app.post('/api/weather', (req,res) => {
+  const params = JSON.parse(JSON.stringify(req.body)).params;
+  // let city = SearchCity(params);
+  // console.log(params);
+  //console.log(city);
+  let citycode: string;
+  // console.log(params);
+  if (!params) {
+    return false;
+  } else {
+
+    fs.readFile('mockData/weathercity.json', function (err, data) {
+      if (err) {
+        console.error(err);
+        return false;
+      } else {
+        let city = data.toString();
+        city = JSON.parse(city);
+        let citydata = (city).filter(function (e) {
+          return e.city == params
+        })
+        citycode = citydata[0].cityid;
+
+
+        const e =request(
+          {url:'http://aider.meizu.com/app/weather/listWeather?cityIds='+citycode+'',
+          method:'GET',
+          headers:{'Content-Type':'text/json' }
+        },
+          function(error,response,body){
+          if(!error && response.statusCode == 200){
+            // console.log(JSON.parse(body));
+            res.send({'data':JSON.parse(body) } );
+          }
+        });
+      }
+    })
+  }
+})
+
+
+app.get('/api/express',(req,res) => {
+  let expressname: string;
+  let number: string = req.query.number;
+  switch(req.query.name)
+  {
+    case '顺丰快递':
+      expressname = 'shunfeng';
+      break;
+    case '中通快递':
+      expressname = 'zhongtong';
+      break ;
+    case '邮政快递':
+      expressname = 'youzhengguonei';
+      break;
+    case '优速快递':
+      expressname = 'youshuwuliu';
+      break;
+    case '申通快递':
+      expressname = 'shentong';
+      break;
+    case '圆通快递':
+      expressname = 'yuantong';
+      break;
+    case '韵达快递':
+      expressname = 'yunda';
+      break;
+    default:
+  }
+
+  // let url = 'https://sp0.baidu.com/9_Q4sjW91Qh3otqbppnN2DJv/pae/channel/data/asyncqury?cb=jQuery110204759692032715892_1499865778178&appid=4001&com=&nu='+number+'';
+  let url = 'https://sp0.baidu.com/9_Q4sjW91Qh3otqbppnN2DJv/pae/channel/data/asyncqury?cb=?';
+  console.log(expressname);
+  const e =request(
+    {url: url,
+      method:'GET',
+      headers:{'Content-Type':'text/json' },
+      data: {com:expressname,nu:number,appid:4001}
+    },
+    function(error,response,body){
+      if(!error && response.statusCode == 200){
+        console.log(JSON.parse(body));
+        // res.json({'data':JSON.parse(body) } );
+      }
+    });
 })
 const server = app.listen(8000, 'localhost', () => {
   //console.log(systemdatil);

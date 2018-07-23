@@ -16,6 +16,11 @@ import {AdminDetailComponent} from '../../admin/admin-detail/admin-detail.compon
 import {AdminComponent} from '../../admin/admin.component';
 import {EditComponent} from '../../admin/edit/edit.component';
 import {EditunsaveService} from '../../serve/editunsave.service';
+import {UserindexComponent} from '../../user/userindex/userindex.component';
+import {ReeorduserComponent} from '../../user/reeorduser/reeorduser.component';
+import {RepassComponent} from '../../user/repass/repass.component';
+import {EdituserComponent} from '../../user/edituser/edituser.component';
+import {UsermessageComponent} from '../../user/usermessage/usermessage.component';
 
 export const HomeRoutes = [
   {
@@ -64,7 +69,7 @@ export const HomeRoutes = [
           {
             path: 'edit',
             component: EditComponent,
-           /* canDeactivate: [EditunsaveService]*/
+           canDeactivate: [EditunsaveService]
           }
         ]
       },
@@ -106,7 +111,23 @@ export const HomeRoutes = [
     children: [
       {
         path: '',
-        component: UserComponent
+        component:  UserindexComponent,
+      },
+      {
+        path: 'reword',
+        component: ReeorduserComponent,
+      },
+      {
+        path: 'repass',
+        component: RepassComponent,
+      },
+      {
+        path: 'edit',
+        component: EdituserComponent,
+      },
+      {
+        path: 'info',
+        component: UsermessageComponent,
       }
     ]
   },

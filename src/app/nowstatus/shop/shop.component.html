@@ -26,7 +26,7 @@
         <div>在界面中一致：所有的元素和结构需保持一致，比如：设计样式、图标和文本、元素的位置等。</div>
       </el-collapse-item>-->
 
-      <div *ngFor="let item of companydesc; let i = index">
+      <div *ngFor="let item of companydesc?.data | company: 'name': filtername; let i = index">
         <el-collapse-item [label]= 'item.name' [value]="i">
           <div>{{item.desc}}</div>
         </el-collapse-item>
@@ -35,8 +35,9 @@
     </el-collapse>
   </div>
   <div>
-    <el-pagination [total]="companydesc?.length"
-                   [small]="true">
+    <el-pagination [total]="companydesc?.total"
+                   [small]="true"
+                   (modelChange)="pagination($event)">
     </el-pagination>
   </div>
 </ng-container>

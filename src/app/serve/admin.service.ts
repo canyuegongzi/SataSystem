@@ -4,7 +4,6 @@ import {Router} from '@angular/router';
 import {Observable, Subject} from 'rxjs';
 import {map} from 'rxjs/internal/operators';
 import {EditAdminIformation, SearchAdminParams} from '../module/Adminuer';
-import {post} from 'selenium-webdriver/http';
 
 @Injectable({
   providedIn: 'root'

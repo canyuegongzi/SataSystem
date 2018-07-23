@@ -1,0 +1,70 @@
+<ng-container>
+  <p class="admin-header">添加员工</p>
+  <hr/>
+  <div class="header-head container">
+    <div class="row">
+      <div class="col-md-3"><span>头像</span></div>
+      <div class=" head-img"><img alt="" [src]="currentUser?.headphoto"></div>
+    </div>
+  </div>
+  <div class="body-userdetail container">
+    <div class="row">
+      <div class="col-md-3"><span style="line-height: 10;">信息</span></div>
+      <div class="col-md-8">
+        <table class="table">
+          <tr>
+            <td class="th" style="width: 6rem">姓名</td>
+            <td>{{currentUser?.name}}</td>
+            <td>性别</td>
+            <td>{{sex}}</td>
+            <td>岗位</td>
+            <td>{{currentUser?.job}}</td>
+
+          </tr>
+          <tr>
+            <td  style="width: 6rem">权限</td>
+            <td>{{root}}</td>
+            <td>入职时间</td>
+            <td>{{currentUser?.date}}</td>
+            <td>生日</td>
+            <td>{{currentUser?.birthday}}</td>
+          </tr>
+          <tr>
+            <td  style="width: 6rem">住址</td>
+            <td colspan = "5">{{currentUser?.address}}</td>
+          </tr>
+          <tr>
+            <td  style="width: 6rem">手机号</td>
+            <td colspan ='5'>{{currentUser?.phone}}</td>
+          </tr>
+          <tr>
+            <td  style="width: 6rem">简介</td>
+            <td colspan ='5'>{{currentUser?.desc}}</td>
+          </tr>
+        </table>
+
+      </div>
+    </div>
+  </div>
+  <div class="detail-content container">
+    <div class="row">
+      <div class="col-md-3">登录IP</div>
+      <div class="col-md-5">127.0.0.1</div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">登录地址</div>
+      <div class="col-md-5">xxxxxxxxxxxx</div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">我的消息</div>
+      <div class="col-md-5"><a routerLink="/user/info" [queryParams]="{id: currentUser?.id, name: currentUser?.name }">点击查看</a></div>
+    </div>
+    <div class="row">
+      <div class="col-md-4"><a routerLink="/user/edit" [queryParams]="{id: currentUser?.id, name: currentUser?.name }"><button type="button" class="btn btn-primary" (click)="editUserMessage()">修改信息</button></a>
+
+      </div>
+      <div class="col-md-4"><button type="button" class="btn btn-danger">退出登录</button></div>
+      <div class="col-md-4"><a routerLink="/user/repass"  [queryParams]="{id: currentUser?.id, name: currentUser?.name }"><button type="button" class="btn btn-danger">修改密码</button></a></div>
+    </div>
+  </div>
+</ng-container>

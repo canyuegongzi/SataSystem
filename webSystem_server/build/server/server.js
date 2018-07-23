@@ -3,10 +3,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express = require("express");
 var fun = require("./mock");
 var bodyParser = require("body-parser");
-var fs = require('fs');
 var mock_1 = require("./mock");
 var mockData = require("../model/localadmin");
 var app = express();
+var fs = require('fs');
+var request = require('request');
+var http = require('http');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 /*在线人数信息*/
@@ -364,7 +366,7 @@ app.get('/api/admindelete', function (req, res) {
 });
 /*具体的查询detail*/
 app.get('/api/admindetail', function (req, res) {
-    console.log(req.query.id);
+    // console.log(req.query.id);
     var id = req.query.id;
     if (id) {
         /*读取大致的仍人员信息*/
@@ -600,15 +602,199 @@ app.get('/api/company', function (req, res) {
             var length = company.data.length;
             // console.log(company);
             if (req.query.name) {
+                console.log(req.query.name);
                 var onecompany = (company.data).filter(function (e) {
                     return e.name == req.query.name;
                 });
-                console.log(req);
-                res.send(onecompany.data);
+                // console.log(req)
+                res.send({ data: onecompany, total: length });
+            }
+            else if (req.query.page) {
+                var companys = company.data.slice(10 * ((req.query.page) - 1), (((req.query.page) - 1) + 1) * 10);
+                res.send({ data: companys, total: length });
             }
             else {
-                res.send(company);
+                res.send({ data: company, total: length });
             }
+        }
+    });
+});
+/*查询当前登录用户*/
+app.get('/api/user', function (req, res) {
+    var id = req.query.id;
+    var name = req.query.name;
+    if (!id && !name) {
+        res.send({ status: false, date: new Date() });
+    }
+    else {
+        fs.readFile('mockData/user.json', function (err, data) {
+            if (err) {
+                console.error(err);
+                res.send({ status: false, date: new Date() });
+            }
+            else {
+                var user = data.toString();
+                user = JSON.parse(user);
+                var userdetail = (user.data).filter(function (e) {
+                    return e.name == name && e.id == id;
+                });
+                res.json(userdetail);
+            }
+        });
+    }
+});
+/*修改的 登录的用户的信息*/
+app.post('/api/edituser', function (req, res) {
+    var params = JSON.parse(JSON.stringify(req.body)).params;
+    //console.log(params);
+    fs.readFile('mockData/user.json', function (err, data) {
+        if (err) {
+            res.json({ status: false, date: new Date() });
+        }
+        else {
+            var userdetail = data.toString();
+            userdetail = JSON.parse(userdetail);
+            for (var i = 0; i < userdetail.data.length; i++) {
+                if (params.id == userdetail.data[i].id) {
+                    // console.log('id一样的');
+                    for (var key in params) {
+                        if (userdetail.data[i][key]) {
+                            userdetail.data[i][key] = params[key];
+                        }
+                    }
+                }
+            }
+            userdetail.total = userdetail.data.length;
+            var str = JSON.stringify(userdetail);
+            //console.log(str);
+            fs.writeFile('mockData/user.json', str, function (err) {
+                if (err) {
+                    res.json({ status: false, date: new Date() });
+                    console.error(err);
+                }
+                else {
+                    res.json({ status: true, date: new Date() });
+                }
+            });
+        }
+    });
+});
+/*修改密码*/
+app.post('/api/editpass', function (req, res) {
+    var params = JSON.parse(JSON.stringify(req.body)).params;
+    console.log(params);
+    if (params.oldpass == params.newpass) {
+        res.send({ status: 'same', date: new Date() });
+    }
+    else {
+        fs.readFile('mockData/userpassword.json', function (err, data) {
+            if (err) {
+                res.send({ status: false, date: new Date() });
+            }
+            else {
+                var userpass = data.toString();
+                userpass = JSON.parse(userpass);
+                for (var i = 0; i < userpass.data.length; i++) {
+                    if (params.id == userpass.data[i].id) {
+                        if (userpass.data[i].password != params.oldpass) {
+                            return res.send({ status: 'different', date: new Date() });
+                        }
+                        else {
+                            userpass.data[i].password = params.newpass;
+                            userpass.data[i].name = params.name;
+                        }
+                    }
+                }
+                userpass.total = userpass.data.length;
+                var str = JSON.stringify(userpass);
+                fs.writeFile('mockData/userpassword.json', str, function (err) {
+                    if (err) {
+                        res.send({ status: false, date: new Date() });
+                        console.error(err);
+                    }
+                    else {
+                        res.send({ status: true, date: new Date() });
+                    }
+                });
+            }
+        });
+    }
+});
+/*查询天气*/
+app.post('/api/weather', function (req, res) {
+    var params = JSON.parse(JSON.stringify(req.body)).params;
+    // let city = SearchCity(params);
+    // console.log(params);
+    //console.log(city);
+    var citycode;
+    // console.log(params);
+    if (!params) {
+        return false;
+    }
+    else {
+        fs.readFile('mockData/weathercity.json', function (err, data) {
+            if (err) {
+                console.error(err);
+                return false;
+            }
+            else {
+                var city = data.toString();
+                city = JSON.parse(city);
+                var citydata = (city).filter(function (e) {
+                    return e.city == params;
+                });
+                citycode = citydata[0].cityid;
+                var e = request({ url: 'http://aider.meizu.com/app/weather/listWeather?cityIds=' + citycode + '',
+                    method: 'GET',
+                    headers: { 'Content-Type': 'text/json' }
+                }, function (error, response, body) {
+                    if (!error && response.statusCode == 200) {
+                        // console.log(JSON.parse(body));
+                        res.send({ 'data': JSON.parse(body) });
+                    }
+                });
+            }
+        });
+    }
+});
+app.get('/api/express', function (req, res) {
+    var expressname;
+    var number = req.query.number;
+    switch (req.query.name) {
+        case '顺丰快递':
+            expressname = 'shunfeng';
+            break;
+        case '中通快递':
+            expressname = 'zhongtong';
+            break;
+        case '邮政快递':
+            expressname = 'youzhengguonei';
+            break;
+        case '优速快递':
+            expressname = 'youshuwuliu';
+            break;
+        case '申通快递':
+            expressname = 'shentong';
+            break;
+        case '圆通快递':
+            expressname = 'yuantong';
+            break;
+        case '韵达快递':
+            expressname = 'yunda';
+            break;
+        default:
+    }
+    // let url = 'https://sp0.baidu.com/9_Q4sjW91Qh3otqbppnN2DJv/pae/channel/data/asyncqury?cb=jQuery110204759692032715892_1499865778178&appid=4001&com=&nu='+number+'';
+    var url = 'https://sp0.baidu.com/9_Q4sjW91Qh3otqbppnN2DJv/pae/channel/data/asyncqury?cb=?';
+    console.log(expressname);
+    var e = request({ url: url,
+        method: 'GET',
+        headers: { 'Content-Type': 'text/json' },
+        data: { com: expressname, nu: number, appid: 4001 }
+    }, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            console.log(JSON.parse(body));
+            // res.json({'data':JSON.parse(body) } );
         }
     });
 });

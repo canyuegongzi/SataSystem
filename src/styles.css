@@ -7,6 +7,9 @@
   margin: 0;
   padding: 0;
 }
+.content {
+  padding: 0;
+}
 a {
   text-decoration: none;
 }
@@ -103,4 +106,30 @@ li {
 }
 .edit-admin >div {
   height: 80px;
+}
+.body-userdetail table th,  .body-userdetail table td{
+  border-collapse:separate;
+  border-spacing:0 0.5rem;
+  border-top: 0px solid #dee2e6 !important;
+
+}
+/*侧边*/
+.sitebar {
+  height: 33rem;
+
+}
+.barico {
+  margin-right: .5rem;
+}
+a{
+  color: #000000;
+  text-decoration: none;
+}
+/*footer*/
+.coptright {
+  width: 100%;
+  text-align: center;
+}
+.coptright p {
+  display: block;
 }

@@ -1,0 +1,10 @@
+#expressname {
+  width: 8rem;
+}
+#expressnum {
+  width: 16rem;
+}
+.express-desc {
+  line-height: 5rem;
+  margin-top: 5rem;
+}

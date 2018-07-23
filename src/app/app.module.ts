@@ -29,6 +29,19 @@ import {ToolsModule} from './module/tools/tools.module';
 import { SlidetoolsComponent } from './tools/slidetools/slidetools.component';
 import { TlTableComponent } from './data/tl-table/tl-table.component';
 import { ShowlistComponent } from './admin/showlist/showlist.component';
+import { UsermessageComponent } from './user/usermessage/usermessage.component';
+import { WeatherComponent } from './tools/weather/weather.component';
+import { MapComponent } from './tools/map/map.component';
+import { ExpressComponent } from './tools/express/express.component';
+import { SoundComponent } from './ai/sound/sound.component';
+import { PhotoComponent } from './ai/photo/photo.component';
+import { NoteComponent } from './note/note.component';
+import { SongComponent } from './song/song.component';
+import { AibarComponent } from './home/sitebar/aibar/aibar.component';
+import { AmapComponent } from './tools/map/amap/amap.component';
+import {BaiduMapModule} from 'angular2-baidu-map';
+import {AbmModule} from 'angular-baidu-maps';
+
 
 
 
@@ -42,7 +55,6 @@ import { ShowlistComponent } from './admin/showlist/showlist.component';
     FooterComponent,
     ContentComponent,
     RegisterComponent,
-    ToolsComponent,
     MessageComponent,
     ControlComponent,
     UserComponent,
@@ -52,6 +64,10 @@ import { ShowlistComponent } from './admin/showlist/showlist.component';
     SlidetoolsComponent,
     TlTableComponent,
     ShowlistComponent,
+    HeaderComponent,
+    ToolsComponent,
+    AibarComponent,
+    AmapComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,7 +81,11 @@ import { ShowlistComponent } from './admin/showlist/showlist.component';
     /*第三方的包*/
     ElModule.forRoot(),
     BrowserAnimationsModule,
-    BrowserAnimationsModule,
+    /*AbmModule.forRoot({
+      apiKey: '1Wuoc7aFMTlXuXcuVejnhGWMASkKvMb5' // app key为必选项
+    }),*/
+    BaiduMapModule.forRoot({ ak: '1Wuoc7aFMTlXuXcuVejnhGWMASkKvMb5' }),
+    // AbmModule,
     /*数据可视化库*/
     NgxEchartsModule,
     /*自己的模块*/

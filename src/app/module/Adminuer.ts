@@ -63,6 +63,16 @@ export interface Demerits {
   reason ?: string | null;
   way ?: string | null;
 }
-
-
+export interface LoginUser extends SearchAdminParams {
+  birthday ?: string | null;
+  headphoto ?: string | null;
+  photo ?: any | null;
+  root ?: number | 1;
+  desc ?: string | null;
+  address ?: string | null;
+}
+export interface EditPass {
+  oldpass: string;
+  newpass: string;
+}
 

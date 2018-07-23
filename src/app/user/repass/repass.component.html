@@ -1,0 +1,30 @@
+<ng-container>
+  <p class="admin-header">修改密码</p>
+  <hr/>
+
+  <div class="addadmin-name user-edit-password">
+<el-form [formGroup]="formModel" label-width="100px"
+         [show-icon]="true" [show-message]="true" el-class="form-demo">
+
+  <el-form-item label="旧密码" [required]="true"
+                [status]="statusCtrl('mail')" [error]="messageCtrl('oldpass')">
+    <el-input formControlName="oldpass"></el-input>
+  </el-form-item>
+
+  <el-form-item label="新密码" [required]="true"
+                [status]="statusCtrl('newpass')" [error]="messageCtrl('newpass')">
+    <el-input formControlName="newpass" native-type="password"></el-input>
+  </el-form-item>
+  <el-form-item label="确认密码" [required]="true"
+                [status]="statusCtrl('repass')" [error]="messageCtrl('repass')">
+    <el-input formControlName="repass" native-type="password"></el-input>
+  </el-form-item>
+
+  <el-form-item>
+    <el-button type="primary" (click)="submit()">提交</el-button>
+    <el-button (click)="reset()">重置</el-button>
+  </el-form-item>
+
+</el-form>
+</div>
+</ng-container>

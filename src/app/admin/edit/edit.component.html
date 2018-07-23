@@ -77,7 +77,7 @@
       <div el-col [span]="6">
         <el-form-item label="部门" [required]="true"
                       [status]="statusCtrl('reach')" [error]="messageCtrl('reach')">
-          <el-select [model]="forminit ?.reach" formControlName="reach">
+          <el-select [model]="forminit ?.reach" formControlName="reachs">
             <el-option *ngFor="let item of [{value: 1, label: '策划' }, { value: 2, label: '行政' },
     { value: 3, label: '公关' }, { value: 4, label: '研发二' },
     { value: 5, label: '市场二' }, { value: 6, label: '设计二' },
@@ -150,40 +150,3 @@
     </div>
   </el-form>
 </ng-container>
-<!--"420101198101017802"
-age
-:
-35
-code
-:
-"GyDy"
-date
-:
-"2018-07-19"
-demerits
-:
-1
-headphoto
-:
-""
-id
-:
-1532002354442
-job
-:
-"研发二"
-name
-:
-"顾佳怡"
-phone
-:
-"13180519553"
-reach
-:
-"设计一"
-sex
-:
-0
-star
-:
-2-->

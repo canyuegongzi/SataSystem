@@ -15,8 +15,8 @@
     </div>
   </div>
  <div el-col span="3">
-   <div class="loginuser"><img src="https://img2.woyaogexing.com/2018/07/10/907e733831ad4d17!400x400_big.jpg" alt=""/></div>
-   <span class="loginname"><a href="" style="color:#ffffff">admin</a></span>
+   <div class="loginuser"><img [src]="headphoto" alt=""/></div>
+   <span class="loginname"><a routerLink="/user" [queryParams]="{id: 1, name: 'admin' }" style="color:#ffffff">admin</a></span>
    <div id="message">
      <a href="" style="color:#ffffff;display: block"><i class="fa fa-envelope-o user-message" aria-hidden="true"></i></a>
      <i class="message-number">1</i>

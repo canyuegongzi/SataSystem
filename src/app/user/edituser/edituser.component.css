@@ -1,0 +1,6 @@
+.edit-user{width: 70%;
+/*margin: 0 auto;*/
+position: relative;
+left: 50%;
+transform: translateX(-50%);
+-moz-transform: translateX(-50%);}

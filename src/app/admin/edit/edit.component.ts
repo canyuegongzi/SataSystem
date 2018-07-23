@@ -26,9 +26,9 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
   private name = new FormControl('');
   private code = new FormControl('', Validators.required);
   private sex = new FormControl('');
-  private reach = new FormControl([{}] , Validators.required);
+  private reachs = new FormControl('');
   private date = new FormControl('', Validators.required);
-  private deal = new FormControl([], Validators.required);
+  private deal = new FormControl('');
   private fresh = new FormControl('', Validators.required);
   private identity = new FormControl('', Validators.required);
   private phone = new FormControl('', Validators.required);
@@ -50,7 +50,7 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
       'name': this.name,
       'code': this.code,
       'sex': this.sex,
-      'reach': this.reach,
+      'reachs': this.reach,
       'date': this.date,
       'age': this.age,
       /*待遇*/
@@ -138,8 +138,8 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
   console.log(this.name.value);
   }
   ngAfterViewInit() {
-    this.changeDetectorRef.markForCheck();
-    this.changeDetectorRef.detectChanges();
+    // this.changeDetectorRef.markForCheck();
+    // this.changeDetectorRef.detectChanges();
   }
   formInit() {
     /*表单的初始化*/
@@ -173,7 +173,7 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
      if (this.validateForm.value) {
       this.admin.editAdminInformation(this.validateForm.value, this.id).subscribe(res => {
           if (res.status) {
-            Swal('修改成功成功', '请进行其他操作', 'success').then(value => {
+            Swal('修改成功', '请进行其他操作', 'success').then(value => {
               this.router.navigate(['/admin/show']);
             });
           }

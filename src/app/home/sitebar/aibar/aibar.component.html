@@ -1,0 +1,27 @@
+<div class="sitebar">
+  <div el-row class="tac sitebar">
+    <div el-col span="24">
+      <el-menu model="2" class="el-menu-vertical-demo">
+        <el-submenu index="1">
+          <ng-template #title>
+            <i class="fa fa-bar-chart barico"></i>生活工具
+          </ng-template>
+          <el-menu-item index="1-1"><i class="fa fa fa-area-chart barico"></i><a routerLink="/tools/express">快递查询</a></el-menu-item>
+          <el-menu-item index="1-2"><i class="fa fa-map barico"></i><a routerLink="/tools/weather">天气查询</a></el-menu-item>
+          <el-menu-item index="1-3"><i class="fa fa-pie-chart barico"></i><a routerLink="/tools/map">地点查询</a></el-menu-item>
+        </el-submenu>
+        <el-submenu index="2">
+          <ng-template #title>
+            <i class="barico fa fa-envelope-open-o"></i>AI工具
+          </ng-template>
+          <el-menu-item index="3-1"><i class="fa fa-deaf barico"></i><a routerLink="/ai/sound">语音识别</a></el-menu-item>
+          <el-menu-item index="3-2"><i class="fa fa-list-alt barico"></i><a routerLink="/ai/photo">图片识别</a></el-menu-item>
+        </el-submenu>
+        <el-menu-item index="3"><i class="fa fa-user-circle barico"></i><a routerLink="/note">备忘录</a></el-menu-item>
+        <el-menu-item index="4"><i class="fa el-icon-setting barico"></i><a routerLink="/song">娱乐歌曲</a></el-menu-item>
+
+
+      </el-menu>
+    </div>
+  </div>
+</div>

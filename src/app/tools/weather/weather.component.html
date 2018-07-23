@@ -1,0 +1,71 @@
+
+<div class="container weather-back">
+  <div class="row">
+    <div class="col-md-6">
+      <div id="mainBody">
+        <div id="cloud1" class="cloud"></div>
+        <div id="cloud2" class="cloud"></div>
+      </div>
+
+      <div id="weather"><img src="../../../assets/images/cloud.png" width="300"/></div>
+
+      <table cellspacing="0">
+        <thead>
+        <tr>
+          <td style="border-top-left-radius:10px;">
+            <div class="paraLeft" id="local">{{cityName}}</div>
+            <div class="paraLeft" id="city"></div>
+            <div class="paraLeft" id="hour">未来天气预报</div>
+          </td>
+          <td>&nbsp;</td>
+          <td style="border-top-right-radius:10px;"><div id="temper">6°</div></td>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr *ngFor="let Weather of futureWeather ">
+          <td>{{Weather ?.week}}</td>
+          <td>{{Weather ?.weather}}</td>
+          <td><span class="blue">{{Weather ?.temp_night_c}}°</span><span>{{Weather.temp_day_c}}°</span></td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+          <td style="border-bottom-left-radius:10px;">
+            <div class="paraLeft" id="update">更新于{{nowWeather ?.time | date:'HH:mm:ss'}}</div>
+          </td>
+          <td><span id="time1"></span></td>
+          <td  style="border-bottom-right-radius:10px;"><span id="time2"></span></td>
+        </tr>
+        </tfoot>
+      </table>
+    </div>
+    <div class="searchweather col-md-6">
+      <form [formGroup]='formModel' (ngSubmit)='submit()' novalidate>
+        <div class="form-group row">
+          <label for="cityname" class="col-sm-2 col-form-label">城市</label>
+          <div class="col-sm-10">
+            <input type="text" formControlName="city" class="form-control weather-input" id="cityname" placeholder="请输入城市名称">
+            <button type="submit" class="btn btn-primary weather-btn" id="submitRegSearch">查找</button>
+          </div>
+        </div>
+      </form>
+      <div class="advice container">
+        <div *ngFor="let item of Advice">
+        <div class="row weather-title">
+          <div class="col-md-12">{{item?.name}}:{{item?.level}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">{{item?.content}}</div>
+        </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+
+
+</div>

@@ -1,0 +1,88 @@
+<ng-container>
+  <p class="admin-header">修改信息</p>
+  <hr/>
+
+  <div class="edit-user addadmin-name">
+  <el-form [formGroup]="formModel" label-width="100px" size="small"
+           [show-icon]="true" [show-message]="true">
+
+        <el-form-item label="姓名" [required]="true" label-width="100px"
+                      [status]="statusCtrl('name')" [error]="messageCtrl('name')">
+          <el-input formControlName="name" [model] = 'current ?.name' [value]="forminit ?.name"></el-input>
+        </el-form-item>
+
+
+
+        <el-form-item label="性别" [required]="true"
+                      [status]="statusCtrl('name')" [error]="messageCtrl('name')">
+          <el-select [model]="current ?.sex">
+            <el-option *ngFor="let item of [{value: 1,label: '男' },
+    { value: 2, label: '女' }]"
+                       [label]="item.label"
+                       [value]="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
+
+
+        <el-form-item label="权限" [required]="true"
+                      [status]="statusCtrl('root')" [error]="messageCtrl('root')">
+          <el-select [model]="'1'" formControlName="root" [elDisabled]="true">
+
+            <el-option *ngFor="let item of [{value: '1',label: '普通员工' },
+                                            { value: '2' , label: '系统管理员' }]"
+                       [label]="item.label"
+                       [value]="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
+
+        <el-form-item label="家庭住址" [required]="true"
+                      [status]="statusCtrl('address')" [error]="messageCtrl('address')">
+          <el-input formControlName="address" [value]="current ?.address"></el-input>
+        </el-form-item>
+
+
+        <el-form-item label="个人简介" [required]="true"
+                      [status]="statusCtrl('name')" [error]="messageCtrl('name')">
+          <el-input formControlName="desc" type="textarea"
+                    [rows]="2" [value]="current ?.desc"></el-input>
+        </el-form-item>
+
+
+        <el-form-item label="手机号" [required]="true"
+                      [status]="statusCtrl('phone')" [error]="messageCtrl('phone')">
+          <el-input formControlName="phone" [value]="current ?.phone"></el-input>
+        </el-form-item>
+
+        <el-form-item label="工作" [required]="true"
+                      [status]="statusCtrl('job')" [error]="messageCtrl('job')">
+          <el-input formControlName="job" [value]="current ?.job"></el-input>
+        </el-form-item>
+
+
+        <el-form-item label="入职日期" [required]="true"
+                      [status]="statusCtrl('date')" [error]="messageCtrl('date')">
+          <el-date-picker (modelChange)="handle($event)"
+                          [format]="'yyyy年MM月-dd日'" formControlName="date"
+                          [model]='current?.date'>
+          </el-date-picker>
+        </el-form-item>
+
+        <el-form-item label="生日" [required]="true"
+                      [status]="statusCtrl('birthday')" [error]="messageCtrl('birthday')">
+          <el-date-picker
+                          [format]="'yyyy年MM月-dd日'" formControlName="date"
+                          [model]='current?.birthday'>
+          </el-date-picker>
+        </el-form-item>
+
+          <el-form-item>
+        <el-button type="primary" (click)="submit()">提交</el-button><el-button type="primary" (click)="reset()">重置</el-button>
+          </el-form-item>
+          <el-form-item>
+
+          </el-form-item>
+  </el-form>
+  </div>
+</ng-container>

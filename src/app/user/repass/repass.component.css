@@ -1,0 +1,7 @@
+.user-edit-password{
+  width: 70%;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+}

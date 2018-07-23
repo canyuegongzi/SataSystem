@@ -1,0 +1,193 @@
+
+
+
+#mainBody{
+  height:100%;
+}
+.weather-back {
+  background: url('../../../assets/images/body_bg.jpg');
+  width: 100%;
+  height: 100%;
+  background-size: 100% 100%;
+}
+
+.cloud{
+  position:absolute;
+  top:0px;
+  left:0px;
+  width:100%;
+  height:100%;
+  background:url("../../../assets/images/cloud.png") no-repeat;
+  z-index:1;
+  opacity:0.8;
+}
+
+#cloud2{
+  z-index:3;
+}
+
+#weather{
+  background:url("../../../assets/images/sun.png") no-repeat;
+  border-radius: 90px;
+  width: 140px;
+  /* height: 120px; */
+  position: absolute;
+  left: 150px;
+  top: 0px;
+  z-index: 2;
+}
+
+#weather img{
+  margin:30px -90px;
+}
+
+table{
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  width: 460px;
+  padding: 6px;
+  border-radius: 15px;
+  color: #FFF;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 2px #000;
+  overflow: hidden;
+}
+
+/* thead tfoot*/
+thead tr{
+  height:160px;
+  /*background:#314561; !* default background for browsers without gradient support *!*/
+  /* css3 */
+ /* background:-webkit-gradient(linear, 0 0, 0 30%, from(#6E7C90), to(#314561));
+  background:-moz-linear-gradient(#6E7C90, #314561);
+  background:-o-linear-gradient(#6E7C90, #314561);
+  background:linear-gradient(#6E7C90, #314561);*/
+  border-top-right-radius:10px;
+  border-top-left-radius:10px;
+
+}
+
+
+tfoot tr{
+  /*background:#344865;*/
+  height:45px;
+  border-bottom-right-radius:10px;
+  border-bottom-left-radius:10px;
+}
+
+/* tbody */
+
+tbody tr{
+  /*background:#40597D;*/
+  height:50px;
+}
+
+tbody tr.even{
+  /*background:#344865;*/
+}
+
+tbody td{
+  width:165px;
+ /* border-top:4px solid #2D3D56;*/
+  font:22px "黑体";
+  line-height:30px;
+  padding:2px 10px;
+}
+
+
+tbody td img{
+  margin-left:50px;
+  width:65px;
+  height:45px;
+}
+
+/* paragram */
+
+.paraLeft{
+  float:left;
+  margin:5px 0 0 5px;
+}
+
+
+#local{
+  font:26px "黑体";
+  line-height:26px;
+  margin-top:60px;
+}
+
+#city{
+  font:18px "黑体";
+  line-height:20px;
+}
+
+#hour{
+  font:18px "黑体";
+  line-height:20px;
+  color:#8191A4;
+  letter-spacing:-1px;
+}
+
+#temper{
+  height:100px;
+  margin-top:60px;
+  float:right;
+  font:96px Arial, Helvetica, sans-serif;
+  line-height:100px;
+  text-align:right;
+  margin-left:5px;
+}
+
+
+
+#update{
+  font:18px "黑体";
+  line-height:45px;
+  width:auto;
+  height:45px;
+  margin:0;
+  float:right;
+  color: #FFFFFF;
+}
+
+span#time1,span#time2{
+  font:18px Arial, Helvetica, sans-serif;
+  width:auto;
+  height:45px;
+  line-height:45px;
+  margin:0 15px;
+  float:right;
+}
+span#time2{
+  float:left;
+}
+
+span{
+  float:right;
+  width:60px;
+  font:bolder 32px Arial, Helvetica, sans-serif;
+  line-height:30px;
+  text-align:right;
+  margin-left:5px;
+}
+
+span.blue{
+  color:#7696C1;
+}
+.searchweather {
+  margin-top: 2rem;
+}
+.weather-btn {
+  float: left;
+  margin-left: 2rem;
+}
+.weather-input { float: left;width: 14rem}
+.advice {
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #ff8c0c;
+
+}
+.weather-title {
+  margin-bottom: .5rem;
+}
