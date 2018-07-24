@@ -75,4 +75,7 @@ export interface EditPass {
   oldpass: string;
   newpass: string;
 }
-
+export interface Login {
+  name ?: string;
+  pass ?: string;
+}

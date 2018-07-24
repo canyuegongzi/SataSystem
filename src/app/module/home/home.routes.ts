@@ -21,12 +21,12 @@ import {ReeorduserComponent} from '../../user/reeorduser/reeorduser.component';
 import {RepassComponent} from '../../user/repass/repass.component';
 import {EdituserComponent} from '../../user/edituser/edituser.component';
 import {UsermessageComponent} from '../../user/usermessage/usermessage.component';
+import {LoginService} from '../../serve/login.service';
 
 export const HomeRoutes = [
   {
     path: 'data',
     component: HomeComponent,
-    /*canActivate: [LoginService],*/
     children: [
       {
         path: '',

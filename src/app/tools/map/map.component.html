@@ -1,3 +1,23 @@
+<ng-container>
 
-<app-amap></app-amap>
+  <form [formGroup]='formModel' (ngSubmit)='submit()' novalidate class="mapsearch">
+    <div class="form-group row">
+      <label for="cityname" class=" col-form-label">城市</label>
+
+        <input type="text" formControlName="city" class="form-control citymap-input" id="cityname" placeholder="请输入城市名称">
+        <button type="submit" class="btn btn-primary weather-btn" id="submitMapSearch">查找</button>
+
+    </div>
+  </form>
+  <div style="height:500px;width:100%;">
+    <baidu-map [options]="opts">
+      <marker *ngFor="let marker of markers" [point]="marker.point" [options]="marker.options"></marker>
+      <control type="navigation" [options]="controlOpts" (loaded)="controlLoaded($event)"></control>
+      <control type="overviewmap" [options]="overviewmapOpts"></control>
+      <control type="scale" [options]="scaleOpts"></control>
+      <control type="maptype" [options]="mapTypeOpts"></control>
+      <control type="geolocation" [options]="geolocationOpts" (loaded)="locationMap($event)"></control>
+    </baidu-map>
+  </div>
+</ng-container>
 

@@ -6,6 +6,7 @@ import * as mockData from '../model/localadmin';
 import {SearchCity} from '../model/searchCity';
 import * as moment from "moment";
 import _quarter = moment.unitOfTime._quarter;
+import * as register from './volidMessage'
 const app = express();
 const fs = require('fs');
 const request = require('request');
@@ -14,6 +15,9 @@ const http = require('http');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
+
+/*短信验证的号码*/
+let phoneCode: any;
 /*在线人数信息*/
 const linenumdatas = [
   {
@@ -658,12 +662,16 @@ app.post('/api/edituser', (req,res) => {
       userdetail = JSON.parse(userdetail);
       for(let i = 0; i < userdetail.data.length;i++){
         if(params.id == userdetail.data[i].id){
-          // console.log('id一样的');
-          for(var key in params){
+            //console.log('sssss');
+            userdetail.data[i] = params;
+
+            /*不知啥原因，通过遍历共同的对象的方式再次修改的方式行不通*/
+          /*for(var key in params){
+            // console.log(key)
             if(userdetail.data[i][key]){
-              userdetail.data[i][key] = params[key];
+              userdetail.data[i].key = params.key;
             }
-          }
+          }*/
         }
       }
       userdetail.total = userdetail.data.length;
@@ -760,7 +768,7 @@ app.post('/api/weather', (req,res) => {
   }
 })
 
-
+/*处理快递的请求*/
 app.get('/api/express',(req,res) => {
   let expressname: string;
   let number: string = req.query.number;
@@ -805,7 +813,134 @@ app.get('/api/express',(req,res) => {
         // res.json({'data':JSON.parse(body) } );
       }
     });
+});
+/*处理登录*/
+app.post('/api/login', (req,res) =>{
+  const params = JSON.parse(JSON.stringify(req.body)).params;
+  console.log(params);
+  if (!params.protocol) {
+    res.json({status: false, date: new Date()});
+  } else {
+    fs.readFile('mockData/userpassword.json', function (err, data) {
+      if (err) {
+        res.json({status: false, date: new Date()});
+      }
+      let user = data.toString();
+      user = JSON.parse(user);
+      let loginmes = (user.data).filter(function (e) {
+        return e.name == params.phone && e.password == params.password;
+      })
+      // console.log(loginmes[0].name);
+      console.log(loginmes);
+      if (loginmes == '') {
+        res.json({status: false, date: new Date()});
+      } else {
+        res.json({status: true, date: new Date(), data: loginmes});
+      }
+
+    })
+  }
 })
+/*发送短信*/
+app.post('/api/regnumber', (req, res) => {
+  const params = JSON.parse(JSON.stringify(req.body)).params;
+  console.log(params);
+  phoneCode = register.makeCode();
+  register.sendMessage(params, phoneCode);
+})
+/*处理注册*/
+app.post('/api/register', (req, res) =>{
+  const params = JSON.parse(JSON.stringify(req.body)).params;
+  console.log(params);
+  console.log(phoneCode);
+
+  if (phoneCode != params.message) {
+    res.json({status: 'message', date: new Date()});
+    return;
+  } else {
+    fs.readFile('mockData/userpassword.json', function (err, data) {
+
+      if(err) {
+        res.json({status: false, date: new Date()});
+        return;
+      } else {
+        let newuser = data.toString();
+        newuser = JSON.parse(newuser);
+        let userid =  mockData.diffId();
+        let olduser = (newuser.data).filter(function (e) {
+          return e.name == params.phone;
+        });
+        if (olduser != []) {
+          res.json({status: 'same', date: new Date()})
+          return;
+        } else {
+          const userDetail = {
+            name: params.phone,
+            password: params.password,
+            id: userid
+          };
+          const userdesc = {
+            name: params.phone,
+            id: userid,
+            birthday: "",
+            date: "",
+            root: 1,
+            phone: params.phone,
+            address: "",
+            desc: "",
+            sex: 1,
+            job: "",
+            headphoto: ""
+          };
+          /*push数据*/
+          newuser.data.push(userDetail);
+          newuser.total = newuser.total +1;
+          let  str = JSON.stringify(newuser);
+
+          fs.writeFile('mockData/userpassword.json',str,function(err){
+            if (err) {
+              res.json({status: false, date: new Date()});
+              return;
+            } else {
+
+              fs.readFile('mockData/user.json', function (err, data) {
+
+                  if(err) {
+                    res.json({status: false, date: new Date()});
+                    return;
+                  }
+                  let newuserdesc = data.toString();
+                  newuserdesc = JSON.parse(newuserdesc);
+                  newuserdesc.data.push(userdesc);
+                  newuserdesc.total = newuserdesc.total +1;
+                  let  str1 = JSON.stringify(newuserdesc);
+
+                  fs.writeFile('mockData/user.json',str1,function(err){
+                    if (err) {
+                      res.json({status: false, date: new Date()});
+                      return;
+                    }
+                    res.json({status: true, date: new Date()});
+                  })
+
+                }
+              )
+
+
+            }
+
+
+          })
+        }
+
+
+      }
+
+
+
+    })
+  }
+});
 const server = app.listen(8000, 'localhost', () => {
-  //console.log(systemdatil);
-})
+
+});

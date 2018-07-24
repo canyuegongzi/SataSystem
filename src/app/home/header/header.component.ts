@@ -7,7 +7,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  private headohoto =  'https://img2.woyaogexing.com/2018/07/10/907e733831ad4d17!400x400_big.jpg';
+  public headohoto =  'http://oykcnjwn9.bkt.clouddn.com/907e733831ad4d17%21400x400_big.jpg';
   constructor() { }
 
   ngOnInit() {

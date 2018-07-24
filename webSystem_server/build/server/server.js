@@ -5,12 +5,15 @@ var fun = require("./mock");
 var bodyParser = require("body-parser");
 var mock_1 = require("./mock");
 var mockData = require("../model/localadmin");
+var register = require("./volidMessage");
 var app = express();
 var fs = require('fs');
 var request = require('request');
 var http = require('http');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+/*短信验证的号码*/
+var phoneCode;
 /*在线人数信息*/
 var linenumdatas = [
     {
@@ -656,12 +659,15 @@ app.post('/api/edituser', function (req, res) {
             userdetail = JSON.parse(userdetail);
             for (var i = 0; i < userdetail.data.length; i++) {
                 if (params.id == userdetail.data[i].id) {
-                    // console.log('id一样的');
-                    for (var key in params) {
-                        if (userdetail.data[i][key]) {
-                            userdetail.data[i][key] = params[key];
-                        }
-                    }
+                    //console.log('sssss');
+                    userdetail.data[i] = params;
+                    /*不知啥原因，通过遍历共同的对象的方式再次修改的方式行不通*/
+                    /*for(var key in params){
+                      // console.log(key)
+                      if(userdetail.data[i][key]){
+                        userdetail.data[i].key = params.key;
+                      }
+                    }*/
                 }
             }
             userdetail.total = userdetail.data.length;
@@ -757,6 +763,7 @@ app.post('/api/weather', function (req, res) {
         });
     }
 });
+/*处理快递的请求*/
 app.get('/api/express', function (req, res) {
     var expressname;
     var number = req.query.number;
@@ -798,6 +805,120 @@ app.get('/api/express', function (req, res) {
         }
     });
 });
+/*处理登录*/
+app.post('/api/login', function (req, res) {
+    var params = JSON.parse(JSON.stringify(req.body)).params;
+    console.log(params);
+    if (!params.protocol) {
+        res.json({ status: false, date: new Date() });
+    }
+    else {
+        fs.readFile('mockData/userpassword.json', function (err, data) {
+            if (err) {
+                res.json({ status: false, date: new Date() });
+            }
+            var user = data.toString();
+            user = JSON.parse(user);
+            var loginmes = (user.data).filter(function (e) {
+                return e.name == params.phone && e.password == params.password;
+            });
+            // console.log(loginmes[0].name);
+            console.log(loginmes);
+            if (loginmes == '') {
+                res.json({ status: false, date: new Date() });
+            }
+            else {
+                res.json({ status: true, date: new Date(), data: loginmes });
+            }
+        });
+    }
+});
+/*发送短信*/
+app.post('/api/regnumber', function (req, res) {
+    var params = JSON.parse(JSON.stringify(req.body)).params;
+    console.log(params);
+    phoneCode = register.makeCode();
+    register.sendMessage(params, phoneCode);
+});
+/*处理注册*/
+app.post('/api/register', function (req, res) {
+    var params = JSON.parse(JSON.stringify(req.body)).params;
+    console.log(params);
+    console.log(phoneCode);
+    if (phoneCode != params.message) {
+        res.json({ status: 'message', date: new Date() });
+        return;
+    }
+    else {
+        fs.readFile('mockData/userpassword.json', function (err, data) {
+            if (err) {
+                res.json({ status: false, date: new Date() });
+                return;
+            }
+            else {
+                var newuser = data.toString();
+                newuser = JSON.parse(newuser);
+                var userid = mockData.diffId();
+                var olduser = (newuser.data).filter(function (e) {
+                    return e.name == params.phone;
+                });
+                if (olduser != []) {
+                    res.json({ status: 'same', date: new Date() });
+                    return;
+                }
+                else {
+                    var userDetail = {
+                        name: params.phone,
+                        password: params.password,
+                        id: userid
+                    };
+                    var userdesc_1 = {
+                        name: params.phone,
+                        id: userid,
+                        birthday: "",
+                        date: "",
+                        root: 1,
+                        phone: params.phone,
+                        address: "",
+                        desc: "",
+                        sex: 1,
+                        job: "",
+                        headphoto: ""
+                    };
+                    /*push数据*/
+                    newuser.data.push(userDetail);
+                    newuser.total = newuser.total + 1;
+                    var str = JSON.stringify(newuser);
+                    fs.writeFile('mockData/userpassword.json', str, function (err) {
+                        if (err) {
+                            res.json({ status: false, date: new Date() });
+                            return;
+                        }
+                        else {
+                            fs.readFile('mockData/user.json', function (err, data) {
+                                if (err) {
+                                    res.json({ status: false, date: new Date() });
+                                    return;
+                                }
+                                var newuserdesc = data.toString();
+                                newuserdesc = JSON.parse(newuserdesc);
+                                newuserdesc.data.push(userdesc_1);
+                                newuserdesc.total = newuserdesc.total + 1;
+                                var str1 = JSON.stringify(newuserdesc);
+                                fs.writeFile('mockData/user.json', str1, function (err) {
+                                    if (err) {
+                                        res.json({ status: false, date: new Date() });
+                                        return;
+                                    }
+                                    res.json({ status: true, date: new Date() });
+                                });
+                            });
+                        }
+                    });
+                }
+            }
+        });
+    }
+});
 var server = app.listen(8000, 'localhost', function () {
-    //console.log(systemdatil);
 });

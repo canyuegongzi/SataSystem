@@ -6,12 +6,13 @@ import {SoundComponent} from '../../ai/sound/sound.component';
 import {PhotoComponent} from '../../ai/photo/photo.component';
 import {NoteComponent} from '../../note/note.component';
 import {SongComponent} from '../../song/song.component';
+import {LoginService} from '../../serve/login.service';
 
 export const ToolRoutes = [
   {
     path: 'tools',
     component: ToolsComponent,
-    /*canActivate: [LoginService],*/
+    canActivate: [LoginService],
     children: [
       {
         path: '',
@@ -34,6 +35,7 @@ export const ToolRoutes = [
   {
     path: 'ai',
     component: ToolsComponent,
+    canActivate: [LoginService],
     children: [
       {
         path: '',
@@ -52,6 +54,7 @@ export const ToolRoutes = [
   {
     path: 'note',
     component: ToolsComponent,
+    canActivate: [LoginService],
     children: [
       {
         path: '',
@@ -62,6 +65,7 @@ export const ToolRoutes = [
   {
     path: 'song',
     component: ToolsComponent,
+    canActivate: [LoginService],
     children: [
       {
         path: '',

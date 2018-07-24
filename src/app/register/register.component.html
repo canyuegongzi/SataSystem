@@ -3,6 +3,7 @@
     <div class="form-group form-write1 form-write" [class.has-error]="formModel.hasError('phone','phone')">
       <label for="phone">手机号</label>
       <input formControlName="phone" type="text" id="phone" placeholder="请输入手机号" class="form-control"/>
+      <span class="vaildata-login" (click)="sendMessage()">{{noticeessage}}</span>
       <span class="form-text" [class.hidden]="!formModel.hasError('phone','phone')">
       请输入合法的手机号
     </span>
@@ -16,7 +17,7 @@
     </div>
     <div class="form-group form-write">
       <label for="repass">验证码</label>
-      <input formControlName="repass" type="text" id="repass" placeholder="请输入验证码" class="form-control"/>
+      <input formControlName="message" type="text" id="repass" placeholder="请输入验证码" class="form-control"/>
       <!--<span class="form-text" [class.hidden]="!formModel.hasError('repass','repass')">
       验证码不正确
     </span>-->

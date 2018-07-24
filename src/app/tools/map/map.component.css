@@ -1,0 +1,11 @@
+.mapsearch {
+  padding-top: 2rem;
+}
+#submitMapSearch {
+  margin-left: 3rem;
+}
+.mapsearch .citymap-input {
+  width: 18rem;
+  float: left;
+  margin-left: 2rem;
+}

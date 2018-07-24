@@ -3,6 +3,8 @@ import {Router, CanActivate, Routes, ActivatedRouteSnapshot, RouterStateSnapshot
 import {Observable} from 'rxjs';
 import {Http} from '@angular/http';
 import {map} from 'rxjs/internal/operators';
+import {Login} from '../module/Adminuer';
+import Swal from 'sweetalert2';
 
 // noinspection JSAnnotator
 @Injectable({
@@ -19,66 +21,89 @@ export class LoginService implements CanActivate {
   constructor(private router: Router, private http: Http) {}
 
   canActivate() {
-    /*读取存储的用户的信息用作验证*/
-    const user = JSON.parse(localStorage.getItem('user'));
     /*判断当前的用户是否登录*/
-    if (user.user === this.username && user.pass === this.userpass && this.allowLogin === true) {
-      return true;
-    } else {
-      /*如果当前的用户没有登录则路由到登录的页面*/
-      // noinspection JSIgnoredPromiseFromCall
+    if (!JSON.parse(localStorage.getItem('user'))) {
+      Swal('你还没有登录，请登录');
       this.router.navigate(['']);
       return false;
+    } else {
+      /*读取存储的用户的信息用作验证*/
+      const user = JSON.parse(localStorage.getItem('user')).name;
+      const id = JSON.parse(localStorage.getItem('user')).id;
+      if (user && id) {
+        // console.log(user);
+        return true;
+      } else {
+        Swal('发生未错误');
+        this.router.navigate(['/']);
+        return false;
+      }
     }
   }
-  doLogin(pargrams: any) {
+
+
+  doLogin(pargrams: Login): Observable<any> {
     // this.http.get('', {params: {user: pargrams.phone, pas: pargrams.password}});
     /*判断当前的登录是否是合法的*/
-    if (pargrams.phone === '18660683370' && pargrams.password === '123456' && pargrams.protocol === true) {
+    if (!pargrams) {
+      return;
+    }
+   return this.http.post('api/login', {params: pargrams}).pipe(
+     map(res => res.json())
+   );
+   /* if (pargrams.phone === '18660683370' && pargrams.password === '123456' && pargrams.protocol === true) {
       this.username = pargrams.phone;
       this.userpass = pargrams.password;
       this.user = {user: pargrams.phone, pass: pargrams.password};
       this.allowLogin = true;
-      /*如果登录是合法的，路由到具体的页面*/
-      this.router.navigate(['data']/*, { queryParams: { name: 1 }} */);
-      /*将当前的登录信息存储*/
+      /!*如果登录是合法的，路由到具体的页面*!/
+      this.router.navigate(['data']/!*, { queryParams: { name: 1 }} *!/);
+      /!*将当前的登录信息存储*!/
       localStorage.setItem('user', JSON.stringify(this.user));
       console.log('登录成功！');
     } else {
-      /*否则路由到登录页面再次登录*/
+      /!*否则路由到登录页面再次登录*!/
       // noinspection JSIgnoredPromiseFromCall
-      this.router.navigate(['/']/*, { queryParams: { name: 1 }} */);
+      this.router.navigate(['/']/!*, { queryParams: { name: 1 }} *!/);
       console.log('登录失败！');
       this.allowLogin = false;
-    }
+    }*/
     /*返回是否允许登录的布尔值*/
-    return this.allowLogin;
+   /* return this.allowLogin;*/
   }
-  outlogin(pargrams: any) {
-  }
-  register(pargrams: any) {
-    const mas = pargrams.repass;
-    this.regNumber(mas)
-      .subscribe(
-        res => {
-          setTimeout( success => {
-            console.log('注册成功!');
-            // noinspection JSIgnoredPromiseFromCall
-            this.router.navigateByUrl('');
-          }, 5000);
-      },
-        error => {
-          console.log('注册失败！');
+
+  outlogin() {
+    const user = JSON.parse(localStorage.getItem('user')).name;
+    const id = JSON.parse(localStorage.getItem('user')).id;
+    if (!user && !id) {
+      console.log('你还没登录');
+    } else {
+      Swal({title: '确定退出登录?', showCancelButton: true}).then((value => {
+        console.log(value);
+        if (value.value === true) {
+          localStorage.removeItem('user');
+          this.router.navigate(['/']);
         }
-    );
+      }));
+
+
+    }
+  }
+  /*注册服务*/
+  register(pargrams: any): Observable<any> {
+    const mas = pargrams.repass;
+   return this.http.post('api/register', {params: pargrams}).pipe(
+     map(res => res.json())
+   );
   }
   /*验证短信码*/
   regNumber(pargrams: any): Observable<any> {
-    return this.http.get('./res.json', { params: {par: pargrams} }).pipe(
-      map(res => {
-        res.json();
-      })
-    );
-
+    console.log(pargrams);
+    if (pargrams) {
+      return this.http.post('api/regnumber', { params: pargrams }).pipe(
+        map(res => res.json()
+        )
+      );
+    }
   }
 }

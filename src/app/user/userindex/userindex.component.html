@@ -1,5 +1,5 @@
 <ng-container>
-  <p class="admin-header">添加员工</p>
+  <p class="admin-header">登录用户</p>
   <hr/>
   <div class="header-head container">
     <div class="row">
@@ -59,11 +59,11 @@
       <div class="col-md-3">我的消息</div>
       <div class="col-md-5"><a routerLink="/user/info" [queryParams]="{id: currentUser?.id, name: currentUser?.name }">点击查看</a></div>
     </div>
-    <div class="row">
+    <div class="row buttons">
       <div class="col-md-4"><a routerLink="/user/edit" [queryParams]="{id: currentUser?.id, name: currentUser?.name }"><button type="button" class="btn btn-primary" (click)="editUserMessage()">修改信息</button></a>
 
       </div>
-      <div class="col-md-4"><button type="button" class="btn btn-danger">退出登录</button></div>
+      <div class="col-md-4"><button type="button" class="btn btn-danger" (click)="outLogin()">退出登录</button></div>
       <div class="col-md-4"><a routerLink="/user/repass"  [queryParams]="{id: currentUser?.id, name: currentUser?.name }"><button type="button" class="btn btn-danger">修改密码</button></a></div>
     </div>
   </div>

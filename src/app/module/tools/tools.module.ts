@@ -28,7 +28,7 @@ import { BaiduMapModule } from 'angular2-baidu-map';
     RouterModule.forChild(<any>ToolRoutes),
     /*第三方的包*/
     ElModule.forRoot(),
-    BaiduMapModule.forRoot({ ak: '1Wuoc7aFMTlXuXcuVejnhGWMASkKvMb5' }),
+    BaiduMapModule.forRoot({ ak: 'm7Q5C64s8uKmUgnCw3THgmUKcOcepQQn' }),
     BrowserAnimationsModule,
     /*数据可视化库*/
     NgxEchartsModule,

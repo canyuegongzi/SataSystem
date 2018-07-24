@@ -4,6 +4,7 @@ import {UserService} from '../../serve/user.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Http} from '@angular/http';
 import Swal from 'sweetalert2';
+import {LoginService} from '../../serve/login.service';
 @Component({
   selector: 'app-repass',
   templateUrl: './repass.component.html',
@@ -24,7 +25,8 @@ export class RepassComponent implements OnInit {
   private par: any;
   constructor(private user: UserService, private http: Http,
               private routeInfo: ActivatedRoute,
-              private router: Router, private fb: FormBuilder) {
+              private router: Router, private fb: FormBuilder,
+              private login: LoginService) {
     this.formModel = this.fb.group({
       'oldpass': this.oldpass,
       'newpass': this.newpass,
@@ -59,6 +61,7 @@ export class RepassComponent implements OnInit {
                 break;
               case true:
                 Swal('修改成功', '请重新登录', 'success').then(value => {
+                  localStorage.removeItem('user');
                   this.router.navigate(['/']);
                 });
                 break;

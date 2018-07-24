@@ -1,0 +1,15 @@
+.vaildata-login{
+  position: absolute;
+  width: 5.5rem;
+  height: 2.4rem;
+  background-color: #cdcdcd;
+  right: 1rem;
+  display: block;
+  top: 32px;
+  line-height: 2.4rem;
+  color: #ffff;
+  cursor: pointer;
+}
+.form-write {
+  position: relative;
+}

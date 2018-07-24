@@ -1,3 +1,5 @@
+import {LoginService} from './serve/login.service';
+
 export const appRoutes = [
   {
     path: '',
@@ -10,12 +12,12 @@ export const appRoutes = [
   },
   {
     path: 'home',
-    loadChildren: './module/home/home.module#HomeModule'
+    loadChildren: './module/home/home.module#HomeModule',
+    canActivate: [LoginService],
   },
   {
     path: 'tools',
-    loadChildren: './module/tools/tools.module#ToolsModule'
+    loadChildren: './module/tools/tools.module#ToolsModule',
+    canActivate: [LoginService],
   }
 ];
-
-// export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes);

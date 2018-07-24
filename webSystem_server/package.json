@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@alicloud/sms-sdk": "^1.1.2",
     "express": "^4.16.3",
     "mockjs": "^1.0.1-beta3",
     "moment": "^2.22.2",

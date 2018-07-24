@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {concat} from 'rxjs';
 import {LoginService} from '../serve/login.service';
-
+import {Router} from '@angular/router';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -11,7 +12,7 @@ import {LoginService} from '../serve/login.service';
 export class LoginComponent implements OnInit {
   formModel: FormGroup;
   loginParams: string[];
-  constructor(private loginService: LoginService) {
+  constructor(private loginService: LoginService, private router: Router) {
     const fb = new FormBuilder();
     this.formModel = fb.group({
       phone: ['', this.phoneValidator],
@@ -24,7 +25,7 @@ export class LoginComponent implements OnInit {
     if (!phone) {
       return null;
     }
-    if (phone.length >= 11) {
+    if (phone.length >= 3) {
       return null;
     } else {
       return {phone : true};
@@ -47,9 +48,25 @@ export class LoginComponent implements OnInit {
   }
   submit() {
     if (this.formModel.value) {
+      console.log(this.formModel.value);
       this.loginParams = this.formModel.value;
     }
-    this.loginService.doLogin(this.loginParams);
+    this.loginService.doLogin(this.formModel.value).subscribe({
+      next: (res) => {
+        // console.log(res.data[0].name);
+        if (res.status) {
+          this.router.navigate(['data']);
+          /*/!*将当前的登录信息存储*!/*/
+          const user = JSON.stringify(res.data[0]);
+          localStorage.setItem('user', user );
+          console.log('登录成功！');
+          // console.log(localStorage.getItem(res.data[0].name));
+        } else {
+          Swal('你还未登录，请先注册');
+          this.router.navigate(['register']);
+        }
+      }
+    });
   }
   ngOnInit() {
   }

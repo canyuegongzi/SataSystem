@@ -29,20 +29,13 @@ import {ToolsModule} from './module/tools/tools.module';
 import { SlidetoolsComponent } from './tools/slidetools/slidetools.component';
 import { TlTableComponent } from './data/tl-table/tl-table.component';
 import { ShowlistComponent } from './admin/showlist/showlist.component';
-import { UsermessageComponent } from './user/usermessage/usermessage.component';
-import { WeatherComponent } from './tools/weather/weather.component';
-import { MapComponent } from './tools/map/map.component';
-import { ExpressComponent } from './tools/express/express.component';
-import { SoundComponent } from './ai/sound/sound.component';
-import { PhotoComponent } from './ai/photo/photo.component';
-import { NoteComponent } from './note/note.component';
-import { SongComponent } from './song/song.component';
+
 import { AibarComponent } from './home/sitebar/aibar/aibar.component';
 import { AmapComponent } from './tools/map/amap/amap.component';
-import {BaiduMapModule} from 'angular2-baidu-map';
-import {AbmModule} from 'angular-baidu-maps';
 
-
+import { BaiduMapModule } from 'angular2-baidu-map';
+import { SongBaseComponent } from './song/song-base/song-base.component';
+import {LoginService} from './serve/login.service';
 
 
 @NgModule({
@@ -68,6 +61,7 @@ import {AbmModule} from 'angular-baidu-maps';
     ToolsComponent,
     AibarComponent,
     AmapComponent,
+    SongBaseComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,11 +75,7 @@ import {AbmModule} from 'angular-baidu-maps';
     /*第三方的包*/
     ElModule.forRoot(),
     BrowserAnimationsModule,
-    /*AbmModule.forRoot({
-      apiKey: '1Wuoc7aFMTlXuXcuVejnhGWMASkKvMb5' // app key为必选项
-    }),*/
-    BaiduMapModule.forRoot({ ak: '1Wuoc7aFMTlXuXcuVejnhGWMASkKvMb5' }),
-    // AbmModule,
+    BaiduMapModule.forRoot({ ak: 'm7Q5C64s8uKmUgnCw3THgmUKcOcepQQn' }),
     /*数据可视化库*/
     NgxEchartsModule,
     /*自己的模块*/
@@ -94,7 +84,7 @@ import {AbmModule} from 'angular-baidu-maps';
     ToolsModule,
     RouterModule.forRoot(<Routes>appRoutes),
   ],
-  providers: [],
+  providers: [LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
