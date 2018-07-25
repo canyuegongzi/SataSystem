@@ -57,7 +57,10 @@ export class LoginComponent implements OnInit {
         if (res.status) {
           this.router.navigate(['data']);
           /*/!*将当前的登录信息存储*!/*/
+          res.data[0].ip = res.ip;
           const user = JSON.stringify(res.data[0]);
+          // const ip  = JSON.stringify(res.ip);
+          console.log(user);
           localStorage.setItem('user', user );
           console.log('登录成功！');
           // console.log(localStorage.getItem(res.data[0].name));

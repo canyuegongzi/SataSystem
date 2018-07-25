@@ -16,10 +16,12 @@
   </div>
  <div el-col span="3">
    <div class="loginuser"><img [src]="headohoto" alt=""/></div>
-   <span class="loginname"><a routerLink="/user" [queryParams]="{id: 1, name: 'admin' }" style="color:#ffffff">admin</a></span>
+   <span class="loginname" (mouseover)="this.cure = ! this.cure"><a routerLink="/user" [queryParams]="{id: 1, name: 'admin' }" style="color:#ffffff">系统管理员</a></span>
    <div id="message">
-     <a href="" style="color:#ffffff;display: block"><i class="fa fa-envelope-o user-message" aria-hidden="true"></i></a>
+     <a routerLink="/user/info" style="color:#ffffff;display: block"><i class="fa fa-envelope-o user-message" aria-hidden="true"></i></a>
      <i class="message-number">1</i>
    </div>
+   <div class="message-slide-clue" [class.show-slide-message] = "cure"><span><a routerLink="/user/info">系统通知</a></span><span><a routerLink="/setting">系统设置</a></span><span  (click)="outLogin()">退出登录</span></div>
  </div>
 </div>
+

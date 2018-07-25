@@ -35,7 +35,7 @@
 .loginname {
   border-radius: 50%;
   display: block;
-  margin-left: -.5rem;
+  margin-left: -1rem;
   margin-top: 2rem;
 }
 .admin {
@@ -51,7 +51,7 @@
   font-size: 2rem;
   position: absolute;
   top: -1.5rem;
-  right: 5rem;
+  right: 4rem;
 }
 #message{
   position: relative;
@@ -63,10 +63,35 @@
   color: red;
   position: absolute;
   top: -1.9rem;
-  right: 4.2rem;
+  right: 3.5rem;
   display: block;
   background-color: #ffffff;
   font-size: .8rem;
   line-height: 1rem;
   text-align: center;
+}
+.message-slide-clue {
+  width: 7.5rem;
+  height: 9rem;
+  position: absolute;
+  z-index: 50;
+  margin-left: -1.4rem;
+  top: 3.9rem;
+  background: rgba(0,0,0,.5);
+}
+.show-slide-message {
+  display: none;
+}
+.message-slide-clue >span a , .message-slide-clue >span{
+  display: block;
+  line-height: 3rem;
+  text-align:  center;
+  color: #FFFFFF;
+  font-size: 1rem;
+  font-weight: 400;
+  text-decoration: none;
+  cursor: pointer;
+}
+.loginname >a {
+  text-decoration:  none;
 }

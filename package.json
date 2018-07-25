@@ -23,7 +23,7 @@
     "@angular/router": "^6.0.3",
     "@types/bootstrap": "^4.1.2",
     "@types/jquery": "^3.3.4",
-    "angular-baidu-maps": "^2.0.1",
+    "angular-calendar": "^0.25.2",
     "angular-ui-tree": "^2.22.6",
     "angular2-baidu-map": "^4.3.2",
     "bootstrap": "^4.1.1",
@@ -35,7 +35,6 @@
     "ngx-echarts": "^3.1.0",
     "popper.js": "^1.14.3",
     "rxjs": "^6.0.0",
-    "sweetalert": "^2.1.0",
     "sweetalert2": "^7.25.6",
     "zone.js": "^0.8.26"
   },

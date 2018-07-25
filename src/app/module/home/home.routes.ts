@@ -148,6 +148,10 @@ export const HomeRoutes = [
       {
         path: '',
         component: SettingComponent
+      },
+      {
+        path: 'setting',
+        component: SettingComponent
       }
     ]
   }

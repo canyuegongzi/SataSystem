@@ -1,3 +1,23 @@
-<p>
-  usermessage works!
-</p>
+<ng-container>
+
+  <p class="admin-header">操作日志</p>
+  <hr/>
+  <div [el-class] = "'loginlog'" *ngIf="log">
+
+    <el-table [model]="log" [stripe]="true" center="all">
+      <el-table-column model-key="ip" label="IP" width="200">
+      </el-table-column>
+      <el-table-column model-key="date" label="时间" width="200">
+      </el-table-column>
+      <el-table-column model-key="desc" label="操作" width="200">
+      </el-table-column>
+    </el-table>
+    <el-pagination *ngIf="log" [total]="log.length"
+                   [layout]="['prev', 'pager', 'next', 'total']"
+                   [el-class]="'admin-pagination'"
+                   (modelChange)="pagination($event)"
+    >
+    </el-pagination>
+  </div>
+
+</ng-container>

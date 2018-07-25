@@ -1,11 +1,7 @@
 import {Component, Input, OnInit, Output} from '@angular/core';
 import {GetdataService} from '../../serve/getdata.service';
-import {from} from 'rxjs';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {LoginService} from '../../serve/login.service';
 import {ElMessageService} from 'element-angular/release/message/message.service';
-import swal from 'sweetalert';
-declare var SweetAlert: any;
 @Component({
   selector: 'app-assaydata',
   templateUrl: './assaydata.component.html',

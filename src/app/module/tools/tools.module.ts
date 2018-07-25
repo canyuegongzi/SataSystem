@@ -16,6 +16,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ElModule} from 'element-angular';
 import {NgxEchartsModule} from 'ngx-echarts';
 import { BaiduMapModule } from 'angular2-baidu-map';
+import {CalendarModule} from 'angular-calendar';
 @NgModule({
   imports: [
     BrowserModule,
@@ -30,6 +31,7 @@ import { BaiduMapModule } from 'angular2-baidu-map';
     ElModule.forRoot(),
     BaiduMapModule.forRoot({ ak: 'm7Q5C64s8uKmUgnCw3THgmUKcOcepQQn' }),
     BrowserAnimationsModule,
+    CalendarModule.forRoot(),
     /*数据可视化库*/
     NgxEchartsModule,
   ],

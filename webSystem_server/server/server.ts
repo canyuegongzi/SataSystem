@@ -6,7 +6,8 @@ import * as mockData from '../model/localadmin';
 import {SearchCity} from '../model/searchCity';
 import * as moment from "moment";
 import _quarter = moment.unitOfTime._quarter;
-import * as register from './volidMessage'
+import * as register from './volidMessage';
+import * as location from './locationip';
 const app = express();
 const fs = require('fs');
 const request = require('request');
@@ -817,6 +818,7 @@ app.get('/api/express',(req,res) => {
 /*处理登录*/
 app.post('/api/login', (req,res) =>{
   const params = JSON.parse(JSON.stringify(req.body)).params;
+  const ip = location.getClientIp(req);
   console.log(params);
   if (!params.protocol) {
     res.json({status: false, date: new Date()});
@@ -835,9 +837,36 @@ app.post('/api/login', (req,res) =>{
       if (loginmes == '') {
         res.json({status: false, date: new Date()});
       } else {
-        res.json({status: true, date: new Date(), data: loginmes});
-      }
 
+        fs.readFile('mockData/loginlog.json', function (err, data) {
+
+          if(err) {
+            res.json({status: false, date: new Date()});
+            return;
+          } else {
+            let loginlog = data.toString();
+            loginlog = JSON.parse(loginlog);
+
+            let loginuser = (loginlog.data).filter(function (e) {
+              return e.name == params.phone;
+            })
+            /*dui日志操作*/
+
+            loginuser[0].log.push({ip: ip, desc: "登陆成功", date: new Date() })
+            loginuser[0].total = loginuser[0].total + 1;
+            // loginlog.total = loginlog.total+1;
+            let str3 = JSON.stringify(loginlog);
+            fs.writeFile('mockData/loginlog.json',str3,function(err){
+              if (err) {
+                res.json({status: false, date: new Date()});
+                return;
+              }else {
+                res.json({status: true, date: new Date(), data: loginmes, ip: ip});
+              }
+            })
+          }
+        })
+      }
     })
   }
 })
@@ -851,8 +880,8 @@ app.post('/api/regnumber', (req, res) => {
 /*处理注册*/
 app.post('/api/register', (req, res) =>{
   const params = JSON.parse(JSON.stringify(req.body)).params;
-  console.log(params);
-  console.log(phoneCode);
+  //console.log(params);
+  //console.log(phoneCode);
 
   if (phoneCode != params.message) {
     res.json({status: 'message', date: new Date()});
@@ -941,6 +970,28 @@ app.post('/api/register', (req, res) =>{
     })
   }
 });
-const server = app.listen(8000, 'localhost', () => {
+/*获取操作日志的处理*/
+app.get('/api/loginlog', (req, res) => {
+  /*前台传参格式写成了数组*/
+  const  id = req.query[0];
+  const  name = req.query[1];
+  const page = req.query[2];
+  fs.readFile('mockData/loginlog.json', function (err, data) {
+    if (err) {
+      res.json({status: false, date: new Date()});
+    }
+      let log = data.toString();
+      log = JSON.parse(log);
+    let userlog = (log.data).filter(function (e) {
+      return e.name == name;
+    })
+   //console.log(userlog[0].log)
+    let loginlogone = userlog[0].log.slice(10 * ((page) - 1), (((page) - 1) + 1) * 10);
+    //console.log(loginlogone);
+    res.json(loginlogone);
+  })
 
+  }
+)
+const server = app.listen(8000, 'localhost', () => {
 });

@@ -36,6 +36,7 @@ import { AmapComponent } from './tools/map/amap/amap.component';
 import { BaiduMapModule } from 'angular2-baidu-map';
 import { SongBaseComponent } from './song/song-base/song-base.component';
 import {LoginService} from './serve/login.service';
+import {CalendarModule} from 'angular-calendar';
 
 
 @NgModule({
@@ -76,6 +77,7 @@ import {LoginService} from './serve/login.service';
     ElModule.forRoot(),
     BrowserAnimationsModule,
     BaiduMapModule.forRoot({ ak: 'm7Q5C64s8uKmUgnCw3THgmUKcOcepQQn' }),
+    CalendarModule.forRoot(),
     /*数据可视化库*/
     NgxEchartsModule,
     /*自己的模块*/

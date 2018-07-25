@@ -106,4 +106,10 @@ export class LoginService implements CanActivate {
       );
     }
   }
+  /*获取当前的登陆的操作的日志*/
+  public getLoginLog(id: any, name: any, page: any): Observable<any> {
+   return this.http.get('api/loginlog', {params: [id, name, page]}).pipe(
+      map(res => res.json())
+    );
+  }
 }

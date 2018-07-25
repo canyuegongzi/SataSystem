@@ -10,14 +10,19 @@
     </div>
   </form>
   <div style="height:500px;width:100%;">
-    <baidu-map [options]="opts">
+    <!--百度地图的接入方式-->
+    <!--<baidu-map [options]="opts">
       <marker *ngFor="let marker of markers" [point]="marker.point" [options]="marker.options"></marker>
       <control type="navigation" [options]="controlOpts" (loaded)="controlLoaded($event)"></control>
       <control type="overviewmap" [options]="overviewmapOpts"></control>
       <control type="scale" [options]="scaleOpts"></control>
       <control type="maptype" [options]="mapTypeOpts"></control>
       <control type="geolocation" [options]="geolocationOpts" (loaded)="locationMap($event)"></control>
-    </baidu-map>
+    </baidu-map>-->
+    <!--高德地图的接入方式-->
+
+    <div id="container" tabindex="0" style="height: 100%; height: 100%"></div>
+
   </div>
 </ng-container>
 
