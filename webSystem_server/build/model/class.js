@@ -53,3 +53,13 @@ var DetailAdmin = /** @class */ (function () {
     return DetailAdmin;
 }());
 exports.DetailAdmin = DetailAdmin;
+var Log = /** @class */ (function () {
+    function Log(name, date, log, total) {
+        this.name = name;
+        this.date = date;
+        this.log = log;
+        this.total = total;
+    }
+    return Log;
+}());
+exports.Log = Log;

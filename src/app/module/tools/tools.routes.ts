@@ -7,6 +7,8 @@ import {PhotoComponent} from '../../ai/photo/photo.component';
 import {NoteComponent} from '../../note/note.component';
 import {SongComponent} from '../../song/song.component';
 import {LoginService} from '../../serve/login.service';
+import {EditComponent} from '../../admin/edit/edit.component';
+import {WordEditComponent} from '../../word-edit/word-edit.component';
 
 export const ToolRoutes = [
   {
@@ -70,6 +72,16 @@ export const ToolRoutes = [
       {
         path: '',
         component: SongComponent
+      }
+    ]
+  },
+  {
+    path: 'edit',
+    component: ToolsComponent,
+    children: [
+      {
+        path: '',
+        component: WordEditComponent
       }
     ]
   }

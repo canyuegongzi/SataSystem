@@ -7,6 +7,7 @@ import {SearchCity} from '../model/searchCity';
 import * as moment from "moment";
 import _quarter = moment.unitOfTime._quarter;
 import * as register from './volidMessage';
+/*主要用于日志系统*/
 import * as location from './locationip';
 const app = express();
 const fs = require('fs');
@@ -683,7 +684,45 @@ app.post('/api/edituser', (req,res) => {
           res.json({status: false, date: new Date()});
           console.error(err);
           } else {
-          res.json({status: true, date: new Date()})
+
+
+
+          fs.writeFile('mockData/userpassword.json', str,function(err){
+            if(err){
+              res.send({status: false, date: new Date()});
+              console.error(err);
+            } else {
+              fs.readFile('mockData/loginlog.json', function (err, data) {
+
+                if(err) {
+                  res.json({status: false, date: new Date()});
+                  return;
+                } else {
+                  let editdetaillog = data.toString();
+                  editdetaillog = JSON.parse(editdetaillog);
+
+                  let edituser = (editdetaillog.data).filter(function (e) {
+                    return e.name == params.name;
+                  })
+                  /*dui日志操作*/
+
+                  edituser[0].log.push({ip: location.getClientIp(req), desc: "管理员信息密码成功", date: new Date() })
+                  edituser[0].total = edituser[0].total + 1;
+                  // loginlog.total = loginlog.total+1;
+                  let str4 = JSON.stringify(editdetaillog);
+                  fs.writeFile('mockData/loginlog.json',str4,function(err){
+                    if (err) {
+                      res.json({status: false, date: new Date()});
+                      return;
+                    }else {
+                      res.send({status: true, date: new Date()})
+                    }
+                  })
+                }
+              })
+              // res.send({status: true, date: new Date()})
+            }
+          });
         }
       });
     }
@@ -721,7 +760,35 @@ app.post('/api/editpass', (req, res) =>{
           res.send({status: false, date: new Date()});
           console.error(err);
         } else {
-          res.send({status: true, date: new Date()})
+          fs.readFile('mockData/loginlog.json', function (err, data) {
+
+            if(err) {
+              res.json({status: false, date: new Date()});
+              return;
+            } else {
+              let editpasslog = data.toString();
+              editpasslog = JSON.parse(editpasslog);
+
+              let edituser = (editpasslog.data).filter(function (e) {
+                return e.name == params.name;
+              })
+              /*dui日志操作*/
+
+              edituser[0].log.push({ip: location.getClientIp(req), desc: "修改密码成功", date: new Date() })
+              edituser[0].total = edituser[0].total + 1;
+              // loginlog.total = loginlog.total+1;
+              let str4 = JSON.stringify(editpasslog);
+              fs.writeFile('mockData/loginlog.json',str4,function(err){
+                if (err) {
+                  res.json({status: false, date: new Date()});
+                  return;
+                }else {
+                  res.send({status: true, date: new Date()})
+                }
+              })
+            }
+          })
+          // res.send({status: true, date: new Date()})
         }
       });
 
@@ -899,7 +966,7 @@ app.post('/api/register', (req, res) =>{
         let olduser = (newuser.data).filter(function (e) {
           return e.name == params.phone;
         });
-        if (olduser != []) {
+        if (olduser == true) {
           res.json({status: 'same', date: new Date()})
           return;
         } else {
@@ -949,7 +1016,32 @@ app.post('/api/register', (req, res) =>{
                       res.json({status: false, date: new Date()});
                       return;
                     }
-                    res.json({status: true, date: new Date()});
+
+                    fs.readFile('mockData/loginlog.json', function (err, data) {
+
+                      if(err) {
+                        res.json({status: false, date: new Date()});
+                        return;
+                      } else {
+                        let newuserlog = data.toString();
+                        newuserlog = JSON.parse(newuserlog);
+                        newuserlog.data.push(location.setLog(params.phone, location.getClientIp(req)));
+                        newuserlog.total = newuserlog.total +1;
+                        let  strlog = JSON.stringify(newuserlog);
+                        /*dui日志操作*/
+                        fs.writeFile('mockData/loginlog.json',strlog,function(err){
+                          if (err) {
+                            res.json({status: false, date: new Date()});
+                            return;
+                          }else {
+                            res.json({status: true, date: new Date()});
+                          }
+                        })
+                      }
+                    })
+
+
+
                   })
 
                 }

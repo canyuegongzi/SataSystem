@@ -37,6 +37,8 @@ import { BaiduMapModule } from 'angular2-baidu-map';
 import { SongBaseComponent } from './song/song-base/song-base.component';
 import {LoginService} from './serve/login.service';
 import {CalendarModule} from 'angular-calendar';
+import {CKEditorModule} from 'ng2-ckeditor';
+import { WordEditComponent } from './word-edit/word-edit.component';
 
 
 @NgModule({
@@ -78,6 +80,7 @@ import {CalendarModule} from 'angular-calendar';
     BrowserAnimationsModule,
     BaiduMapModule.forRoot({ ak: 'm7Q5C64s8uKmUgnCw3THgmUKcOcepQQn' }),
     CalendarModule.forRoot(),
+    CKEditorModule,
     /*数据可视化库*/
     NgxEchartsModule,
     /*自己的模块*/

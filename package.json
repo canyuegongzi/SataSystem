@@ -21,6 +21,7 @@
     "@angular/platform-browser": "^6.0.3",
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
+    "@ckeditor/ckeditor5-build-decoupled-document": "^11.0.1",
     "@types/bootstrap": "^4.1.2",
     "@types/jquery": "^3.3.4",
     "angular-calendar": "^0.25.2",

@@ -17,6 +17,8 @@ import {ElModule} from 'element-angular';
 import {NgxEchartsModule} from 'ngx-echarts';
 import { BaiduMapModule } from 'angular2-baidu-map';
 import {CalendarModule} from 'angular-calendar';
+import {WordEditComponent} from '../../word-edit/word-edit.component';
+import {CKEditorModule} from 'ng2-ckeditor';
 @NgModule({
   imports: [
     BrowserModule,
@@ -32,6 +34,7 @@ import {CalendarModule} from 'angular-calendar';
     BaiduMapModule.forRoot({ ak: 'm7Q5C64s8uKmUgnCw3THgmUKcOcepQQn' }),
     BrowserAnimationsModule,
     CalendarModule.forRoot(),
+    CKEditorModule,
     /*数据可视化库*/
     NgxEchartsModule,
   ],
@@ -43,6 +46,7 @@ import {CalendarModule} from 'angular-calendar';
     PhotoComponent,
     NoteComponent,
     SongComponent,
+    WordEditComponent,
   ],
   providers: [],
   schemas: [

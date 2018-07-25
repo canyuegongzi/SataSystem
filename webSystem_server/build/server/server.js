@@ -6,6 +6,7 @@ var bodyParser = require("body-parser");
 var mock_1 = require("./mock");
 var mockData = require("../model/localadmin");
 var register = require("./volidMessage");
+/*主要用于日志系统*/
 var location = require("./locationip");
 var app = express();
 var fs = require('fs');
@@ -680,7 +681,42 @@ app.post('/api/edituser', function (req, res) {
                     console.error(err);
                 }
                 else {
-                    res.json({ status: true, date: new Date() });
+                    fs.writeFile('mockData/userpassword.json', str, function (err) {
+                        if (err) {
+                            res.send({ status: false, date: new Date() });
+                            console.error(err);
+                        }
+                        else {
+                            fs.readFile('mockData/loginlog.json', function (err, data) {
+                                if (err) {
+                                    res.json({ status: false, date: new Date() });
+                                    return;
+                                }
+                                else {
+                                    var editdetaillog = data.toString();
+                                    editdetaillog = JSON.parse(editdetaillog);
+                                    var edituser = (editdetaillog.data).filter(function (e) {
+                                        return e.name == params.name;
+                                    });
+                                    /*dui日志操作*/
+                                    edituser[0].log.push({ ip: location.getClientIp(req), desc: "管理员信息密码成功", date: new Date() });
+                                    edituser[0].total = edituser[0].total + 1;
+                                    // loginlog.total = loginlog.total+1;
+                                    var str4 = JSON.stringify(editdetaillog);
+                                    fs.writeFile('mockData/loginlog.json', str4, function (err) {
+                                        if (err) {
+                                            res.json({ status: false, date: new Date() });
+                                            return;
+                                        }
+                                        else {
+                                            res.send({ status: true, date: new Date() });
+                                        }
+                                    });
+                                }
+                            });
+                            // res.send({status: true, date: new Date()})
+                        }
+                    });
                 }
             });
         }
@@ -720,7 +756,34 @@ app.post('/api/editpass', function (req, res) {
                         console.error(err);
                     }
                     else {
-                        res.send({ status: true, date: new Date() });
+                        fs.readFile('mockData/loginlog.json', function (err, data) {
+                            if (err) {
+                                res.json({ status: false, date: new Date() });
+                                return;
+                            }
+                            else {
+                                var editpasslog = data.toString();
+                                editpasslog = JSON.parse(editpasslog);
+                                var edituser = (editpasslog.data).filter(function (e) {
+                                    return e.name == params.name;
+                                });
+                                /*dui日志操作*/
+                                edituser[0].log.push({ ip: location.getClientIp(req), desc: "修改密码成功", date: new Date() });
+                                edituser[0].total = edituser[0].total + 1;
+                                // loginlog.total = loginlog.total+1;
+                                var str4 = JSON.stringify(editpasslog);
+                                fs.writeFile('mockData/loginlog.json', str4, function (err) {
+                                    if (err) {
+                                        res.json({ status: false, date: new Date() });
+                                        return;
+                                    }
+                                    else {
+                                        res.send({ status: true, date: new Date() });
+                                    }
+                                });
+                            }
+                        });
+                        // res.send({status: true, date: new Date()})
                     }
                 });
             }
@@ -890,7 +953,7 @@ app.post('/api/register', function (req, res) {
                 var olduser = (newuser.data).filter(function (e) {
                     return e.name == params.phone;
                 });
-                if (olduser != []) {
+                if (olduser == true) {
                     res.json({ status: 'same', date: new Date() });
                     return;
                 }
@@ -938,7 +1001,29 @@ app.post('/api/register', function (req, res) {
                                         res.json({ status: false, date: new Date() });
                                         return;
                                     }
-                                    res.json({ status: true, date: new Date() });
+                                    fs.readFile('mockData/loginlog.json', function (err, data) {
+                                        if (err) {
+                                            res.json({ status: false, date: new Date() });
+                                            return;
+                                        }
+                                        else {
+                                            var newuserlog = data.toString();
+                                            newuserlog = JSON.parse(newuserlog);
+                                            newuserlog.data.push(location.setLog(params.phone, location.getClientIp(req)));
+                                            newuserlog.total = newuserlog.total + 1;
+                                            var strlog = JSON.stringify(newuserlog);
+                                            /*dui日志操作*/
+                                            fs.writeFile('mockData/loginlog.json', strlog, function (err) {
+                                                if (err) {
+                                                    res.json({ status: false, date: new Date() });
+                                                    return;
+                                                }
+                                                else {
+                                                    res.json({ status: true, date: new Date() });
+                                                }
+                                            });
+                                        }
+                                    });
                                 });
                             });
                         }

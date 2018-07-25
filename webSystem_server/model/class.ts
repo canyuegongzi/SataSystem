@@ -79,3 +79,18 @@ export class DetailAdmin {
   ) {
   }
 }
+export interface DeatilLog {
+  ip: string;
+  desc: string;
+  date: any;
+}
+export class Log{
+  constructor(
+    public name: string,
+    public date: any,
+    public log: Array<DeatilLog>,
+    public total: number
+  ) {
+
+  }
+}
