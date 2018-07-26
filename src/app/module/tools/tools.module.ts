@@ -18,7 +18,7 @@ import {NgxEchartsModule} from 'ngx-echarts';
 import { BaiduMapModule } from 'angular2-baidu-map';
 import {CalendarModule} from 'angular-calendar';
 import {WordEditComponent} from '../../word-edit/word-edit.component';
-import {CKEditorModule} from 'ng2-ckeditor';
+import {EditorModule} from '@tinymce/tinymce-angular';
 @NgModule({
   imports: [
     BrowserModule,
@@ -34,7 +34,7 @@ import {CKEditorModule} from 'ng2-ckeditor';
     BaiduMapModule.forRoot({ ak: 'm7Q5C64s8uKmUgnCw3THgmUKcOcepQQn' }),
     BrowserAnimationsModule,
     CalendarModule.forRoot(),
-    CKEditorModule,
+    EditorModule,
     /*数据可视化库*/
     NgxEchartsModule,
   ],

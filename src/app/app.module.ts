@@ -37,8 +37,9 @@ import { BaiduMapModule } from 'angular2-baidu-map';
 import { SongBaseComponent } from './song/song-base/song-base.component';
 import {LoginService} from './serve/login.service';
 import {CalendarModule} from 'angular-calendar';
-import {CKEditorModule} from 'ng2-ckeditor';
 import { WordEditComponent } from './word-edit/word-edit.component';
+import {EditorModule} from '@tinymce/tinymce-angular';
+import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 
 
 @NgModule({
@@ -80,7 +81,7 @@ import { WordEditComponent } from './word-edit/word-edit.component';
     BrowserAnimationsModule,
     BaiduMapModule.forRoot({ ak: 'm7Q5C64s8uKmUgnCw3THgmUKcOcepQQn' }),
     CalendarModule.forRoot(),
-    CKEditorModule,
+    EditorModule,
     /*数据可视化库*/
     NgxEchartsModule,
     /*自己的模块*/
@@ -89,7 +90,10 @@ import { WordEditComponent } from './word-edit/word-edit.component';
     ToolsModule,
     RouterModule.forRoot(<Routes>appRoutes),
   ],
-  providers: [LoginService],
+  providers: [LoginService,
+    {
+      provide: LocationStrategy, useClass: HashLocationStrategy
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

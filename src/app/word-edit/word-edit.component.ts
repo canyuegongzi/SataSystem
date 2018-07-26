@@ -7,11 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WordEditComponent implements OnInit {
 
+  public dataModel: any;
   constructor() { }
 
   ngOnInit() {
 
   }
 
+  public handleEvent($eventObj) {
+    console.log(this.dataModel);
+  }
 
 }

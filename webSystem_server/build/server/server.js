@@ -6,12 +6,12 @@ var bodyParser = require("body-parser");
 var mock_1 = require("./mock");
 var mockData = require("../model/localadmin");
 var register = require("./volidMessage");
+var path = require("path");
 /*主要用于日志系统*/
 var location = require("./locationip");
 var app = express();
 var fs = require('fs');
 var request = require('request');
-var http = require('http');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 /*短信验证的号码*/
@@ -182,6 +182,10 @@ var sysOption = [
     }
 ];
 var zoomData = { time: new Date(), data: mock_1.makeArr() };
+/*app.get('/', (req, res) => {
+  res.send("hello express!!!!");
+});*/
+app.use('/', express.static(path.join(__dirname, '../../', '/client')));
 /*用来发送系统夫人具体的参数的函数*/
 app.get('/api/data', function (req, res) {
     res.json(sysData);
@@ -681,42 +685,36 @@ app.post('/api/edituser', function (req, res) {
                     console.error(err);
                 }
                 else {
-                    fs.writeFile('mockData/userpassword.json', str, function (err) {
-                        if (err) {
-                            res.send({ status: false, date: new Date() });
-                            console.error(err);
-                        }
-                        else {
-                            fs.readFile('mockData/loginlog.json', function (err, data) {
-                                if (err) {
-                                    res.json({ status: false, date: new Date() });
-                                    return;
-                                }
-                                else {
-                                    var editdetaillog = data.toString();
-                                    editdetaillog = JSON.parse(editdetaillog);
-                                    var edituser = (editdetaillog.data).filter(function (e) {
-                                        return e.name == params.name;
-                                    });
-                                    /*dui日志操作*/
-                                    edituser[0].log.push({ ip: location.getClientIp(req), desc: "管理员信息密码成功", date: new Date() });
-                                    edituser[0].total = edituser[0].total + 1;
-                                    // loginlog.total = loginlog.total+1;
-                                    var str4 = JSON.stringify(editdetaillog);
-                                    fs.writeFile('mockData/loginlog.json', str4, function (err) {
-                                        if (err) {
-                                            res.json({ status: false, date: new Date() });
-                                            return;
-                                        }
-                                        else {
-                                            res.send({ status: true, date: new Date() });
-                                        }
-                                    });
-                                }
-                            });
-                            // res.send({status: true, date: new Date()})
-                        }
-                    });
+                    {
+                        fs.readFile('mockData/loginlog.json', function (err, data) {
+                            if (err) {
+                                res.json({ status: false, date: new Date() });
+                                return;
+                            }
+                            else {
+                                var editdetaillog = data.toString();
+                                editdetaillog = JSON.parse(editdetaillog);
+                                var edituser = (editdetaillog.data).filter(function (e) {
+                                    return e.name == params.name;
+                                });
+                                /*dui日志操作*/
+                                edituser[0].log.push({ ip: location.getClientIp(req), desc: "管理员信息修改成功", date: new Date() });
+                                edituser[0].total = edituser[0].total + 1;
+                                // loginlog.total = loginlog.total+1;
+                                var str4 = JSON.stringify(editdetaillog);
+                                fs.writeFile('mockData/loginlog.json', str4, function (err) {
+                                    if (err) {
+                                        res.json({ status: false, date: new Date() });
+                                        return;
+                                    }
+                                    else {
+                                        res.send({ status: true, date: new Date() });
+                                    }
+                                });
+                            }
+                        });
+                        // res.send({status: true, date: new Date()})
+                    }
                 }
             });
         }

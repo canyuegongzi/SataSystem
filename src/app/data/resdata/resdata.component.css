@@ -53,3 +53,9 @@ market_out.page {
 .sysmesg .el-table {
   background-color: red;
 }
+.data-number{
+  width: 6rem;
+  height: 3rem;
+  text-align: center;
+  line-height: 3rem;
+}

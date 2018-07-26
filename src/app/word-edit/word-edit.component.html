@@ -1,0 +1,9 @@
+<ng-container><p class="admin-header">文本编辑</p>
+  <hr/>
+
+
+  <div style="width: 100%; height: 200px"
+  ><editor cloudChannel="dev" apiKey="test" [init]="{plugins: 'link'}" [(ngModel)]="dataModel" (onChange)="handleEvent($event)"></editor></div>
+
+</ng-container>
+

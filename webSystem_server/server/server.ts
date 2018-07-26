@@ -7,13 +7,13 @@ import {SearchCity} from '../model/searchCity';
 import * as moment from "moment";
 import _quarter = moment.unitOfTime._quarter;
 import * as register from './volidMessage';
+import * as path from 'path';
 /*主要用于日志系统*/
 import * as location from './locationip';
 const app = express();
 const fs = require('fs');
 const request = require('request');
 
-const http = require('http');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
@@ -187,6 +187,10 @@ const sysOption = [
   }
 ]
 const zoomData = {time: new Date(), data: makeArr()}
+/*app.get('/', (req, res) => {
+  res.send("hello express!!!!");
+});*/
+app.use('/', express.static(path.join(__dirname, '../../', '/client')));
 /*用来发送系统夫人具体的参数的函数*/
 app.get('/api/data', (req, res) => {
   res.json(sysData);
@@ -687,11 +691,8 @@ app.post('/api/edituser', (req,res) => {
 
 
 
-          fs.writeFile('mockData/userpassword.json', str,function(err){
-            if(err){
-              res.send({status: false, date: new Date()});
-              console.error(err);
-            } else {
+
+              {
               fs.readFile('mockData/loginlog.json', function (err, data) {
 
                 if(err) {
@@ -706,7 +707,7 @@ app.post('/api/edituser', (req,res) => {
                   })
                   /*dui日志操作*/
 
-                  edituser[0].log.push({ip: location.getClientIp(req), desc: "管理员信息密码成功", date: new Date() })
+                  edituser[0].log.push({ip: location.getClientIp(req), desc: "管理员信息修改成功", date: new Date() })
                   edituser[0].total = edituser[0].total + 1;
                   // loginlog.total = loginlog.total+1;
                   let str4 = JSON.stringify(editdetaillog);
@@ -722,7 +723,8 @@ app.post('/api/edituser', (req,res) => {
               })
               // res.send({status: true, date: new Date()})
             }
-          });
+
+
         }
       });
     }
@@ -1047,7 +1049,6 @@ app.post('/api/register', (req, res) =>{
                 }
               )
 
-
             }
 
 
@@ -1086,4 +1087,5 @@ app.get('/api/loginlog', (req, res) => {
   }
 )
 const server = app.listen(8000, 'localhost', () => {
+
 });

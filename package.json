@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
     "@ckeditor/ckeditor5-build-decoupled-document": "^11.0.1",
+    "@tinymce/tinymce-angular": "^2.0.0",
     "@types/bootstrap": "^4.1.2",
     "@types/jquery": "^3.3.4",
     "angular-calendar": "^0.25.2",
@@ -37,6 +38,7 @@
     "popper.js": "^1.14.3",
     "rxjs": "^6.0.0",
     "sweetalert2": "^7.25.6",
+    "tinymce": "^4.8.0",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {

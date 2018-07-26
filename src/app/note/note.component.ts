@@ -1,4 +1,9 @@
-import {Component, OnInit, ViewContainerRef, ChangeDetectionStrategy, ViewChild, TemplateRef} from '@angular/core';
+import {
+  Component, OnInit, ViewContainerRef, ChangeDetectionStrategy, ViewChild, TemplateRef, EventEmitter, Output,
+  Input, AfterViewInit, OnDestroy
+} from '@angular/core';
+declare var tinymce: any;
+
 
 @Component({
   selector: 'app-note',
@@ -7,9 +12,7 @@ import {Component, OnInit, ViewContainerRef, ChangeDetectionStrategy, ViewChild,
 })
 export class NoteComponent implements OnInit {
   constructor(/*public toastr: ToastsManager,*/ vcr: ViewContainerRef) {
-    /*this.toastr.setRootViewContainerRef(vcr);*/
   }
   ngOnInit() {
   }
-
 }
