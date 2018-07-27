@@ -4,7 +4,7 @@
 2：**项目只有pc端，没有做移动端的适配，建议在pc端预览**
 ### **目录说明**
 **webSystem_server**：
-服务器源码【暂时无数据库，数据均为文本形式，具体的模拟数据说明见https://github.com/canyuegongzi/SataSystem_server】
+服务器源码  【暂时无数据库，数据均为文本形式，具体的模拟数据说明见】https://github.com/canyuegongzi/SataSystem_server
 
 **dist**： 
 打包后的项目文件
