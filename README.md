@@ -3,11 +3,15 @@
 1： **在项目中的登录注册模块中，因为采用的是阿里云的短信服务，每分钟每小时会有短信数量的限制，在登录是默认了一个账号： *1860683370，123456*；或者可以直接在服务器的模拟数据中添加用户名即可！**
 2：**项目只有pc端，没有做移动端的适配，建议在pc端预览**
 ### **目录说明**
-**webSystem_server**： 服务器源码【暂时无数据库，数据均为文本形式，具体的模拟数据说明见https://github.com/canyuegongzi/SataSystem_server】
-**dist**： 打包后的项目文件
+**webSystem_server**：
+服务器源码【暂时无数据库，数据均为文本形式，具体的模拟数据说明见https://github.com/canyuegongzi/SataSystem_server】
+
+**dist**： 
+打包后的项目文件
 ### 准备
 #### **服务器端**：
 进入**webSystem_server**目录
+
 1:方式一：
 ```
    cd webSystem_server
