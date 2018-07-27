@@ -2,49 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5aff96f8-b9ec-4039-aee1-972376a82571" name="默认" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/../src/assets/langs/zh_CN.js" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/../src/assets/skins/lightgray/content.inline.min.css" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/../src/assets/skins/lightgray/content.min.css" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/../src/assets/skins/lightgray/content.mobile.min.css" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/../src/assets/skins/lightgray/fonts/tinymce-mobile.woff" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/../src/assets/skins/lightgray/fonts/tinymce-small.eot" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/../src/assets/skins/lightgray/fonts/tinymce-small.svg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/../src/assets/skins/lightgray/fonts/tinymce-small.ttf" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/../src/assets/skins/lightgray/fonts/tinymce-small.woff" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/../src/assets/skins/lightgray/fonts/tinymce.eot" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/../src/assets/skins/lightgray/fonts/tinymce.svg" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/../src/assets/skins/lightgray/fonts/tinymce.ttf" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/../src/assets/skins/lightgray/fonts/tinymce.woff" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/../src/assets/skins/lightgray/img/anchor.gif" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/../src/assets/skins/lightgray/img/loader.gif" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/../src/assets/skins/lightgray/img/object.gif" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/../src/assets/skins/lightgray/img/trans.gif" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/../src/assets/skins/lightgray/skin.min.css" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/../src/assets/skins/lightgray/skin.mobile.min.css" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/../src/typings.d.ts" />
-      <change beforePath="$PROJECT_DIR$/../package-lock.json" afterPath="$PROJECT_DIR$/../package-lock.json" />
-      <change beforePath="$PROJECT_DIR$/../package.json" afterPath="$PROJECT_DIR$/../package.json" />
-      <change beforePath="$PROJECT_DIR$/../src/app/app.module.ts" afterPath="$PROJECT_DIR$/../src/app/app.module.ts" />
-      <change beforePath="$PROJECT_DIR$/../src/app/data/resdata/resdata.component.css" afterPath="$PROJECT_DIR$/../src/app/data/resdata/resdata.component.css" />
-      <change beforePath="$PROJECT_DIR$/../src/app/data/resdata/resdata.component.html" afterPath="$PROJECT_DIR$/../src/app/data/resdata/resdata.component.html" />
-      <change beforePath="$PROJECT_DIR$/../src/app/home/sitebar/aibar/aibar.component.html" afterPath="$PROJECT_DIR$/../src/app/home/sitebar/aibar/aibar.component.html" />
-      <change beforePath="$PROJECT_DIR$/../src/app/module/tools/tools.module.ts" afterPath="$PROJECT_DIR$/../src/app/module/tools/tools.module.ts" />
-      <change beforePath="$PROJECT_DIR$/../src/app/note/note.component.html" afterPath="$PROJECT_DIR$/../src/app/note/note.component.html" />
-      <change beforePath="$PROJECT_DIR$/../src/app/note/note.component.ts" afterPath="$PROJECT_DIR$/../src/app/note/note.component.ts" />
-      <change beforePath="$PROJECT_DIR$/../src/app/word-edit/word-edit.component.html" afterPath="$PROJECT_DIR$/../src/app/word-edit/word-edit.component.html" />
-      <change beforePath="$PROJECT_DIR$/../src/app/word-edit/word-edit.component.ts" afterPath="$PROJECT_DIR$/../src/app/word-edit/word-edit.component.ts" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/build/class.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/localadmin.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/mock.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/server.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/build/server/server.js" afterPath="$PROJECT_DIR$/build/server/server.js" />
-      <change beforePath="$PROJECT_DIR$/mockData/adminuerdetail.json" afterPath="$PROJECT_DIR$/mockData/adminuerdetail.json" />
-      <change beforePath="$PROJECT_DIR$/mockData/adminuser.json" afterPath="$PROJECT_DIR$/mockData/adminuser.json" />
       <change beforePath="$PROJECT_DIR$/mockData/loginlog.json" afterPath="$PROJECT_DIR$/mockData/loginlog.json" />
-      <change beforePath="$PROJECT_DIR$/mockData/user.json" afterPath="$PROJECT_DIR$/mockData/user.json" />
-      <change beforePath="$PROJECT_DIR$/mockData/userpassword.json" afterPath="$PROJECT_DIR$/mockData/userpassword.json" />
-      <change beforePath="$PROJECT_DIR$/server/server.ts" afterPath="$PROJECT_DIR$/server/server.ts" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -141,11 +100,9 @@
       <file leaf-file-name="loginlog.json" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/mockData/loginlog.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="96" column="1" lean-forward="false" selection-start-line="96" selection-start-column="1" selection-end-line="96" selection-end-column="1" />
-              <folding>
-                <marker date="1532591148884" expanded="true" signature="0:1" ph="{&quot;total&quot;: 1...}" />
-              </folding>
+            <state relative-caret-position="0">
+              <caret line="0" column="1313" lean-forward="false" selection-start-line="0" selection-start-column="1313" selection-end-line="0" selection-end-column="1313" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -228,7 +185,7 @@
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="138" />
     <option name="y" value="8" />
     <option name="width" value="1098" />
@@ -344,12 +301,12 @@
       <workItem from="1532585608921" duration="2104000" />
       <workItem from="1532588611153" duration="463000" />
       <workItem from="1532589264445" duration="284000" />
-      <workItem from="1532589752940" duration="1377000" />
+      <workItem from="1532589752940" duration="2686000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="198339000" />
+    <option name="totallyTimeSpent" value="199648000" />
   </component>
   <component name="TodoView" selected-index="1">
     <todo-panel id="selected-file">
@@ -361,7 +318,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.171875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -371,7 +328,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294893" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3294893" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3294893" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1118,11 +1075,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/mockData/loginlog.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="96" column="1" lean-forward="false" selection-start-line="96" selection-start-column="1" selection-end-line="96" selection-end-column="1" />
-          <folding>
-            <marker date="1532591148884" expanded="true" signature="0:1" ph="{&quot;total&quot;: 1...}" />
-          </folding>
+        <state relative-caret-position="0">
+          <caret line="0" column="1313" lean-forward="false" selection-start-line="0" selection-start-column="1313" selection-end-line="0" selection-end-column="1313" />
+          <folding />
         </state>
       </provider>
     </entry>

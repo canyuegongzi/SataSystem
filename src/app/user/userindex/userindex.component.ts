@@ -23,10 +23,13 @@ export class UserindexComponent implements OnInit {
   private sex: string;
   /*root*/
   private root: string;
+  /**/
   constructor(private user: UserService, private login: LoginService) { }
 
   ngOnInit() {
     /*模拟id 和name*/
+    // console.log(JSON.parse(localStorage.getItem('user')));
+    this.loginIp = JSON.parse(localStorage.getItem('user')).ip;
     this.name = JSON.parse(localStorage.getItem('user')).name;
     this.id = JSON.parse(localStorage.getItem('user')).id;
     this.user.getcurrentUser(this.id, this.name).subscribe({

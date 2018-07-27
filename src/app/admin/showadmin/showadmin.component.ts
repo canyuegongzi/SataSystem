@@ -30,10 +30,7 @@ export class ShowadminComponent implements OnInit, OnChanges {
   ngOnInit() {
     /*所有的用户的信息的初始化*/
     this.admin.getAdminInformation().subscribe(res => {
-      this.adminNumber = res[0].data;
-      this.total = res[1].total;
-      this.reach = res[2].reach;
-      this.ages = res[3].ages;
+      this.personInfo(res);
       // console.log(res);
     });
   }
@@ -46,12 +43,11 @@ export class ShowadminComponent implements OnInit, OnChanges {
     /*变更*/
     if (this.formModel.value) {
       this.admin.getAdminInformation(this.formModel.value).subscribe(res => {
-        if (res[0].data && res[1].total && res[2].reach && res[3].ages) {
-          this.resetAdmin();
-          this. adminNumber = res[0].data;
-          this.total = res[1].total;
-          this.reach = res[2].reach;
-          this.ages = res[3].ages;
+        console.log(res.length);
+        if (res.length == 0) {
+          Swal('没查询到先关人员');
+        } else if (res[0].data && res[1].total && res[2].reach && res[3].ages) {
+          this.personInfo(res);
         } else {
             this.adminNumber = res;
             this.total = res.length;
@@ -65,17 +61,23 @@ export class ShowadminComponent implements OnInit, OnChanges {
   }
   /*删除函数*/
   private deleteAdmin(type: string, ref: any) {
-    // console.log(ref.rowData);
+    console.log(ref.rowData.id);
     Swal ({
       title: '确定删除？',
       text: '这将导致这名用户的信息在公司资料库中消失！',
     })
       .then((value) => {
-        this.admin.deleteAdminInformation(ref.rowData.id)
+        this.admin.deleteAdminInformation({id: ref.rowData.id})
           .subscribe(res => {
             if (res.status) {
               Swal('删除成功', '请进行其他操作', 'success').then(value2 => {
                 this.router.navigate(['/admin/show']);
+                this.changeDetectorRef.markForCheck();
+                this.changeDetectorRef.detectChanges();
+                this.admin.getAdminInformation().subscribe(ress => {
+                  this.personInfo(ress);
+                  // console.log(res);
+                });
               });
             } else {
               Swal ('删除失败！');
@@ -101,11 +103,7 @@ export class ShowadminComponent implements OnInit, OnChanges {
     console.log(event);
     if (event) {
       this.admin.getAdminInformation({page: event}).subscribe(res => {
-          this.resetAdmin();
-          this. adminNumber = res[0].data;
-          this.total = res[1].total;
-          this.reach = res[2].reach;
-          this.ages = res[3].ages;
+          this.personInfo(res);
         },
         error => {
           Swal('输入不合法');
@@ -118,5 +116,13 @@ export class ShowadminComponent implements OnInit, OnChanges {
       this.adminNumber =  '';
       this.total = null;
       this.ages = '';
+  }
+  /*获取人员*/
+  private personInfo(res: any): void {
+    this.resetAdmin();
+    this. adminNumber = res[0].data;
+    this.total = res[1].total;
+    this.reach = res[2].reach;
+    this.ages = res[3].ages;
   }
 }

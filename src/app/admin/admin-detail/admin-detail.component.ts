@@ -55,7 +55,7 @@ private deleteadmin() {
         .subscribe(res => {
           if (res.status) {
             Swal ('删除成功！');
-            this.router.navigate(['/admin/show']);
+            this.router.navigate(['/admin']);
           } else {
             Swal ('删除失败！');
           }

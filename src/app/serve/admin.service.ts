@@ -53,7 +53,7 @@ export class AdminService {
   }
   /*删除用户*/
   deleteAdminInformation(par: SearchAdminParams): Observable<any> {
-    // console.log(par);
+    console.log(par);
     if (par) {
       console.log(par);
       return this.http.get('api/admindelete', {params: {id: par.id}}).pipe(

@@ -7,6 +7,7 @@
 
 # dependencies
 /node_modules
+/webSystem_server/node_modules
 
 # IDEs and editors
 /.idea

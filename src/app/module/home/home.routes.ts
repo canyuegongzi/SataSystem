@@ -52,7 +52,7 @@ export const HomeRoutes = [
     children: [
       {
         path: '',
-        component: AddadminComponent,
+        component: ShowadminComponent,
       },
       {
         path: 'show',
