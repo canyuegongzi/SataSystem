@@ -2,7 +2,6 @@ import {ChangeDetectorRef, Component, OnChanges, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AdminService} from '../../serve/admin.service';
 import Swal from 'sweetalert2';
-import {AdminUser} from '../../module/Adminuer';
 import {Router} from '@angular/router';
 
 @Component({
@@ -11,12 +10,12 @@ import {Router} from '@angular/router';
   styleUrls: ['./showadmin.component.css']
 })
 export class ShowadminComponent implements OnInit, OnChanges {
-  private tabtitle = '职员管理';
-  private formModel: FormGroup;
-  private reach: any = '';
-  private adminNumber: any =  '';
-  private total: number;
-  private ages: any = '';
+  public tabtitle = '职员管理';
+  public formModel: FormGroup;
+  public reach: any = '';
+  public adminNumber: any =  '';
+  public total: number;
+  public ages: any = '';
   constructor(private admin: AdminService, private changeDetectorRef: ChangeDetectorRef, private router: Router) {
     const fb = new FormBuilder();
     this.formModel = fb.group({
@@ -37,16 +36,15 @@ export class ShowadminComponent implements OnInit, OnChanges {
   ngOnChanges() {
   }
   /*查询函数*/
-  private submit() {
+  public submit() {
     this.changeDetectorRef.markForCheck();
     this.changeDetectorRef.detectChanges();
     /*变更*/
     if (this.formModel.value) {
       this.admin.getAdminInformation(this.formModel.value).subscribe(res => {
-        console.log(res.length);
-        if (res.length == 0) {
+        if (!res.status) {
           Swal('没查询到先关人员');
-        } else if (res[0].data && res[1].total && res[2].reach && res[3].ages) {
+        } else if (res.status) {
           this.personInfo(res);
         } else {
             this.adminNumber = res;
@@ -60,7 +58,7 @@ export class ShowadminComponent implements OnInit, OnChanges {
     }
   }
   /*删除函数*/
-  private deleteAdmin(type: string, ref: any) {
+  public deleteAdmin(type: string, ref: any) {
     console.log(ref.rowData.id);
     Swal ({
       title: '确定删除？',
@@ -71,7 +69,7 @@ export class ShowadminComponent implements OnInit, OnChanges {
           .subscribe(res => {
             if (res.status) {
               Swal('删除成功', '请进行其他操作', 'success').then(value2 => {
-                this.router.navigate(['/admin/show']);
+                this.router.navigate(['admin/show']);
                 this.changeDetectorRef.markForCheck();
                 this.changeDetectorRef.detectChanges();
                 this.admin.getAdminInformation().subscribe(ress => {
@@ -86,12 +84,12 @@ export class ShowadminComponent implements OnInit, OnChanges {
       });
   }
   /*详情函数*/
-  private detailAdmin(ref: any) {
+  public detailAdmin(ref: any) {
     // console.log(ref.rowData.id);
     if (ref.rowData.id) {
       /*this.admin.getAdminInformation({id: ref.rowData.id}).subscribe(res => {*/
         // console.log('这里是获取职工的具体信息的逻辑');
-        this.router.navigate(['/admin/show/detail'], { queryParams: { id: ref.rowData.id }} );
+        this.router.navigate(['admin/detail'], { queryParams: { id: ref.rowData.id }} );
      /* });*/
     } else {
       // noinspection JSIgnoredPromiseFromCall
@@ -99,7 +97,7 @@ export class ShowadminComponent implements OnInit, OnChanges {
     }
   }
     /*原来所谓的捕获事件是这样*/
-  private pagination(event) {
+  public pagination(event) {
     console.log(event);
     if (event) {
       this.admin.getAdminInformation({page: event}).subscribe(res => {
@@ -120,9 +118,9 @@ export class ShowadminComponent implements OnInit, OnChanges {
   /*获取人员*/
   private personInfo(res: any): void {
     this.resetAdmin();
-    this. adminNumber = res[0].data;
-    this.total = res[1].total;
-    this.reach = res[2].reach;
-    this.ages = res[3].ages;
+    this. adminNumber = res.data;
+    this.total = res.total;
+    this.reach = res.reach ? res.reach : this.reach;
+    this.ages = res.ages ? res.ages : this.ages;
   }
 }

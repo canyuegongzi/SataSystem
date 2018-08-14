@@ -1,9 +1,7 @@
 import {AfterContentInit, ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {AdminService} from '../../serve/admin.service';
 import Swal from 'sweetalert2';
-import {Observable} from 'rxjs';
-import {EditAdminIformation} from '../../module/Adminuer';
 
 @Component({
   selector: 'app-admin-detail',
@@ -12,12 +10,12 @@ import {EditAdminIformation} from '../../module/Adminuer';
 })
 export class AdminDetailComponent implements OnInit, AfterContentInit {
   /*当前员工的唯一标识*/
-  private id: number;
+  public id: number;
   /*具体的所有的信息*/
-  private detailInformation = [];
+  public detailInformation = [];
   /**/
   // private othersInformation:
-  private sex: any;
+  public sex: any;
   constructor(private routerInfo: ActivatedRoute, private admin: AdminService,
               private changeDetectorRef: ChangeDetectorRef, private router: Router) { }
 
@@ -36,15 +34,16 @@ export class AdminDetailComponent implements OnInit, AfterContentInit {
   }
   ngAfterContentInit() {
   }
-private editadmin() {
+  public editadmin() {
+    console.log(this.id);
     Swal ('确定离开详情页面前往修改页面').then(value => {
-      this.router.navigate(['/admin/show/edit'], { queryParams: { id: this.id}} );
+      this.router.navigate(['admin/edit'], { queryParams: { id: this.id}} );
       /*向服务发送具体的信息*/
       this.admin.setFormDetail(this.detailInformation);
     });
 
 }
-private deleteadmin() {
+  public deleteadmin() {
   Swal ({
     title: '确定删除？',
     text: '这将导致这名用户的信息在公司资料库中消失！',
@@ -55,7 +54,7 @@ private deleteadmin() {
         .subscribe(res => {
           if (res.status) {
             Swal ('删除成功！');
-            this.router.navigate(['/admin']);
+            this.router.navigate(['admin/show']);
           } else {
             Swal ('删除失败！');
           }

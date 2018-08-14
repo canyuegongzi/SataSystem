@@ -10,44 +10,44 @@ import {LoginService} from '../../serve/login.service';
 export class UserindexComponent implements OnInit {
 
   /*当前的登录的姓名*/
-  private name: string;
+  public name: string;
   /*当前登录的人员的id*/
-  private id: string;
+  public id: string;
   /*保存当前的登录*/
-  private currentUser: any;
+  public currentUser: any;
   /*当前的ip地址*/
-  private loginIp: string;
+  public loginIp: string;
   /*当前的登录地址*/
-  private loginAddress: string;
+  public loginAddress: string;
   /*sex*/
-  private sex: string;
+  public sex: string;
   /*root*/
-  private root: string;
+  public root: string;
   /**/
   constructor(private user: UserService, private login: LoginService) { }
 
   ngOnInit() {
     /*模拟id 和name*/
     // console.log(JSON.parse(localStorage.getItem('user')));
-    this.loginIp = JSON.parse(localStorage.getItem('user')).ip;
-    this.name = JSON.parse(localStorage.getItem('user')).name;
-    this.id = JSON.parse(localStorage.getItem('user')).id;
+    this.loginIp = JSON.parse(sessionStorage.getItem('user')).ip;
+    this.name = JSON.parse(sessionStorage.getItem('user')).name;
+    this.id = JSON.parse(sessionStorage.getItem('user')).id;
     this.user.getcurrentUser(this.id, this.name).subscribe({
       next: (res) => {
         // console.log(res[0]);
-        this.currentUser = res[0];
-        this.sex = res[0].sex === 1 ? '男' : '女';
-        this.root = res[0].root === 1 ? '普通管理员' : '系统管理员';
+        this.currentUser = res;
+        this.sex = res.sex === 1 ? '男' : '女';
+        this.root = res.root === 1 ? '普通管理员' : '系统管理员';
     },
       error: err => {
 
       }
     });
   }
-  private editUserMessage() {
+  public editUserMessage() {
 
   }
-  private outLogin() {
+  public outLogin() {
     this.login.outlogin();
   }
 

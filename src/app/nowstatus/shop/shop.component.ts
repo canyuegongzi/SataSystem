@@ -8,10 +8,10 @@ import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
   styleUrls: ['./shop.component.css']
 })
 export class ShopComponent implements OnInit {
-  private formModel: FormGroup;
-  private companydesc: any;
-  private compsnyControl: FormControl = new FormControl();
-  private filtername: string;
+  public formModel: FormGroup;
+  public companydesc: any;
+  public compsnyControl: FormControl = new FormControl();
+  public filtername: string;
   constructor(private company: HomeotherService) {
     const fb = new FormBuilder();
     this.formModel = fb.group({
@@ -36,7 +36,7 @@ export class ShopComponent implements OnInit {
        }
     });
   }
-  private submit(): void {
+  public submit(): void {
     console.log(this.formModel.value);
     this.company.getCompanyDetail({name: this.formModel.value}).subscribe({
       next: (res) => {
@@ -48,10 +48,10 @@ export class ShopComponent implements OnInit {
       }
     });
   }
-  private input() {
+  public input() {
     console.log('dddd');
   }
-  private pagination(event) {
+  public pagination(event) {
     if (event) {
       this.company.getCompanyDetail({page: event}).subscribe({
         next: (res) => {

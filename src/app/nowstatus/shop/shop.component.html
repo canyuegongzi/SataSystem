@@ -37,7 +37,8 @@
   <div>
     <el-pagination [total]="companydesc?.total"
                    [small]="true"
-                   (modelChange)="pagination($event)">
+                   (modelChange)="pagination($event)"
+    [size]="5">
     </el-pagination>
   </div>
 </ng-container>

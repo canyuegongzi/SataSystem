@@ -87,9 +87,9 @@ li {
   color: #000000;
   font-size: 1rem;
 }
-#dataresult .el-pagination, .admin-page .admin-pagination {
+/*#dataresult .el-pagination, .admin-page .admin-pagination {
   float: right;
-}
+}*/
 .sysmesg > .el-tr {
   background-color: rgba(0,0,0,.4);
 }
@@ -132,4 +132,7 @@ a{
 }
 .coptright p {
   display: block;
+}
+.admin-pagination{
+  float: right;
 }

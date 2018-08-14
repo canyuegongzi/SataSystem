@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {ActivatedRouteSnapshot, CanDeactivate, RouterStateSnapshot} from '@angular/router';
 import {EditComponent} from '../admin/edit/edit.component';
 import {Observable} from 'rxjs';
-import Swal from 'sweetalert2';
 
 
 export interface CanComponentDeactivate {

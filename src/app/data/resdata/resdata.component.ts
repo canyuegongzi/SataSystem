@@ -1,5 +1,5 @@
 ///<reference path="../../../../node_modules/@types/echarts/index.d.ts"/>
-import {ChangeDetectionStrategy, Component, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
 import {NgxEchartsModule} from 'ngx-echarts';
 import {GetdataService, Line} from '../../serve/getdata.service';
 import {ChangeDetectorRef} from '@angular/core';
@@ -11,7 +11,7 @@ import { ElMessageService } from 'element-angular';
   styleUrls: ['./resdata.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ResdataComponent implements OnInit {
+export class ResdataComponent implements OnInit, OnDestroy {
     /*在线人数的配置文件*/
     lineNumber =  {
       title: {
@@ -227,6 +227,8 @@ export class ResdataComponent implements OnInit {
         }
       ],
     ];
+    /*定时器*/
+    timer: any =  null;
     /*系统警告*/
     systemWaring =  [
       {
@@ -280,7 +282,7 @@ export class ResdataComponent implements OnInit {
         this.syshealOption.hideLoading();
       }, 5000);
       /*在线人数图表数据的初始化*/
-      setInterval( () => {
+    this.timer = setInterval( () => {
         /*实时刷新在线人数的数据*/
         this.linePersonOption.setOption({
           series: [
@@ -373,6 +375,9 @@ export class ResdataComponent implements OnInit {
       }
     });
   }
+  ngOnDestroy() {
+     clearInterval(this.timer);
+  }
   /*x轴时间的更新方法*/
   private statusAutoTime(): Array<number> {
     const axis1Data = (new Date()).toLocaleTimeString().replace(/^\D*/, '');
@@ -414,7 +419,7 @@ export class ResdataComponent implements OnInit {
     return res;
   }
   /*标记系统加警告消息*/
-  private flagMsg(type: string, ref: any): void {
+  public flagMsg(type: string, ref: any): void {
     this.getData.setSysmessageWriteByid(ref.rowData.id).subscribe((res: boolean) => {
       console.log(res);
       if (res) {
@@ -427,7 +432,7 @@ export class ResdataComponent implements OnInit {
     });
   }
   /*查看系统警告的详细信息*/
-  private readMsg(ref: any): void {
+  public readMsg(ref: any): void {
     const ress = [];
     this.sysMesalert = false;
     this.getData.getSysmessageByid(ref.rowData.id).subscribe(res => {
@@ -439,7 +444,7 @@ export class ResdataComponent implements OnInit {
     });
   }
   /*关闭弹出框*/
-  private closeAlert() {
+  public closeAlert() {
     this.sysMesalert = true;
     return true;
   }

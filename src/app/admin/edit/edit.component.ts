@@ -1,6 +1,6 @@
 import {AfterViewInit, ChangeDetectorRef, Component, forwardRef, Inject, OnDestroy, OnInit} from '@angular/core';
 import {AdminService} from '../../serve/admin.service';
-import {Observable, Subscription} from 'rxjs';
+import {Subscription} from 'rxjs';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import Swal from 'sweetalert2';
@@ -14,9 +14,9 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
   id: any;
   labelPosition = 'left';
   /*数据回填1*/
-  private forminit: any;
+  public forminits: any;
   /*用来从服务中接受具体的信息的，在组件销毁时可以用来取消订阅的流*/
-  private subscription: Subscription;
+  public subscription: Subscription;
   validateForm: FormGroup;
   public  reach = [{value: 1, label: '策划' }, { value: 2, label: '行政' },
     { value: 3, label: '公关' }, { value: 4, label: '研发二' },
@@ -28,21 +28,21 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
   private sex = new FormControl('');
   private reachs = new FormControl('');
   private date = new FormControl('', Validators.required);
-  private deal = new FormControl('');
+  public deal = new FormControl('');
   private fresh = new FormControl('', Validators.required);
   private identity = new FormControl('', Validators.required);
   private phone = new FormControl('', Validators.required);
   private root = new FormControl('', Validators.required);
   private address = new FormControl('', Validators.required);
-  private demerits = new FormControl('', Validators.required);
+  private demerit = new FormControl('', Validators.required);
   private star = new FormControl('', Validators.required);
   private age = new FormControl('', Validators.required);
   /*通报次数*/
-  private demer: any;
+  public demer: any;
  /*综合登记*/
- private  stars: number;
+  public stars: any;
  /*是否修改成功的标志位*/
- private editflag: boolean;
+  public editflag: boolean;
   constructor(private admin: AdminService, private changeDetectorRef: ChangeDetectorRef, private router: Router,
                private routerInfo: ActivatedRoute,
               @Inject(forwardRef(() => FormBuilder)) private formBuilder: FormBuilder, private fb: FormBuilder) {
@@ -61,8 +61,8 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
       'phone': this.phone,
       'root': this.root,
       'address': this.address,
-      'demerits': this.demerits,
-      'star': this.star,
+      'demerit': this.demerit,
+      'stars': this.star,
     });
   }
 
@@ -141,7 +141,7 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
     // this.changeDetectorRef.markForCheck();
     // this.changeDetectorRef.detectChanges();
   }
-  formInit() {
+  private formInit() {
     /*表单的初始化*/
     this.id = this.routerInfo.snapshot.queryParams['id'];
     /**
@@ -151,9 +151,10 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
      * */
     this.admin.getdetailInformation(this.id).subscribe((res: any) => {
       /*把返回的数据进行合并成一个对象的格式*/
-      this.forminit = Object.assign(res[0], res[1]);
-      this.demer  = Number(this.forminit.demerits);
-      this.stars  = Number(this.forminit.star);
+      this.forminits = Object.assign(res[0], res[1]);
+      this.demer  = Number(this.forminits.demerit);
+      this.stars  = Number(this.forminits.star);
+      console.log(this.forminits);
       console.log(this.validateForm.value);
     });
 
@@ -166,15 +167,15 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
   submit(): void {
       for (const key in this.validateForm.value) {
         if (this.validateForm.value[key] === '') {
-            this.validateForm.value[key] = this.forminit[key];
+            this.validateForm.value[key] = this.forminits[key];
         }
       }
-     console.log(this.validateForm.value);
+     console.log(this.validateForm.value.stars);
      if (this.validateForm.value) {
       this.admin.editAdminInformation(this.validateForm.value, this.id).subscribe(res => {
           if (res.status) {
             Swal('修改成功', '请进行其他操作', 'success').then(value => {
-              this.router.navigate(['/admin/show']);
+              this.router.navigate(['admin/show']);
             });
           }
       });
@@ -204,21 +205,21 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
     const control: AbstractControl = this.validateForm.controls[item];
     return control.dirty && control.hasError('message') ? control.errors.message : '';
   }
-  private timeValidator = (control: FormControl) => {
+  public timeValidator = (control: FormControl) => {
     if (!control.value) {
       return { status: 'error', message: '必须选择配送时间' };
     }
     return { status: 'success' };
   }
 
-  private dateValidator = (control: FormControl) => {
+  public dateValidator = (control: FormControl) => {
     if (!control.value) {
       return { status: 'error', message: '必须选择配送日期' };
     }
     return { status: 'success' };
   }
 
-  private nameValidator = (control: FormControl) => {
+  public nameValidator = (control: FormControl) => {
     if (!control.value) {
       return {status: 'error', message: '必须填写城市名'};
     }
@@ -228,13 +229,14 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
     return { status: 'success' };
   }
   /*日期选择的函数*/
-  private handle(par) {
+  public handle(par) {
     console.log(par);
   }
-  private starrate(event) {
+  public starrate(event) {
     console.log(event);
+    event ?  this.validateForm.value.stars = event : this.validateForm.value.stars = this.stars;
   }
-  private changeDemerits(event) {
+  public changeDemerits(event) {
     console.log(event);
   }
   /*canDeactivate(): Observable<boolean> | boolean {
@@ -243,7 +245,8 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
       Swal('确定要离开');
       return false;
     }
-  }*/private isObjectValueEqual(a, b) {
+  }*/
+  public isObjectValueEqual(a, b) {
 
     const aProps = Object.getOwnPropertyNames(a);
     const bProps = Object.getOwnPropertyNames(b);

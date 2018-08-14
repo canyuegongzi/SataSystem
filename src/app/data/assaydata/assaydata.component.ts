@@ -1,7 +1,6 @@
 import {Component, Input, OnInit, Output} from '@angular/core';
 import {GetdataService} from '../../serve/getdata.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ElMessageService} from 'element-angular/release/message/message.service';
 @Component({
   selector: 'app-assaydata',
   templateUrl: './assaydata.component.html',
@@ -256,7 +255,7 @@ export class AssaydataComponent implements OnInit {
     ]
   };
   /*模拟解析文字*/
-  public assDescriptpon: Object = {};
+  public assDescriptpon: any;
     /*area : '',
     press: '',
     bugtime: '',
@@ -278,7 +277,7 @@ export class AssaydataComponent implements OnInit {
   public assline: any;
   /*雷达图的初始化*/
   public radar: any;
-  constructor(private getData: GetdataService, private message: ElMessageService) {
+  constructor(private getData: GetdataService) {
     const fb = new FormBuilder();
     this.formModel = fb.group({
       press: ['', Validators.required],

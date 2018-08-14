@@ -12,9 +12,9 @@ import Swal from 'sweetalert2';
 })
 export class ExpressComponent implements OnInit {
 
-  private formModel: FormGroup;
-  private expressname = new FormControl('', Validators.required);
-  private expressnum = new FormControl('', Validators.required);
+  public formModel: FormGroup;
+  public expressname = new FormControl('', Validators.required);
+  public expressnum = new FormControl('', Validators.required);
   constructor(private router: Router, private http: Http, private fb: FormBuilder, private life: LifeService) {
     this.formModel = this.fb.group({
       'name': this.expressname,

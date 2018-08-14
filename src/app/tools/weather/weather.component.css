@@ -1,11 +1,9 @@
-
-
-
 #mainBody{
   height:100%;
 }
 .weather-back {
-  background: url('../../../assets/images/body_bg.jpg');
+
+  background: url('http://oykcnjwn9.bkt.clouddn.com/body_bg.jpg');
   width: 100%;
   height: 100%;
   background-size: 100% 100%;
@@ -17,7 +15,7 @@
   left:0px;
   width:100%;
   height:100%;
-  background:url("../../../assets/images/cloud.png") no-repeat;
+  background:url("http://oykcnjwn9.bkt.clouddn.com/cloud.png") no-repeat;
   z-index:1;
   opacity:0.8;
 }
@@ -27,7 +25,7 @@
 }
 
 #weather{
-  background:url("../../../assets/images/sun.png") no-repeat;
+  background:url("http://oykcnjwn9.bkt.clouddn.com/sun.png") no-repeat;
   border-radius: 90px;
   width: 140px;
   /* height: 120px; */

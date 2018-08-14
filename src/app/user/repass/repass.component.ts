@@ -13,16 +13,16 @@ import {LoginService} from '../../serve/login.service';
 export class RepassComponent implements OnInit {
 
   /*id*/
-  private id: number;
+  public id: number;
   /*name*/
-  private name: string;
-  private formModel: FormGroup;
+  public name: string;
+  public formModel: FormGroup;
   /*表单的初始化*/
   private oldpass = new FormControl('', Validators.required);
   private newpass = new FormControl('', Validators.required);
   private repass = new FormControl('', Validators.required);
   /*发送的数据*/
-  private par: any;
+  protected par: any;
   constructor(private user: UserService, private http: Http,
               private routeInfo: ActivatedRoute,
               private router: Router, private fb: FormBuilder,
@@ -61,7 +61,7 @@ export class RepassComponent implements OnInit {
                 break;
               case true:
                 Swal('修改成功', '请重新登录', 'success').then(value => {
-                  localStorage.removeItem('user');
+                  sessionStorage.removeItem('user');
                   this.router.navigate(['/']);
                 });
                 break;

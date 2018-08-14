@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FriengsComponent implements OnInit {
 
-  private data: any = [
+  public data: any = [
     {
       label: '系统开发',
       children: [
@@ -155,7 +155,7 @@ export class FriengsComponent implements OnInit {
   ngOnInit() {
   }
 
-  private checkChange(event) {
+  public checkChange(event) {
     console.log(event);
   }
 }

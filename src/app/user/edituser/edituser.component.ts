@@ -9,10 +9,10 @@ import {AbstractControl, FormBuilder, FormControl, FormGroup, FormsModule, Valid
   styleUrls: ['./edituser.component.css']
 })
 export class EdituserComponent implements OnInit {
-  private id: number;
-  private name: string;
-  private current: any;
-  private formModel: FormGroup;
+  public id: number;
+  public name: string;
+  public current: any;
+  public formModel: FormGroup;
   /*表单的初始化*/
   private loginname = new FormControl('');
   private sex = new FormControl('');
@@ -44,7 +44,7 @@ export class EdituserComponent implements OnInit {
     this.user.getcurrentUser(this.id, this.name).subscribe({
         next: (res) => {
           console.log(res);
-          this.current = res[0];
+          this.current = res;
         },
         error: () => {
           Swal('未知错误', '', 'error');
@@ -52,7 +52,7 @@ export class EdituserComponent implements OnInit {
       }
     );
   }
-  private statusCtrl(item: string): string {
+  public statusCtrl(item: string): string {
     if (!this.formModel.controls[item]) {
       return;
     }
@@ -60,14 +60,14 @@ export class EdituserComponent implements OnInit {
     return control.dirty && control.hasError('status') ? control.errors.status : '';
   }
 
-  private messageCtrl(item: string): string {
+  public messageCtrl(item: string): string {
     if (!this.formModel.controls[item]) {
       return;
     }
     const control: AbstractControl = this.formModel.controls[item];
     return control.dirty && control.hasError('message') ? control.errors.message : '';
   }
-  private submit(): void {
+  public submit(): void {
     console.log(this.formModel.value);
     for (const key in this.formModel.value) {
       if (this.formModel.value[key] === '') {
@@ -101,9 +101,9 @@ export class EdituserComponent implements OnInit {
       );
     }
   }
-  private reset(): void {
+  public reset(): void {
     this.formModel.reset();
   }
-  private handle($event): void {
+  public handle($event): void {
   }
 }

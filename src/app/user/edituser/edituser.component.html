@@ -8,7 +8,7 @@
 
         <el-form-item label="姓名" [required]="true" label-width="100px"
                       [status]="statusCtrl('name')" [error]="messageCtrl('name')">
-          <el-input formControlName="name"  [elDisabled]="true" [model] = 'current ?.name' [value]="forminit ?.name"></el-input>
+          <el-input formControlName="name"  [elDisabled]="true" [model] = 'current ?.name' [value]="current ?.name"></el-input>
         </el-form-item>
 
 
@@ -72,7 +72,7 @@
         <el-form-item label="生日" [required]="true"
                       [status]="statusCtrl('birthday')" [error]="messageCtrl('birthday')">
           <el-date-picker
-                          [format]="'yyyy年MM月-dd日'" formControlName="date"
+                          [format]="'yyyy年MM月-dd日'" formControlName="birthday"
                           [model]='current?.birthday'>
           </el-date-picker>
         </el-form-item>

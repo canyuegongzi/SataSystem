@@ -9,7 +9,7 @@
       <div el-col [span]="6">
         <el-form-item label="姓名" [required]="true"
                       [status]="statusCtrl('name')" [error]="messageCtrl('name')">
-          <el-input formControlName="name" [model] = 'forminit ?.name' [value]="forminit ?.name"></el-input>
+          <el-input formControlName="name" [model] = 'forminits ?.name' [value]="forminits ?.name"></el-input>
         </el-form-item>
       </div>
       <div el-col [span]="6">
@@ -18,7 +18,7 @@
           <!--<el-select [model]="'选项2'" formControlName="sex">
 
           </el-select>-->
-          <el-select [model]="forminit ?.sex">
+          <el-select [model]="forminits ?.sex">
             <el-option *ngFor="let item of [{value: 1,label: '男' },
     { value: 2, label: '女' }]"
                        [label]="item.label"
@@ -30,7 +30,7 @@
       <div el-col [span]="6">
         <el-form-item label="编号" [required]="true"
                       [status]="statusCtrl('code')" [error]="messageCtrl('code')">
-          <el-input formControlName="code" [elDisabled]="true" [value]="forminit ?.code"></el-input>
+          <el-input formControlName="code" [elDisabled]="true" [value]="forminits ?.code"></el-input>
         </el-form-item>
       </div>
       <div el-col [span]="6">
@@ -50,14 +50,14 @@
     <div el-row gutter="20">
       <div el-col [span]="12">
         <el-form-item label="家庭住址" [required]="true"
-                      [status]="statusCtrl('address')" [error]="messageCtrl('address')">
-          <el-input formControlName="address" [value]="forminit ?.address"></el-input>
+                      [status]="statusCtrl('name')" [error]="messageCtrl('name')">
+          <el-input formControlName="address" [value]="forminits ?.address"></el-input>
         </el-form-item>
       </div>
       <div el-col [span]="12">
         <el-form-item label="身份证号" [required]="true"
                       [status]="statusCtrl('name')" [error]="messageCtrl('name')">
-          <el-input formControlName="identity" [value]="forminit ?.identity"></el-input>
+          <el-input formControlName="identity" [value]="forminits ?.identity"></el-input>
         </el-form-item>
       </div>
     </div>
@@ -65,19 +65,19 @@
       <div el-col [span]="6">
         <el-form-item label="手机号" [required]="true"
                       [status]="statusCtrl('phone')" [error]="messageCtrl('phone')">
-          <el-input formControlName="phone" [value]="forminit ?.phone"></el-input>
+          <el-input formControlName="phone" [value]="forminits ?.phone"></el-input>
         </el-form-item>
       </div>
       <div el-col [span]="6">
         <el-form-item label="年龄" [required]="true"
                       [status]="statusCtrl('age')" [error]="messageCtrl('age')">
-          <el-input formControlName="age" [value]="forminit ?.age"></el-input>
+          <el-input formControlName="age" [value]="forminits ?.age"></el-input>
         </el-form-item>
       </div>
       <div el-col [span]="6">
         <el-form-item label="部门" [required]="true"
                       [status]="statusCtrl('reach')" [error]="messageCtrl('reach')">
-          <el-select [model]="forminit ?.reach" formControlName="reachs">
+          <el-select [model]="forminits ?.reach" formControlName="reachs">
             <el-option *ngFor="let item of [{value: 1, label: '策划' }, { value: 2, label: '行政' },
     { value: 3, label: '公关' }, { value: 4, label: '研发二' },
     { value: 5, label: '市场二' }, { value: 6, label: '设计二' },
@@ -91,7 +91,7 @@
       <div el-col [span]="6">
         <el-form-item label="应届" [required]="true"
                       [status]="statusCtrl('fresh')" [error]="messageCtrl('fresh')">
-          <el-select [model]="forminit?.fresh" formControlName="fresh">
+          <el-select [model]="forminits ?.fresh" formControlName="fresh">
             <el-option *ngFor="let item of [{value: 1,label: '是' },
                                             { value: 0, label: '否' }]"
                        [label]="item.label"
@@ -108,7 +108,7 @@
                       [status]="statusCtrl('date')" [error]="messageCtrl('date')">
           <el-date-picker (modelChange)="handle($event)"
                           [format]="'yyyy年MM月-dd日'" formControlName="date"
-                          [model]='forminit?.date'>
+                          [model]='forminits?.date'>
           </el-date-picker>
         </el-form-item>
       </div>
@@ -117,7 +117,7 @@
     <div el-row gutter="20">
       <div el-col [span]="24">
       <el-form-item label="基本待遇">
-        <el-checkbox-group formControlName="deal" (modelChange)="deal">
+        <el-checkbox-group formControlName="deal" (modelChange)='deal'>>
           <el-checkbox label="养老保险">养老保险</el-checkbox>
           <el-checkbox label="养老保险">养老保险</el-checkbox>
           <el-checkbox label="医疗保险">医疗保险</el-checkbox>
@@ -133,12 +133,12 @@
     <div el-row gutter="20">
       <div el-col [span]="12">
         <el-form-item label="基本表现">
-          <el-rate formControlName="star" [model]="stars" (modelChange) = "starrate($event)" [colors]="['#99A9BF']"></el-rate>
+          <el-rate formControlName="stars" [model]="stars" (modelChange) = "starrate($event)" [colors]="['#99A9BF']"></el-rate>
         </el-form-item>
       </div>
       <div el-col [span]="12">
         <el-form-item label="通报次数">
-          <el-input-number formControlName="demerits"  (modelChange)="changeDemerits($event)" [min]="1" [max]="10"></el-input-number>
+          <el-input-number formControlName="demerit" [model]="demer" (modelChange)="changeDemerits($event)" [min]="1" [max]="10"></el-input-number>
         </el-form-item>
       </div>
     </div>

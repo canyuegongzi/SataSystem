@@ -9,12 +9,12 @@ import Swal from 'sweetalert2';
 })
 export class UsermessageComponent implements OnInit {
 
-  private name: string;
-  private id: string;
+  public name: string;
+  public id: string;
   /*具体的操作的日志的消息*/
-  private log: any;
+  public log: any;
   /*页数*/
-  private page = 1;
+  public page = 1;
   constructor(private  logilog: LoginService , private routeInfo: ActivatedRoute) { }
 
   ngOnInit() {
@@ -22,8 +22,8 @@ export class UsermessageComponent implements OnInit {
     * 这儿为啥要用local Storage。
     * 路由传参莫名的不能用了
     * */
-    this.id = JSON.parse(localStorage.getItem('user')).id;
-    this.name = JSON.parse(localStorage.getItem('user')).name;
+    this.id = JSON.parse(sessionStorage.getItem('user')).id;
+    this.name = JSON.parse(sessionStorage.getItem('user')).name;
     // this.id = this.routeInfo.snapshot.queryParams['id'];
     // this.name = this.routeInfo.snapshot.queryParams['name'];
     this.logilog.getLoginLog(this.id, this.name, this.page).subscribe({
@@ -36,7 +36,7 @@ export class UsermessageComponent implements OnInit {
       }
     });
   }
- private pagination(event): void {
+  public pagination(event): void {
     // this.page = event;
    this.logilog.getLoginLog(this.id, this.name, event).subscribe({
      next: (res) => {

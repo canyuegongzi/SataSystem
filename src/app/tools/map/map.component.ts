@@ -1,19 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  BNavigationControl,
-  ControlAnchor,
-  GeolocationControlOptions,
-  MapOptions, MapTypeControlOptions, MapTypeControlType, MarkerOptions, NavigationControlOptions, NavigationControlType,
-  OverviewMapControlOptions, Point,
-  ScaleControlOptions
-} from 'angular2-baidu-map';
+
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Http} from '@angular/http';
 import {LifeService} from '../../serve/life.service';
 import {Router} from '@angular/router';
-import Swal from 'sweetalert2';
-import {Icon} from 'angular2-baidu-map/types/Icon';
-import {BPoint} from 'angular2-baidu-map/types/Point';
+
 declare var AMap: any;
 @Component({
   selector: 'app-map',
@@ -31,11 +22,11 @@ export class MapComponent implements OnInit {
   // private geolocationOpts: GeolocationControlOptions;
 
   /*搜索表单*/
-  private formModel: FormGroup;
-  private cityname = new FormControl('', Validators.required);
+  public formModel: FormGroup;
+  protected cityname = new FormControl('', Validators.required);
   /*高德地图的配置参数*/
-  private citylocation: string;
-  private jingwei: Array<number>;
+  public citylocation: string;
+  public jingwei: Array<number>;
   constructor(private router: Router, private http: Http, private fb: FormBuilder, private life: LifeService) {
     this.formModel = this.fb.group({
       'city': this.cityname
@@ -160,7 +151,7 @@ export class MapComponent implements OnInit {
       });
       map.addControl(geolocation);
       geolocation.getCurrentPosition();
-      AMap.event.addListener(geolocation, 'complete', this.locationSuccess);//返回定位信息
+      AMap.event.addListener(geolocation, 'complete', this.locationSuccess); //返回定位信息
       AMap.event.addListener(geolocation, 'error', this.locationFail);
       /*/!*地图旋转等控件*!/
       const controlBar = new AMap.ControlBar({

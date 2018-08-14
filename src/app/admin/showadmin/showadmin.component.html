@@ -12,21 +12,25 @@
         <label for="input4" class="sr-only">姓名</label>
         <input formControlName='name' type="text" class="form-control" id="input4" placeholder="请输入姓名">
       </div>
-      <el-date-picker [format]="'yyyy - MM'" [hidden-day]="true" formControlName='data' [size]="small"
+      <el-date-picker [format]="'yyyy - MM'" [hidden-day]="true" formControlName='data'
                       placeholder='请选择入职月份'>
       </el-date-picker>
       <div class="form-group mx-sm-3 mb-2">
         <label for="input3" class="sr-only">年龄</label>
         <select formControlName="age" id="input3" placeholder="请选择年龄" class="form-control">
           <option value="-1">年龄</option>
+          <ng-container *ngIf="ages">
           <option [value]="ages" *ngFor="let ages of ages">{{ages}}</option>
+          </ng-container>
         </select>
       </div>
       <div class="form-group mx-sm-3 mb-2">
         <label for="input1" class="sr-only">部门</label>
         <select formControlName="reach" id="input1" placeholder="请选择所属部门" class="form-control">
           <option value="-1">所属部门</option>
+          <ng-container *ngIf="reach">
           <option [value]="reach" *ngFor="let reach of reach">{{reach}}</option>
+          </ng-container>
         </select>
       </div>
       <button type="submit" class="btn btn-primary mb-2" icon="search">
@@ -45,13 +49,13 @@
       </el-table-column>
       <el-table-column model-key="date" label="入职日期" width="120">
       </el-table-column>
-      <el-table-column model-key="job" label="工作岗位" width="120">
+      <el-table-column model-key="reach" label="隶属部门" width="120">
       </el-table-column>
       <el-table-column model-key="phone" label="联系方式">
       </el-table-column>
       <el-table-column model-key="star" label="表现状况">
       </el-table-column>
-      <el-table-column model-key="demerits" label="通报次数">
+      <el-table-column model-key="demerit" label="通报次数">
       </el-table-column>
       <el-table-column label="删除" width="120">
         <ng-template #slot let-scope="scope">

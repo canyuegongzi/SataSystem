@@ -1,7 +1,5 @@
 import {
-  Component, OnInit, ViewContainerRef, ChangeDetectionStrategy, ViewChild, TemplateRef, EventEmitter, Output,
-  Input, AfterViewInit, OnDestroy
-} from '@angular/core';
+  Component, OnInit, ViewContainerRef} from '@angular/core';
 declare var tinymce: any;
 
 

@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import 'echarts/map/js/china.js';
 import {NgxEchartsModule} from 'ngx-echarts';
 import {GetdataService} from '../../serve/getdata.service';
@@ -138,7 +138,7 @@ export class MapdataComponent implements OnInit {
       }
     ]};
   /*系统开发配置*/
-  public sysOption = {};
+  public sysOption: any;
   /*用来初始化地图*/
   public sysmap: any;
   /*用来初始化pie图*/

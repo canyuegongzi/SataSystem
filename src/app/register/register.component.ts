@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {LoginService} from '../serve/login.service';
 import {Http} from '@angular/http';
-import {timer} from 'rxjs';
-import {success} from 'element-angular/release/message/images';
 import Swal from 'sweetalert2';
 import {Router} from '@angular/router';
 @Component({
@@ -13,13 +11,13 @@ import {Router} from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   /*显示内容*/
-  private noticeessage = '获取验证码';
+  public noticeessage = '获取验证码';
   /*是否再次点击*/
-  private otherClick = true;
+  public otherClick = true;
   /*数字的显示*/
-  private messageNum = 60;
+  public messageNum = 60;
   /*定时器*/
-  private timer = null;
+  public timer = null;
   formModel: FormGroup;
   registerParams: string[];
   registerStaue: boolean;
@@ -83,7 +81,7 @@ export class RegisterComponent implements OnInit {
       return { repass: true};
     }
   }
-  submit() {
+  public submit() {
     if (this.formModel.value) {
       this.registerParams = this.formModel.value;
     }
@@ -112,7 +110,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
   /*获取验证码*/
-  private sendMessage(): void {
+  public sendMessage(): void {
     if (this.otherClick) {
       this.otherClick = false;
       this.loginService.regNumber((this.formModel.value).phone).subscribe({

@@ -1,0 +1,56 @@
+<ng-container>
+  <p class="admin-header">系统管理员注册</p>
+  <hr/>
+  <div>
+    <form id="regSearch" [formGroup]='formModel' (ngSubmit)='submit()' novalidate>
+      <div class="form-group row">
+        <label for="regCode" class="col-sm-2 col-form-label">编号</label>
+        <div class="col-sm-10">
+          <input type="text" formControlName="code" class="form-control" id="regCode" placeholder="请输入唯一编号">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="regName" class="col-sm-2 col-form-label">姓名</label>
+        <div class="col-sm-10">
+          <input type="text" formControlName="name" class="form-control" id="regName" placeholder="请输入姓名">
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-10">
+          <button type="submit" class="btn btn-primary" id="submitRegSearch">查找</button>
+          <span class="btn btn-primary" (click)="regAdmin()" id="submitRegRegadmin">注册</span>
+        </div>
+      </div>
+  </form>
+    <table class="table table-bordered show-admin-root">
+      <thead>
+      <tr>
+        <th scope="col">姓名</th>
+        <th scope="col">性别</th>
+        <th scope="col">入职日期</th>
+        <th scope="col">岗位</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td scope="row">{{rootAdminDetail?.name}}</td>
+        <td>{{rootAdminDetail?.sex}}</td>
+        <td>{{rootAdminDetail?.date}}</td>
+        <td>{{rootAdminDetail?.job}}</td>
+      </tr>
+      <tr>
+        <th scope="row">星级</th>
+        <th>通报次数</th>
+        <th>联系方式</th>
+        <th>当前权限</th>
+      </tr>
+      <tr>
+        <td scope="row">{{rootAdminDetail?.star}}</td>
+        <td>{{rootAdminDetail?.demerit}}</td>
+        <td>{{rootAdminDetail?.phone}}</td>
+        <td>{{rootAdminDetail?.root}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</ng-container>

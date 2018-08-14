@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {concat} from 'rxjs';
 import {LoginService} from '../serve/login.service';
 import {Router} from '@angular/router';
 import Swal from 'sweetalert2';
@@ -60,13 +59,21 @@ export class LoginComponent implements OnInit {
           res.data[0].ip = res.ip;
           const user = JSON.stringify(res.data[0]);
           // const ip  = JSON.stringify(res.ip);
-          console.log(user);
-          localStorage.setItem('user', user );
+          // console.log(user);
+          sessionStorage.setItem('user', user );
           console.log('登录成功！');
           // console.log(localStorage.getItem(res.data[0].name));
         } else {
-          Swal('你还未登录，请先注册');
-          this.router.navigate(['register']);
+          switch (res.message) {
+            case 'error':
+              Swal('密码或者用户名错误');
+              break;
+            case 'noperson':
+              Swal('你还未注册， 请先注册').then(value => {
+                this.router.navigate(['register']);
+              });
+              break;
+          }
         }
       }
     });

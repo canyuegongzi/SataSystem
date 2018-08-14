@@ -10,18 +10,18 @@ import Swal from 'sweetalert2';
   styleUrls: ['./weather.component.css']
 })
 export class WeatherComponent implements OnInit {
-  private formModel: FormGroup;
-  private cityname = new FormControl('', Validators.required);
+  public formModel: FormGroup;
+  public cityname = new FormControl('', Validators.required);
   /*现在的天气数据*/
-  private  nowWeather: any;
+  public  nowWeather: any;
   /*未来的天气数据*/
-  private futureWeather: any;
+  public futureWeather: any;
   /*现在的坏境的数据*/
-  private environmentStatus: any;
+  public environmentStatus: any;
   /*现在的穿衣的建议*/
-  private Advice: any;
+  public Advice: any;
   /*城市*/
-  private cityName: string;
+  public cityName: string;
   constructor(private router: Router, private http: Http, private fb: FormBuilder, private life: LifeService) {
     this.formModel = this.fb.group({
       'city': this.cityname

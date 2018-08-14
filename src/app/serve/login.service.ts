@@ -22,14 +22,14 @@ export class LoginService implements CanActivate {
 
   canActivate() {
     /*判断当前的用户是否登录*/
-    if (!JSON.parse(localStorage.getItem('user'))) {
+    if (!JSON.parse(sessionStorage.getItem('user'))) {
       Swal('你还没有登录，请登录');
       this.router.navigate(['']);
       return false;
     } else {
       /*读取存储的用户的信息用作验证*/
-      const user = JSON.parse(localStorage.getItem('user')).name;
-      const id = JSON.parse(localStorage.getItem('user')).id;
+      const user = JSON.parse(sessionStorage.getItem('user')).name;
+      const id = JSON.parse(sessionStorage.getItem('user')).id;
       if (user && id) {
         // console.log(user);
         return true;
@@ -73,15 +73,15 @@ export class LoginService implements CanActivate {
   }
 
   outlogin() {
-    const user = JSON.parse(localStorage.getItem('user')).name;
-    const id = JSON.parse(localStorage.getItem('user')).id;
+    const user = JSON.parse(sessionStorage.getItem('user')).name;
+    const id = JSON.parse(sessionStorage.getItem('user')).id;
     if (!user && !id) {
       console.log('你还没登录');
     } else {
       Swal({title: '确定退出登录?', showCancelButton: true}).then((value => {
         console.log(value);
         if (value.value === true) {
-          localStorage.removeItem('user');
+          sessionStorage.removeItem('user');
           this.router.navigate(['/']);
         }
       }));

@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import {from, Observable} from 'rxjs';
+import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
 import {Http} from '@angular/http';
 import {map} from 'rxjs/internal/operators';
-import {browser} from 'protractor';
 import {EditPass, LoginUser} from '../module/Adminuer';
 import Swal from 'sweetalert2';
 
