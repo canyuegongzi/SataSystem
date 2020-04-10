@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {NgxEchartsModule} from 'ngx-echarts';
 import {Http} from '@angular/http';
 import {map} from 'rxjs/internal/operators';
+import baseUrl from '../../api';
 
 @Injectable({
   providedIn: 'root'
@@ -12,68 +13,68 @@ export class GetdataService {
   /*获取总体的数据*/
   // noinspection JSAnnotator
   getSyssumdata(): Observable<any> {
-    return this.http.get('api/data').pipe(
+    return this.http.get(baseUrl + 'api/data').pipe(
       map(res => res.json())
     );
   }
   /*获取在线人数*/
   getLinenumber(): Observable<Line[]> {
-    return this.http.get('api/linenumber').pipe(
+    return this.http.get(baseUrl + 'api/linenumber').pipe(
       map(res => res.json())
     );
   }
   /*获取当前状态的函数*/
   getStatusnumber(): Observable<Line[]> {
-    return this.http.get('api/stausnumber').pipe(
+    return this.http.get(baseUrl + 'api/stausnumber').pipe(
       map(res => res.json())
       );
   }
   /*获取所有的系统警告*/
   getSysmessage(): Observable<any> {
-      return this.http.get('api/sysmessage').pipe(
+      return this.http.get(baseUrl + 'api/sysmessage').pipe(
         map(res => res.json()
         ));
   }
   /*通过id获取具体的系统的警告*/
   getSysmessageByid(id: number): Observable<any> {
-    return this.http.get('api/sysmessage/' + id).pipe(
+    return this.http.get(baseUrl + 'api/sysmessage/' + id).pipe(
       map(res => res.json()
       ));
   }
   /*通过id标记消息*/
   setSysmessageWriteByid(id: number): Observable<boolean> {
-    return this.http.get('api/sysmeswrite/' + id).pipe(
+    return this.http.get(baseUrl + 'api/sysmeswrite/' + id).pipe(
       map(res => res.json()
       ));
   }
   /*获取系统的地图的分布的信息*/
   getSysdataMap(): Observable<any> {
-    return this.http.get('api/sysdatamap').pipe(
+    return this.http.get(baseUrl + 'api/sysdatamap').pipe(
       map(res => res.json())
     );
   }
   /*获取系统的开发信息*/
   getSysdevelopMess(): Observable<any> {
-    return this.http.get('api/sysdevelope').pipe(
+    return this.http.get(baseUrl + 'api/sysdevelope').pipe(
       map(res => res.json()
       )
     );
   }
   /*获取散点图的信息*/
   getAssayData(): Observable<any> {
-    return this.http.get('api/syszoomdata').pipe(
+    return this.http.get(baseUrl + 'api/syszoomdata').pipe(
       map(res => res.json())
     );
   }
   /*计算相关度*/
   accountSysNumber(par: any): Observable<any> {
     if (par.time && par.press) {
-      return this.http.get('api/accountdata', { params: {press: par.time, time: par.press} }).pipe(
+      return this.http.get(baseUrl + 'api/accountdata', { params: {press: par.time, time: par.press} }).pipe(
         map(res => res.json())
       );
     } else if (par.area) {
       console.log(par.area);
-      return this.http.get('api/accountdata', { params: {area: par.area }}).pipe(
+      return this.http.get(baseUrl + 'api/accountdata', { params: {area: par.area }}).pipe(
         map(res => res.json())
       );
     }

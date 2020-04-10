@@ -52,17 +52,11 @@ export class LoginComponent implements OnInit {
     }
     this.loginService.doLogin(this.formModel.value).subscribe({
       next: (res) => {
-        // console.log(res.data[0].name);
         if (res.status) {
           this.router.navigate(['data']);
-          /*/!*将当前的登录信息存储*!/*/
           res.data[0].ip = res.ip;
           const user = JSON.stringify(res.data[0]);
-          // const ip  = JSON.stringify(res.ip);
-          // console.log(user);
           sessionStorage.setItem('user', user );
-          console.log('登录成功！');
-          // console.log(localStorage.getItem(res.data[0].name));
         } else {
           switch (res.message) {
             case 'error':

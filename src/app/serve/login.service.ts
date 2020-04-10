@@ -5,6 +5,7 @@ import {Http} from '@angular/http';
 import {map} from 'rxjs/internal/operators';
 import {Login} from '../module/Adminuer';
 import Swal from 'sweetalert2';
+import baseUrl from '../../api';
 
 // noinspection JSAnnotator
 @Injectable({
@@ -43,12 +44,12 @@ export class LoginService implements CanActivate {
 
 
   doLogin(pargrams: Login): Observable<any> {
-    // this.http.get('', {params: {user: pargrams.phone, pas: pargrams.password}});
+    // this.http.get(baseUrl +'', {params: {user: pargrams.phone, pas: pargrams.password}});
     /*判断当前的登录是否是合法的*/
     if (!pargrams) {
       return;
     }
-   return this.http.post('api/login', {params: pargrams}).pipe(
+   return this.http.post(baseUrl +'api/login', {params: pargrams}).pipe(
      map(res => res.json())
    );
    /* if (pargrams.phone === '18660683370' && pargrams.password === '123456' && pargrams.protocol === true) {
@@ -92,7 +93,7 @@ export class LoginService implements CanActivate {
   /*注册服务*/
   register(pargrams: any): Observable<any> {
     const mas = pargrams.repass;
-   return this.http.post('api/register', {params: pargrams}).pipe(
+   return this.http.post(baseUrl +'api/register', {params: pargrams}).pipe(
      map(res => res.json())
    );
   }
@@ -100,7 +101,7 @@ export class LoginService implements CanActivate {
   regNumber(pargrams: any): Observable<any> {
     console.log(pargrams);
     if (pargrams) {
-      return this.http.post('api/regnumber', { params: pargrams }).pipe(
+      return this.http.post(baseUrl +'api/regnumber', { params: pargrams }).pipe(
         map(res => res.json()
         )
       );
@@ -108,7 +109,7 @@ export class LoginService implements CanActivate {
   }
   /*获取当前的登陆的操作的日志*/
   public getLoginLog(id: any, name: any, page: any): Observable<any> {
-   return this.http.get('api/loginlog', {params: [id, name, page]}).pipe(
+   return this.http.get(baseUrl + 'api/loginlog', {params: [id, name, page]}).pipe(
       map(res => res.json())
     );
   }

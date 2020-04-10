@@ -20,15 +20,13 @@
   background-color: red;
   position: absolute;
   top:1rem;
-  right: 2rem;
 }
 .loginuser >img {
   background-color: red;
   position: absolute;
   top: .5rem;
-  right: 2rem;
   height: 3rem;
-  margin-right: 8rem;
+  right: -8rem;
   width: 3rem;
   border-radius: 50%;
 }

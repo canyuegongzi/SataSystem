@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {Http} from '@angular/http';
 import {map} from 'rxjs/internal/operators';
+import baseUrl from '../../api';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class LifeService {
     if (!name) {
       return;
     } else {
-     return this.http.post('api/weather', {params:  name} ).pipe(
+     return this.http.post(baseUrl + 'api/weather', {params:  name} ).pipe(
         map(res => res.json())
       );
     }
@@ -25,7 +26,7 @@ export class LifeService {
     if (!number && !expressname) {
       return;
     } else {
-     return this.http.get('api/express', {params: {name: expressname, number: number}}).pipe(
+     return this.http.get(baseUrl + 'api/express', {params: {name: expressname, number: number}}).pipe(
         map(res => res.json())
       );
     }

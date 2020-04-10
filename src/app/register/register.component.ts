@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
   /*显示内容*/
   public noticeessage = '获取验证码';
   /*是否再次点击*/
-  public otherClick = true;
+  public otherClick = false;
   /*数字的显示*/
   public messageNum = 60;
   /*定时器*/
@@ -65,13 +65,11 @@ export class RegisterComponent implements OnInit {
     if (!repass) {
       return null;
     }
-    console.log(repass.length);
     if (repass.length = 5) {
       // noinspection JSAnnotator
       repass = control.value;
       this.loginService.regNumber(repass).subscribe(
         status => {
-            console.log(status);
             if (status) {
               return null;
             }
@@ -85,9 +83,12 @@ export class RegisterComponent implements OnInit {
     if (this.formModel.value) {
       this.registerParams = this.formModel.value;
     }
+    if (!this.formModel.value.phone || !this.formModel.value.password || !this.formModel.value.message) {
+      Swal('请先填写信息', '', 'error');
+      return;
+    }
     this.loginService.register(this.registerParams).subscribe({
       next: (res) => {
-        console.log(res);
         if (res.status === true) {
           Swal('注册成功', '请登录', 'success').then(value => {
             this.router.navigate(['/']);
@@ -111,26 +112,31 @@ export class RegisterComponent implements OnInit {
   }
   /*获取验证码*/
   public sendMessage(): void {
-    if (this.otherClick) {
-      this.otherClick = false;
-      this.loginService.regNumber((this.formModel.value).phone).subscribe({
-        next: (res) => {
-          console.log(res);
-        },
-        error: (err) => {
-          console.log(err);
-        }
-      });
-      this.timer = setInterval(() => {
-        this.messageNum--;
-        this.noticeessage = this.messageNum + 's后重发';
-        if (this.messageNum <= 1) {
-          this.otherClick = true;
-          clearInterval(this.timer);
-          this.noticeessage = '获取验证码';
-        }
-      }, 1000);
+    if (!(this.formModel.value).phone) {
+      return;
     }
+    if (this.otherClick) {
+      return;
+    }
+    this.otherClick = true;
+    this.loginService.regNumber((this.formModel.value).phone).subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+    this.timer = setInterval(() => {
+      this.messageNum--;
+      this.noticeessage = this.messageNum + 's后重发';
+      if (this.messageNum <= 1) {
+        this.otherClick = false;
+        clearInterval(this.timer);
+        this.noticeessage = '获取验证码';
+      }
+      console.log(this.noticeessage);
+    }, 1000);
   }
 
 }

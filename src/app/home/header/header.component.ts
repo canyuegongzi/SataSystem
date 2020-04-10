@@ -8,7 +8,7 @@ import {LoginService} from '../../serve/login.service';
 export class HeaderComponent implements OnInit {
 
   public cure = true;
-  public headohoto =  'http://oykcnjwn9.bkt.clouddn.com/907e733831ad4d17%21400x400_big.jpg';
+  public headohoto =  'http://qiniu.canyuegongzi.xyz/headphoto.jpg';
   constructor(private me: LoginService) { }
 
   ngOnInit() {

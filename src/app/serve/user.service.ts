@@ -5,6 +5,7 @@ import {Http} from '@angular/http';
 import {map} from 'rxjs/internal/operators';
 import {EditPass, LoginUser} from '../module/Adminuer';
 import Swal from 'sweetalert2';
+import baseUrl from '../../api';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class UserService {
   constructor(private router: Router, private http: Http) { }
   public getcurrentUser(id: any, name: string): Observable<any> {
     if (id && name) {
-      return this.http.get('api/user', {params: {id: id, name: name}}).pipe(
+      return this.http.get(baseUrl + 'api/user', {params: {id: id, name: name}}).pipe(
         map(res => res.json())
       );
     } else {
@@ -24,7 +25,7 @@ export class UserService {
   /*修改信息*/
   public editUserDetail(par: LoginUser): Observable<any> {
     if (par) {
-      return this.http.post('api/edituser', {params:  par}).pipe(
+      return this.http.post(baseUrl + 'api/edituser', {params:  par}).pipe(
         map(res => res.json())
       );
     }
@@ -35,7 +36,7 @@ export class UserService {
       Swal('未知错误', '请进行其他操作', 'error');
       return;
     } else {
-     return this.http.post('api/editpass', {params: par}).pipe(
+     return this.http.post(baseUrl + 'api/editpass', {params: par}).pipe(
         map(res => res.json()
         )
       );
